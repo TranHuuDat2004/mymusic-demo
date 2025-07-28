@@ -609,6 +609,22 @@ const ALL_MUSIC_SECTIONS = [
             },
         ]
     },
+        {
+        id: "ConanMovie28",
+        title: "Conan Movie 28", // Tên hiển thị cho playlist/section
+        songs: [
+            {
+                id: "conan28",
+                title: "TWILIGHT",
+                artistData: "King Gnu",
+                displayArtist: { name: "King Gnu", id: "KingGnu" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/conan28.jpg", // Dựa trên file robin.png
+                audioSrc: "audio/TWILIGHT.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+        ]
+    },
     {
         id: "BlueArchiveOST",
         title: "Blue Archive - Original Soundtrack",
