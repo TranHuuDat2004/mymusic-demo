@@ -74,6 +74,16 @@ const ALL_MUSIC_SECTIONS = [
                 plays: "8.456.798" // Random
             },
             {
+                id: "fav10",
+                title: "Khúc Vương Tình Remix ",
+                artistData: "Cần Vinh, Lee Ken",
+                displayArtist: { name: "Cần Vinh, Lee Ken", id: "can-vinh" },
+                artUrl: "img/Khúc Vương Tình Remix (Cần Vinh, Lee Ken).png",
+                audioSrc: "audio/Khúc Vương Tình Remix (Cần Vinh, Lee Ken).mp3",
+                isFavorite: false, // Ví dụ
+                plays: "8.321.678" // Random
+            },
+            {
                 id: "fav7",
                 title: "Nên Chờ Hay Nên Quên Remix",
                 artistData: "Cần Vinh, Lee Ken",
