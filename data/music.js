@@ -635,6 +635,23 @@ const ALL_MUSIC_SECTIONS = [
             },
         ]
     },
+
+            {
+        id: "UmaMusumeOST",
+        title: "Uma Musume OST", 
+        songs: [
+            {
+                id: "uma1",
+                title: "Make Debut!",
+                artistData: "Azumi Waki",
+                displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/make debut.png", // Dựa trên file robin.png
+                audioSrc: "audio/make debut.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+        ]
+    },
     {
         id: "BlueArchiveOST",
         title: "Blue Archive - Original Soundtrack",
