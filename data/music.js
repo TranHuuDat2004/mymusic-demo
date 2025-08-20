@@ -650,6 +650,16 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
+                        {
+                id: "uma2",
+                title: "G1 & URA Finals",
+                artistData: "Azumi Waki",
+                displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/G1 & URA Finals.jpg", // Dựa trên file robin.png
+                audioSrc: "audio/G1 & URA Finals.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
         ]
     },
     {
