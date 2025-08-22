@@ -660,6 +660,36 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
+                                    {
+                id: "uma3",
+                title: "Character Gacha",
+                artistData: "Azumi Waki",
+                displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/Character Gacha.png", // Dựa trên file robin.png
+                audioSrc: "audio/Character Gacha.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+                                    {
+                id: "uma4",
+                title: "GI Race & URA qualifiers",
+                artistData: "Azumi Waki",
+                displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/GI Race URA qualifiers.png", // Dựa trên file robin.png
+                audioSrc: "audio/GI Race URA qualifiers.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+                                    {
+                id: "uma5",
+                title: "Arima Kinen & Japan Derby",
+                artistData: "Azumi Waki",
+                displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/Arima Kinen Japan Derby.png", // Dựa trên file robin.png
+                audioSrc: "audio/Arima Kinen Japan Derby.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
         ]
     },
     {
