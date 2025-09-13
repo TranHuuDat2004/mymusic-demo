@@ -619,9 +619,9 @@ const ALL_MUSIC_SECTIONS = [
             },
         ]
     },
-        {
-        id: "ConanMovie28",
-        title: "Conan Movie 28", // Tên hiển thị cho playlist/section
+    {
+        id: "ConanMovie",
+        title: "Conan Movie ", // Tên hiển thị cho playlist/section
         songs: [
             {
                 id: "conan28",
@@ -633,12 +633,22 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
+            {
+                id: "conan26",
+                title: "Utsukushii Hire",
+                artistData: "Spitz",
+                displayArtist: { name: "Spitz ", id: "Spitz" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/Utsukushii Hire.jpg", // Dựa trên file robin.png
+                audioSrc: "audio/Utsukushii Hire.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
         ]
     },
 
-            {
+    {
         id: "UmaMusumeOST",
-        title: "Uma Musume OST", 
+        title: "Uma Musume OST",
         songs: [
             {
                 id: "uma1",
@@ -650,7 +660,7 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
-                        {
+            {
                 id: "uma2",
                 title: "G1 & URA Finals",
                 artistData: "Azumi Waki",
@@ -660,7 +670,7 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
-                                    {
+            {
                 id: "uma3",
                 title: "Character Gacha",
                 artistData: "Azumi Waki",
@@ -670,7 +680,7 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
-                                    {
+            {
                 id: "uma4",
                 title: "GI Race & URA qualifiers",
                 artistData: "Azumi Waki",
@@ -680,13 +690,23 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: false,
                 plays: "9.876.543"
             },
-                                    {
+            {
                 id: "uma5",
                 title: "Arima Kinen & Japan Derby",
                 artistData: "Azumi Waki",
                 displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
                 artUrl: "img/Arima Kinen Japan Derby.png", // Dựa trên file robin.png
                 audioSrc: "audio/Arima Kinen Japan Derby.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+            {
+                id: "uma6",
+                title: "The begin story",
+                artistData: "Azumi Waki",
+                displayArtist: { name: "Azumi Waki", id: "AzumiWaki" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/The begin story.png", // Dựa trên file robin.png
+                audioSrc: "audio/The begin story.mp3", // Dựa trên tên file
                 isFavorite: false,
                 plays: "9.876.543"
             },
