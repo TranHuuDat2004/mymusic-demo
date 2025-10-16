@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     </a>
                 </li>
                 <li>
+    <a href="soundtrack.html">
+        <!-- Icon Play Circle cho Soundtrack -->
+        <svg viewBox="0 0 24 24" class="icon-soundtrack" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 16.5v-9l6 4.5-6 4.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+        Soundtrack
+    </a>
+</li>
+                <li>
                     <a href="artists.html">
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-artist"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
                         Nghệ Sĩ
@@ -121,9 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-// js/sidebar.js
+    // js/sidebar.js
 
-// ... (toàn bộ code hiện có của bạn từ dòng 1 đến dòng setActiveLink() và generatePlaylistLinks()) ...
+    // ... (toàn bộ code hiện có của bạn từ dòng 1 đến dòng setActiveLink() và generatePlaylistLinks()) ...
 
     // --- 5. Gọi các hàm thực thi ---
     setActiveLink();
@@ -169,10 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     display: none; /* Ẩn ban đầu */
                 `;
                 document.body.appendChild(overlay);
-                
+
                 // Thêm listener click cho overlay để đóng sidebar
-                overlay.addEventListener('click', () => { 
-                    if(sidebarContainer) sidebarContainer.classList.remove('active');
+                overlay.addEventListener('click', () => {
+                    if (sidebarContainer) sidebarContainer.classList.remove('active');
                     toggleSidebarOverlay(false); // Gọi lại để xóa chính nó
                 });
             }
@@ -182,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 10);
         } else {
             if (overlay) {
-                 overlay.style.display = 'none'; // Ẩn đi thay vì xóa ngay để có thể tái sử dụng
-                 // Nếu muốn xóa hoàn toàn:
-                 // if (overlay.parentNode) {
-                 //     overlay.parentNode.removeChild(overlay);
-                 // }
+                overlay.style.display = 'none'; // Ẩn đi thay vì xóa ngay để có thể tái sử dụng
+                // Nếu muốn xóa hoàn toàn:
+                // if (overlay.parentNode) {
+                //     overlay.parentNode.removeChild(overlay);
+                // }
             }
         }
     }
