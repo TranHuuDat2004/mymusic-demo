@@ -133,32 +133,7 @@ const ALL_MUSIC_SECTIONS = [
             },
         ]
     },
-    {
-        id: "ConanMovie",
-        title: "Conan Movie ", // Tên hiển thị cho playlist/section
-        songs: [
-            {
-                id: "conan28",
-                title: "TWILIGHT",
-                artistData: "King Gnu",
-                displayArtist: { name: "King Gnu", id: "KingGnu" }, // Tái sử dụng id của HOYO-MiX
-                artUrl: "img/conan28.jpg", // Dựa trên file robin.png
-                audioSrc: "audio/TWILIGHT.mp3", // Dựa trên tên file
-                isFavorite: false,
-                plays: "9.876.543"
-            },
-            {
-                id: "conan26",
-                title: "Utsukushii Hire",
-                artistData: "Spitz",
-                displayArtist: { name: "Spitz ", id: "Spitz" }, // Tái sử dụng id của HOYO-MiX
-                artUrl: "img/Utsukushii Hire.jpg", // Dựa trên file robin.png
-                audioSrc: "audio/Utsukushii Hire.mp3", // Dựa trên tên file
-                isFavorite: false,
-                plays: "9.876.543"
-            },
-        ]
-    },
+    
 
     {
         id: "UmaMusumeOST",
@@ -280,6 +255,52 @@ const ALL_MUSIC_SECTIONS = [
                 isFavorite: true,
                 plays: "2.777.999"
             }
+        ]
+    },
+    {
+        id: "SUNO",
+        title: "Remix by SUNO",
+        songs: [
+            {
+                id: "suno1",
+                title: "CI4 - Wave 1 (Cover)",
+                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/ci_cover_uo.jpg",
+                audioSrc: "audio/wave1 (Cover).mp3",
+                isFavorite: true,
+                plays: "2.501.337"
+            },
+            {
+                id: "suno2",
+                title: "CI4 - Wave 2 (Cover)",
+                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/ci_cover_uo.jpg",
+                audioSrc: "audio/wave2 (Cover).mp3",
+                isFavorite: true,
+                plays: "2.501.337"
+            },
+            {
+                id: "suno3",
+                title: "CI4 - Wave 3 (Cover)",
+                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/ci_cover_uo.jpg",
+                audioSrc: "audio/wave3 (Cover).mp3",
+                isFavorite: true,
+                plays: "2.501.337"
+            },
+            {
+                id: "suno4",
+                title: "G1 - Uma Musume (Cover)",
+                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/The begin story.png",
+                audioSrc: "audio/G1 (Cover).mp3",
+                isFavorite: true,
+                plays: "2.501.337"
+            },
         ]
     },
     {

@@ -485,6 +485,33 @@ const ALL_MUSIC_SECTIONS = [
             }
         ]
     },
+
+    {
+        id: "ConanMovie",
+        title: "Conan Movie ", // Tên hiển thị cho playlist/section
+        songs: [
+            {
+                id: "conan28",
+                title: "TWILIGHT",
+                artistData: "King Gnu",
+                displayArtist: { name: "King Gnu", id: "KingGnu" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/conan28.jpg", // Dựa trên file robin.png
+                audioSrc: "audio/TWILIGHT.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+            {
+                id: "conan26",
+                title: "Utsukushii Hire",
+                artistData: "Spitz",
+                displayArtist: { name: "Spitz ", id: "Spitz" }, // Tái sử dụng id của HOYO-MiX
+                artUrl: "img/Utsukushii Hire.jpg", // Dựa trên file robin.png
+                audioSrc: "audio/Utsukushii Hire.mp3", // Dựa trên tên file
+                isFavorite: false,
+                plays: "9.876.543"
+            },
+        ]
+    },
     
     // Dán toàn bộ khối mã này vào trong mảng ALL_MUSIC_SECTIONS của file data/music.js
 
