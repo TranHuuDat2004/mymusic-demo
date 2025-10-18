@@ -133,7 +133,7 @@ const ALL_MUSIC_SECTIONS = [
             },
         ]
     },
-    
+
 
     {
         id: "UmaMusumeOST",
@@ -492,6 +492,58 @@ const ALL_MUSIC_SECTIONS = [
                 displayArtist: { name: "2dB Music Production", id: "2db-music" },
                 artUrl: "img/ci_cover_cotds.jpg", audioSrc: "audio/Chicken Invaders Soundtrack - 29 - Cluck of the Dark Side - Victory - Go Large!.mp3",
                 plays: "2.998.765"
+            }
+        ]
+    },
+
+    {
+        id: "CICotDSXmas",
+        title: "Chicken Invaders 5 - Cluck of the Dark Side (Xmas Edition)",
+        songs: [
+            {
+                id: "ci_cotds_xmas_remix2",
+                title: "Xmas Remix 2",
+                artistData: "2dB Music Production",
+                displayArtist: { name: "2dB Music Production", id: "2db-music" },
+                artUrl: "img/ci-xmas.png", // Giả định tên file ảnh bìa
+                audioSrc: "audio/Chicken Invaders 5 COTDS Xmas Remix 2.mp3",
+                plays: "1.830.000" // Giả định số lượt nghe
+            },
+            {
+                id: "ci_cotds_xmas_remix1",
+                title: "Xmas Remix 1",
+                artistData: "2dB Music Production",
+                displayArtist: { name: "2dB Music Production", id: "2db-music" },
+                artUrl: "img/ci-xmas.png",
+                audioSrc: "audio/Chicken Invaders 5 COTDS Xmas Remix 1.mp3",
+                plays: "2.162.000"
+            },
+            {
+                id: "ci_cotds_xmas_boss",
+                title: "Boss theme (Xmas Edition)",
+                artistData: "2dB Music Production",
+                displayArtist: { name: "2dB Music Production", id: "2db-music" },
+                artUrl: "img/ci-xmas.png",
+                audioSrc: "audio/Chicken Invaders 5 COTDS Xmas Edition OST - Boss theme.mp3",
+                plays: "2.346.000"
+            },
+            {
+                id: "ci_cotds_xmas_missionsuccess",
+                title: "Mission Success! (Xmas Edition)",
+                artistData: "2dB Music Production",
+                displayArtist: { name: "2dB Music Production", id: "2db-music" },
+                artUrl: "img/ci-xmas.png",
+                audioSrc: "audio/Chicken Invaders 5 COTDS Xmas Edition OST - Mission Success!.mp3",
+                plays: "2.503.000"
+            },
+            {
+                id: "ci_cotds_missionsuccess_cover",
+                title: "Mission Success (Cover)",
+                artistData: "2dB Music Production", // Giả định nghệ sĩ, có thể thay đổi
+                displayArtist: { name: "2dB Music Production", id: "2db-music" },
+                artUrl: "img/ci-xmas.png",
+                audioSrc: "audio/Mission Success (Cover).mp3",
+                plays: "5.266.000"
             }
         ]
     },
