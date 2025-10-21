@@ -208,7 +208,7 @@ const ALL_MUSIC_SECTIONS = [
             {
                 id: "ba1",
                 title: "Memories Of Kindness",
-                artistData: "NEXON Games", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                artistData: "NEXON Games",
                 displayArtist: { name: "NEXON Games", id: "NEXONGames" },
                 artUrl: "img/memories_of_kindness.png",
                 audioSrc: "audio/memories_of_kindness.mp3",
@@ -264,7 +264,7 @@ const ALL_MUSIC_SECTIONS = [
             {
                 id: "suno1",
                 title: "CI4 - Wave 1 (Cover)",
-                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                artistData: "SUNO AI",
                 displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
                 artUrl: "img/ci_cover_uo.jpg",
                 audioSrc: "audio/wave1 (Cover).mp3",
@@ -274,7 +274,7 @@ const ALL_MUSIC_SECTIONS = [
             {
                 id: "suno2",
                 title: "CI4 - Wave 2 (Cover)",
-                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                artistData: "SUNO AI",
                 displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
                 artUrl: "img/ci_cover_uo.jpg",
                 audioSrc: "audio/wave2 (Cover).mp3",
@@ -284,7 +284,7 @@ const ALL_MUSIC_SECTIONS = [
             {
                 id: "suno3",
                 title: "CI4 - Wave 3 (Cover)",
-                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                artistData: "SUNO AI",
                 displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
                 artUrl: "img/ci_cover_uo.jpg",
                 audioSrc: "audio/wave3 (Cover).mp3",
@@ -294,13 +294,32 @@ const ALL_MUSIC_SECTIONS = [
             {
                 id: "suno4",
                 title: "G1 - Uma Musume (Cover)",
-                artistData: "SUNO AI", // Hoặc "Blue Archive Sound Team" nếu bạn muốn cụ thể hơn
+                artistData: "SUNO AI",
                 displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
                 artUrl: "img/The begin story.png",
                 audioSrc: "audio/G1 (Cover).mp3",
                 isFavorite: true,
                 plays: "2.501.337"
             },
+            {
+                id: "suno5",
+                title: "Immaculate Ardency (Extended)",
+                artistData: "SUNO AI",
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/immaculate_ardency.png",
+                audioSrc: "audio/immaculate_ardency (Extended).mp3",
+                isFavorite: true,
+                plays: "2.501.337"
+            }, {
+                id: "suno6",
+                title: "Luminous Memory (Cover).mp3",
+                artistData: "SUNO AI",
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/Luminous_Memory.png",
+                audioSrc: "audio/Luminous Memory (Cover).mp3",
+                isFavorite: true,
+                plays: "2.501.337"
+            }, 
         ]
     },
     {
