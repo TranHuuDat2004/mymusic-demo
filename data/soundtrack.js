@@ -258,6 +258,101 @@ const ALL_MUSIC_SECTIONS = [
         ]
     },
     {
+        id: "Garena",
+        title: "Garena OST",
+        songs: [
+            {
+                "id": "lqm01",
+                "title": "Nhạc nền Tết 2021",
+                "artistData": "Liên Quân Mobile",
+                "displayArtist": { "name": "Liên Quân Mobile", "id": "LienQuanMobile" },
+                "artUrl": "img/tet2021.png",
+                "audioSrc": "audio/Nhạc nền sảnh Tết 2021.mp3",
+                "isFavorite": true,
+                "plays": "4,102,338"
+            },
+            {
+                "id": "lqm01-remix",
+                "title": "(Remix) Nhạc nền Tết 2021",
+                "artistData": "Liên Quân Mobile",
+                "displayArtist": { "name": "Liên Quân Mobile", "id": "LienQuanMobile" },
+                "artUrl": "img/tet2021.png",
+                "audioSrc": "audio/(Remix) Nhạc nền Tết 2021.mp3",
+                "isFavorite": true,
+                "plays": "4,102,338"
+            },
+            {
+                "id": "lqm02",
+                "title": "Nhạc nền Tết 2022",
+                "artistData": "Liên Quân Mobile",
+                "displayArtist": { "name": "Liên Quân Mobile", "id": "LienQuanMobile" },
+                "artUrl": "img/tet2022.png",
+                "audioSrc": "audio/Nhạc nền sảnh Tết 2022.mp3",
+                "isFavorite": false,
+                "plays": "3,511,890"
+            },
+            {
+                "id": "lqm03",
+                "title": "(Remix) Yorn Long Thần Soái ",
+                "artistData": "Liên Quân Mobile",
+                "displayArtist": { "name": "Liên Quân Mobile", "id": "LienQuanMobile" },
+                "artUrl": "img/yorn.png",
+                "audioSrc": "audio/Yorn Long Thần Soái - (Remix).mp3",
+                "isFavorite": false,
+                "plays": "2,109,450"
+            },
+            {
+                "id": "lqm04",
+                "title": "(Cover) Yorn Long Thần Soái ",
+                "artistData": "Liên Quân Mobile",
+                "displayArtist": { "name": "Liên Quân Mobile", "id": "LienQuanMobile" },
+                "artUrl": "img/yorn.png",
+                "audioSrc": "audio/Yorn Long Thần Soái - (Cover).mp3",
+                "isFavorite": true,
+                "plays": "3,882,104"
+            },
+            {
+                "id": "lqm05",
+                "title": "Nhạc Nền Mùa 9 - Yorn Long Thần Soái",
+                "artistData": "Liên Quân Mobile",
+                "displayArtist": { "name": "Liên Quân Mobile", "id": "LienQuanMobile" },
+                "artUrl": "img/yorn.png",
+                "audioSrc": "audio/Nhạc Nền Mùa 9 - Yorn Long Thần Soái - Liên Quân Mobile.mp3",
+                "isFavorite": false,
+                "plays": "2,995,312"
+            },
+            {
+                "id": "ff01",
+                "title": "Booyah Day OST (Cover)",
+                "artistData": "Garena Free Fire",
+                "displayArtist": { "name": "Garena Free Fire", "id": "FreeFire" },
+                "artUrl": "img/freefire.png",
+                "audioSrc": "audio/Garena Free Fire - Booyah Day  OST cover.mp3",
+                "isFavorite": true,
+                "plays": "2,891,447"
+            },
+            {
+                "id": "ff02",
+                "title": "Booyah Day OST (Remix)",
+                "artistData": "Garena Free Fire",
+                "displayArtist": { "name": "Garena Free Fire", "id": "FreeFire" },
+                "artUrl": "img/freefire.png",
+                "audioSrc": "audio/Garena Free Fire - Booyah Day OST remix.mp3",
+                "isFavorite": false,
+                "plays": "3,918,201"
+            },
+            {
+                "id": "ff03",
+                "title": "Booyah Day (Theme Song)",
+                "artistData": "Garena Free Fire",
+                "displayArtist": { "name": "Garena Free Fire", "id": "FreeFire" },
+                "artUrl": "img/freefire.png",
+                "audioSrc": "audio/Garena Free Fire - Booyah Day ( Theme Song ) OST - Sinister FF.mp3",
+                "isFavorite": true,
+                "plays": "2,015,773"
+            }]
+    },
+    {
         id: "SUNO",
         title: "Remix by SUNO",
         songs: [
@@ -319,7 +414,7 @@ const ALL_MUSIC_SECTIONS = [
                 audioSrc: "audio/Luminous Memory (Cover).mp3",
                 isFavorite: true,
                 plays: "2.501.337"
-            }, 
+            },
         ]
     },
     {
