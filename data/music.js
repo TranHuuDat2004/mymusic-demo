@@ -512,7 +512,34 @@ const ALL_MUSIC_SECTIONS = [
             },
         ]
     },
-    
+
+    {
+    "id": "KaguyaSama",
+    "title": "Kaguya-sama: Love Is War",
+    "songs": [
+        {
+            "id": "kaguya01",
+            "title": "Sentimental Crisis",
+            "artistData": "halca",
+            "displayArtist": { "name": "halca", "id": "halca" },
+            "artUrl": "img/love is war.jpg",
+            "audioSrc": "audio/Sentimental Crisis.mp3",
+            "isFavorite": true,
+            "plays": "8,412,991"
+        },
+        {
+            "id": "kaguya02",
+            "title": "Sentimental Crisis (Instrumental)",
+            "artistData": "Ryuhei Yamada",
+            "displayArtist": { "name": "Ryuhei Yamada", "id": "RyuheiYamada" },
+            "artUrl": "img/love is war.jpg",
+            "audioSrc": "audio/Sentimental Crisis (Instrumental).mp3",
+            "isFavorite": false,
+            "plays": "2,157,304"
+        }
+    ]
+},
+
     // Dán toàn bộ khối mã này vào trong mảng ALL_MUSIC_SECTIONS của file data/music.js
 
 
