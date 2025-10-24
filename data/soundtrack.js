@@ -258,6 +258,82 @@ const ALL_MUSIC_SECTIONS = [
         ]
     },
     {
+        id: "RedAlert3",
+        title: "Red Alert 3 Soundtrack",
+        songs: [
+            {
+                id: "ra3_01",
+                title: "Mecha Storm",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/Mecha Storm.png",
+                audioSrc: "audio/Mecha Storm.mp3",
+                isFavorite: false,
+                plays: "1,851,400"
+            },
+            {
+                id: "ra3_02",
+                title: "Celestial March",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/Celestial March.png",
+                audioSrc: "audio/Celestial March.mp3",
+                isFavorite: true,
+                plays: "4,523,112"
+            },
+            {
+                id: "ra3_03",
+                title: "Battleground of the Bear",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/Battleground of the Bear.png",
+                audioSrc: "audio/Battleground of the Bear.mp3",
+                isFavorite: false,
+                plays: "3,874,980"
+            },
+            {
+                id: "ra3_04",
+                title: "Red Rock for Mother Russia",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/Red Rock for Mother Russia.png",
+                audioSrc: "audio/Red Rock for Mother Russia.mp3",
+                isFavorite: false,
+                plays: "4,019,234"
+            },
+            {
+                id: "ra3_05",
+                title: "Rock and Awe",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/Rock and Awe.png",
+                audioSrc: "audio/Rock and Awe.mp3",
+                isFavorite: false,
+                plays: "4,382,567"
+            },
+            {
+                id: "ra3_06",
+                title: "Bring It!",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/Bring It!.png",
+                audioSrc: "audio/Bring It!.mp3",
+                isFavorite: true,
+                plays: "4,682,789"
+            },
+            {
+                id: "ra3_07",
+                title: "The Empire Strikes",
+                artistData: "James Hannigan & Frank Klepacki",
+                displayArtist: { name: "James Hannigan & Frank Klepacki", id: "RedAlert3Composers" },
+                artUrl: "img/red alert 3.png",
+                audioSrc: "audio/The Empire Strikes.mp3",
+                isFavorite: false,
+                plays: "3,746,115"
+            }
+        ]
+    },
+    {
         id: "Garena",
         title: "Garena OST",
         songs: [
