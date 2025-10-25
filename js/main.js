@@ -3,6 +3,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Main (Home) DOMContentLoaded Start");
 
+    fetch('data/music.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(musicData => {
+            initializeApp(musicData);
+        })
+        .catch(error => {
+            console.error('Lỗi khi tải dữ liệu nhạc:', error);
+            const homeContentContainer = document.getElementById('home-content');
+            if (homeContentContainer) {
+                homeContentContainer.innerHTML = '<p style="color: red; text-align: center;">Không thể tải được dữ liệu nhạc. Vui lòng thử lại sau.</p>';
+            }
+        });
+});
+
+function initializeApp(ALL_MUSIC_SECTIONS) {
     const homeContentContainer = document.getElementById('home-content');
     if (!homeContentContainer) {
         console.error("Không tìm thấy container #home-content.");
@@ -148,4 +168,4 @@ document.addEventListener('DOMContentLoaded', () => {
         window.appendMainFooter();
     }
     console.log("Main (Home) DOMContentLoaded End");
-});
+}

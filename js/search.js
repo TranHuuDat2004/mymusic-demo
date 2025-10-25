@@ -1,36 +1,44 @@
-// search.js
+// js/search.js - Refactored to fetch data
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Search DOMContentLoaded Start");
 
+    // Fetch the music data first
+    fetch('data/music.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(musicData => {
+            // Once data is loaded, initialize all search functionality
+            initializeAppWithData(musicData);
+        })
+        .catch(error => {
+            console.error('Search page: Lỗi khi tải dữ liệu nhạc:', error);
+            const resultsContainer = document.getElementById('search-results-container');
+            if (resultsContainer) {
+                resultsContainer.innerHTML = '<p style="color: red;">Không thể tải dữ liệu để tìm kiếm. Vui lòng thử lại.</p>';
+            }
+        });
+});
+
+function initializeAppWithData(ALL_MUSIC_SECTIONS) {
     const searchInput = document.getElementById('search-input');
     const resultsContainer = document.getElementById('search-results-container');
     const clearSearchBtn = document.getElementById('clear-search-btn');
-    const playlistUl = document.getElementById('playlist-links-list'); // Lấy Ul sidebar
 
-    // --- Tạo link playlist động trong sidebar (Gọi hàm từ utils.js) ---
-    // Vẫn cần render playlist trên trang search để sidebar hiển thị đúng
-     if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && playlistUl && typeof window.renderPlaylistLinks === 'function') {
-        window.renderPlaylistLinks(ALL_MUSIC_SECTIONS, playlistUl);
-        // KHÔNG gọi attachSmoothScrollListeners ở đây
-    } else {
-         console.error("Lỗi: Không tìm thấy dữ liệu nhạc, ul playlist hoặc hàm renderPlaylistLinks trên trang search.");
-    }
-
-    // --- Logic tìm kiếm (như cũ) ---
-    if (typeof ALL_MUSIC_SECTIONS === 'undefined') {
-        // ... xử lý lỗi dữ liệu ...
-        return;
-    }
+    // Ensure utility functions are available from utils.js
     if (typeof window.createSongCard !== 'function') {
-       // ... xử lý lỗi thiếu hàm ...
-        return;
+       console.error("Lỗi: hàm createSongCard không tồn tại. Cần nạp utils.js trước.");
+       resultsContainer.innerHTML = '<p style="color: red;">Lỗi giao diện. Vui lòng tải lại trang.</p>';
+       return;
     }
 
     function performSearch(query) {
-       // ... code hàm performSearch như trước, gọi window.createSongCard ...
         if (!resultsContainer) return;
-        resultsContainer.innerHTML = ''; // Xóa kết quả cũ
+        resultsContainer.innerHTML = ''; // Clear old results
 
         const initialMessage = '<p class="search-initial-message">Nhập từ khóa để bắt đầu tìm kiếm.</p>';
         if (!query) {
@@ -41,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const lowerCaseQuery = query.toLowerCase().trim();
         const foundSongs = [];
 
+        // Use the passed-in music data
         ALL_MUSIC_SECTIONS.forEach(section => {
             if (Array.isArray(section.songs)) {
                 section.songs.forEach(song => {
@@ -49,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const artistDataMatch = song.artistData?.toLowerCase().includes(lowerCaseQuery);
 
                     if (titleMatch || artistMatch || artistDataMatch) {
+                        // Prevent duplicates
                         const uniqueId = song.id || `${song.title}-${song.artistData}`;
                         if (!foundSongs.some(found => (found.id || `${found.title}-${found.artistData}`) === uniqueId)) {
                             foundSongs.push(song);
@@ -63,6 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
             resultGrid.classList.add('card-grid');
             foundSongs.forEach(song => {
                 const card = window.createSongCard(song);
+                // Add click listener to play the song, assuming player.js is loaded and provides this function
+                if (typeof addCardClickListener === 'function') {
+                    addCardClickListener(card);
+                } else if (typeof window.playSongFromData === 'function') {
+                     card.addEventListener('click', () => {
+                        window.playSongFromData(song, foundSongs);
+                    });
+                }
                 resultGrid.appendChild(card);
             });
             resultsContainer.appendChild(resultGrid);
@@ -71,8 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
-    // Xử lý input tìm kiếm
+    // Setup event listeners
     if (searchInput && clearSearchBtn) {
         searchInput.addEventListener('input', () => {
             const query = searchInput.value;
@@ -90,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Không tìm thấy search input hoặc nút clear.");
     }
 
-    console.log("Search DOMContentLoaded End");
-});
+    console.log("Search functionality initialized.");
+}
 
-console.log("search.js loaded"); // Để kiểm tra thứ tự load
+console.log("search.js loaded");
