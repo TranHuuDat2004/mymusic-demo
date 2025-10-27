@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="player-controls">
             <div class="buttons">
-                <button id="shuffle-btn" title="Ngẫu nhiên"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-shuffle"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"></path></svg></button>
-                <button id="prev-btn" title="Trước"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-prev"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button>
-                <button class="play-pause-btn" id="main-play-pause-btn" title="Phát"><svg viewBox="0 0 24 24" width="24" height="24" class="icon-play"><path d="M8 5v14l11-7z"></path></svg></button>
-                <button id="next-btn" title="Tiếp theo"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-next"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg></button>
-                <button id="repeat-btn" title="Lặp lại"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"></path></svg></button>
+                <button id="shuffle-btn"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-shuffle"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"></path></svg></button>
+                <button id="prev-btn"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-prev"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg></button>
+                <button class="play-pause-btn" id="main-play-pause-btn"><svg viewBox="0 0 24 24" width="24" height="24" class="icon-play"><path d="M8 5v14l11-7z"></path></svg></button>
+                <button id="next-btn"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-next"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg></button>
+                <button id="repeat-btn"><svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"></path></svg></button>
             </div>
             <div class="progress-bar-container">
                 <span id="current-time">0:00</span>
@@ -39,8 +39,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
         <div class="other-controls">
-            <button id="volume-btn" title="Âm lượng"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-volume"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg></button>
+            <button id="volume-btn"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-volume"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg></button>
             <div class="volume-bar-container"><input type="range" id="volume-bar" min="0" max="100" value="70" title="Thanh âm lượng"></div>
+            <button id="toggle-bg-btn"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 6v12c3.31 0 6-2.69 6-6s-2.69-6-6-6zM5 12c0-3.87 3.13-7 7-7V3c-4.97 0-9 4.03-9 9s4.03 9 9 9v-2c-3.87 0-7-3.13-7-7z"></path></svg></button>
         </div>
     `;
     playerContainer.className = 'player-bar';
@@ -112,10 +113,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const npFsVolumeBar = document.getElementById('np-fullscreen-volume-bar');
     const npFsShuffleBtn = document.getElementById('np-fullscreen-shuffle-btn');
     const npFsRepeatBtn = document.getElementById('np-fullscreen-repeat-btn');
+    const toggleBgBtn = document.getElementById('toggle-bg-btn');
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'custom-tooltip';
+    document.body.appendChild(tooltip);
+
+    const addTooltip = (element, text) => {
+        element.addEventListener('mouseover', (e) => {
+            tooltip.textContent = text;
+            tooltip.style.display = 'block';
+            const rect = e.target.getBoundingClientRect();
+            let left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
+            if (left < 0) {
+                left = 0;
+            }
+            if (left + tooltip.offsetWidth > window.innerWidth) {
+                left = window.innerWidth - tooltip.offsetWidth;
+            }
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${rect.top - tooltip.offsetHeight - 5}px`;
+        });
+        element.addEventListener('mouseout', () => {
+            tooltip.style.display = 'none';
+        });
+    };
+
+    addTooltip(shuffleBtn, 'Ngẫu nhiên');
+    addTooltip(prevBtn, 'Trước');
+    addTooltip(mainPlayPauseBtn, 'Phát / Tạm dừng');
+    addTooltip(nextBtn, 'Tiếp theo');
+    addTooltip(repeatBtn, 'Lặp lại');
+    addTooltip(volumeBtn, 'Âm lượng');
+    addTooltip(toggleBgBtn, 'Đổi ảnh nền background');
+    addTooltip(likeBtn, 'Thích');
+    addTooltip(progressBar, 'Thanh tiến trình');
+    addTooltip(volumeBar, 'Thanh âm lượng');
 
     // --- 3. QUẢN LÝ TRẠNG THÁI PLAYER ---
     let allSongsFlat = [], currentQueue = [], currentIndex = -1;
     let isShuffle = false, repeatMode = 'none', isVolumeInitialized = false, lastVolume = 0.7;
+    let showBg = localStorage.getItem('showBg') === 'true';
+
+    fullscreenPlayerContainer.classList.toggle('show-background', showBg);
+    toggleBgBtn.classList.toggle('active', showBg);
 
     if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && Array.isArray(ALL_MUSIC_SECTIONS)) {
         allSongsFlat = ALL_MUSIC_SECTIONS.flatMap(section => section.songs);
@@ -208,7 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
         npFsArt.src = songData.artUrl;
 
         const npFsBg = document.getElementById('np-fullscreen-bg');
-        if (npFsBg) {
+        if (npFsBg && showBg) {
             npFsBg.style.backgroundImage = `url('${songData.artUrl}')`;
         }
 
@@ -311,6 +352,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     repeatBtn.addEventListener('click', toggleRepeat);
     npFsRepeatBtn.addEventListener('click', toggleRepeat);
+
+    toggleBgBtn.addEventListener('click', () => {
+        showBg = !showBg;
+        fullscreenPlayerContainer.classList.toggle('show-background', showBg);
+        toggleBgBtn.classList.toggle('active', showBg);
+        localStorage.setItem('showBg', showBg);
+        if (showBg && currentQueue[currentIndex]) {
+            const songData = currentQueue[currentIndex];
+            const npFsBg = document.getElementById('np-fullscreen-bg');
+            if (npFsBg) {
+                npFsBg.style.backgroundImage = `url('${songData.artUrl}')`;
+            }
+        }
+    });
 
     likeBtn.addEventListener('click', () => {
         if (currentIndex === -1) return;
