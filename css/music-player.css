@@ -204,17 +204,29 @@
     pointer-events: none; /* Cho phép click xuyên qua khi bị ẩn */
 }
 
+.np-fullscreen-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px);
+    opacity: 0.3;
+    transition: background-image 0.5s ease-in-out;
+}
+
 .np-fullscreen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(24, 24, 24, 0.95); /* Nền mờ */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(24, 24, 24, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -234,6 +246,20 @@
     pointer-events: auto; /* Cho phép tương tác khi hiện ra */
 }
 
+.np-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.np-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+}
 
 .np-close-btn {
     position: absolute;
@@ -253,10 +279,9 @@
 
 
 .np-art-wrapper {
-    width: 70vw;
-    max-width: 350px;
+    width: 80%;
+    max-width: 400px;
     aspect-ratio: 1 / 1;
-    margin-bottom: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     border-radius: 12px;
 }
@@ -268,23 +293,22 @@
 }
 
 .np-details {
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
 }
 #np-fullscreen-title {
-    font-size: 1.8em;
+    font-size: 2.5em;
     font-weight: 700;
-    margin: 0 0 5px;
+    margin: 0 0 10px;
 }
 #np-fullscreen-artist {
-    font-size: 1.1em;
+    font-size: 1.2em;
     color: #b3b3b3;
 }
 
 
 .np-progress {
     width: 100%;
-    max-width: 500px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -300,7 +324,7 @@
     align-items: center;
     justify-content: center;
     gap: 30px;
-    margin: 20px 0;
+    margin: 30px 0;
 }
 .np-controls button {
     background: none;
@@ -309,10 +333,16 @@
     color: #fff;
     padding: 0;
 }
-.np-controls .play-pause-btn svg {
+.np-controls .play-pause-btn {
     background-color: #fff;
-    color: #000;
     border-radius: 50%;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.np-controls .play-pause-btn svg {
+    fill: currentColor;
 }
 .np-controls button:hover {
     transform: scale(1.05);
@@ -324,7 +354,6 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 500px;
     margin-top: 20px;
 }
 
