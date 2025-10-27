@@ -65,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="cookie.html">Cookie</a>
             </div>
             <div class="copyright">
-                <span>© ${new Date().getFullYear()} MyMusic by Tran Huu Dat</span>
+                <span>© ${new Date().getFullYear()} MyMusic by Tran Huu Dat</span><br>
+                <span class="academic-disclaimer">Đây là một dự án phục vụ cho mục đích học tập. Mọi nội dung chỉ mang tính chất minh họa và không được sử dụng cho bất kỳ mục đích thương mại nào</span>
             </div>
         </div>
     `;

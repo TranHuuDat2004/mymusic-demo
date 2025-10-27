@@ -1,0 +1,353 @@
+/* 3. Player Bar */
+.player-bar {
+    grid-area: player-bar;
+    background-color: #181818;
+    border-top: 1px solid #282828;
+    padding: 0 16px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.player-bar .song-info {
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    /* Spotify's min-width */
+    flex: 1 0 180px;
+}
+
+.player-bar .song-info img#now-playing-art {
+    width: 56px;
+    height: 56px;
+    /* Đảm bảo vuông */
+    /* aspect-ratio: 1 / 1; */
+    object-fit: cover;
+    object-position: center center;
+    margin-right: 12px;
+    border-radius: 4px;
+    background-color: #333;
+}
+
+.player-bar .song-info .text-details h4#now-playing-title {
+    /* Added ID for JS */
+    font-size: 0.9em;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-bar .song-info .text-details p#now-playing-artist {
+    /* Added ID for JS */
+    font-size: 0.75em;
+    color: #b3b3b3;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-bar .song-info .actions button {
+    margin-left: 16px;
+    font-size: 1.1em;
+}
+
+.player-bar .player-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 2 0 auto;
+    /* Take more space but can shrink */
+    max-width: 722px;
+    /* Spotify's max-width */
+}
+
+.player-bar .player-controls .buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.player-bar .player-controls .buttons button {
+    font-size: 1.2em;
+}
+
+.player-bar .player-controls .buttons .play-pause-btn#main-play-pause-btn {
+    /* Added ID for JS */
+    font-size: 1.8em;
+    /* Larger play button */
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-bar .player-controls .buttons .play-pause-btn#main-play-pause-btn:hover {
+    transform: scale(1.1);
+}
+
+.player-bar .progress-bar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
+    font-size: 0.7em;
+    color: #b3b3b3;
+}
+
+.player-bar .progress-bar-container span#current-time {
+    /* Added ID */
+    min-width: 30px;
+    text-align: right;
+}
+
+.player-bar .progress-bar-container span#total-time {
+    /* Added ID */
+    min-width: 30px;
+}
+
+.player-bar .progress-bar-container input#progress-bar[type="range"] {
+    /* Added ID */
+    flex-grow: 1;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #535353;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.player-bar .progress-bar-container input#progress-bar[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player-bar .progress-bar-container input#progress-bar[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+
+.player-bar .other-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 180px;
+    flex: 1 0 180px;
+}
+
+.player-bar .other-controls button {
+    margin-left: 12px;
+    font-size: 1.1em;
+}
+
+.player-bar .other-controls .volume-bar-container {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    /* Fixed width for volume slider */
+}
+
+.player-bar .other-controls .volume-bar-container input#volume-bar[type="range"] {
+    /* Added ID */
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #535353;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.player-bar .other-controls .volume-bar-container input#volume-bar[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.player-bar .other-controls .volume-bar-container input#volume-bar[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+/* --- Styling cho Now Playing Fullscreen --- */
+#now-playing-fullscreen-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000; /* Hiển thị trên mọi thứ khác */
+    pointer-events: none; /* Cho phép click xuyên qua khi bị ẩn */
+}
+
+.np-fullscreen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(24, 24, 24, 0.95); /* Nền mờ */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(100%); /* Bắt đầu từ dưới màn hình */
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#now-playing-fullscreen-container.active .np-fullscreen {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#now-playing-fullscreen-container.active {
+    pointer-events: auto; /* Cho phép tương tác khi hiện ra */
+}
+
+
+.np-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+.np-close-btn svg {
+    fill: #b3b3b3;
+}
+.np-close-btn:hover svg {
+    fill: #fff;
+}
+
+
+.np-art-wrapper {
+    width: 70vw;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-radius: 12px;
+}
+#np-fullscreen-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.np-details {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#np-fullscreen-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 0 0 5px;
+}
+#np-fullscreen-artist {
+    font-size: 1.1em;
+    color: #b3b3b3;
+}
+
+
+.np-progress {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8em;
+    color: #b3b3b3;
+}
+#np-fullscreen-progress-bar {
+    flex-grow: 1;
+}
+
+.np-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+}
+.np-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 0;
+}
+.np-controls .play-pause-btn svg {
+    background-color: #fff;
+    color: #000;
+    border-radius: 50%;
+}
+.np-controls button:hover {
+    transform: scale(1.05);
+}
+
+
+.np-extra-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.np-extra-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #b3b3b3;
+}
+.np-extra-controls button.active {
+    color: #1DB954;
+}
+
+#np-fullscreen-volume-bar {
+    width: 100px;
+}
+
+.player-bar .player-controls .buttons button.active,
+.player-bar .other-controls button.active {
+    color: #1DB954;
+}
+
+.player-bar .player-controls .buttons button.active svg,
+.player-bar .other-controls button.active svg {
+    fill: currentColor;
+}

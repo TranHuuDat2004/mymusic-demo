@@ -1,0 +1,202 @@
+/* CSS SPECIFIC TO ARTIST PAGE (ngoài những gì đã có trong styles.css) */
+.artist-header {
+    height: 300px;
+    /* Or more, depending on your design */
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    /* Align content to bottom */
+    padding: 24px 30px;
+    box-sizing: border-box;
+    margin: -20px -30px 0;
+    /* Negative margin to fill top padding of main-content */
+}
+
+.artist-header::before {
+    /* For background image with overlay */
+    content: "";
+    background-image: var(--artist-banner-url, url('https://via.placeholder.com/1200x300/222/444?text=Artist+Banner'));
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.artist-header::after {
+    /* Overlay */
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(18, 18, 18, 1) 0%, rgba(18, 18, 18, 0.7) 50%, rgba(18, 18, 18, 0) 100%);
+    z-index: 2;
+}
+
+.artist-header-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.artist-avatar img {
+    width: 180px;
+    /* Adjust size as needed */
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #121212;
+    /* Optional border */
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+.artist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.artist-info .artist-type {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.artist-info .artist-name {
+    font-size: 3.5em;
+    /* Large artist name */
+    font-weight: 900;
+    margin: 0;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.artist-stats {
+    font-size: 0.9em;
+    color: #b3b3b3;
+    margin-top: 8px;
+}
+
+.artist-actions {
+    margin-top: 24px;
+    margin-bottom: 30px;
+    /* Space before content sections */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.play-button-large {
+    background-color: #1DB954;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    /* Icon size */
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.play-button-large:hover {
+    transform: scale(1.05);
+}
+
+.follow-button {
+    padding: 8px 20px;
+    border: 1px solid #727272;
+    border-radius: 500px;
+    /* Pill shape */
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.follow-button:hover {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.follow-button.following {
+    border-color: #1DB954;
+    color: #1DB954;
+}
+
+.artist-more-options button {
+    font-size: 1.5em;
+    /* For the three dots icon */
+}
+
+/* Re-using .content-section and .card-grid from main styles */
+/* You might want specific styling for song list items if not using cards */
+.song-list-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    gap: 12px;
+}
+
+.song-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.song-list-item .song-index {
+    color: #b3b3b3;
+    width: 20px;
+    text-align: right;
+}
+
+/* Nếu bạn muốn ảnh nhỏ trong danh sách bài hát (ví dụ: trang nghệ sĩ) cũng vuông: */
+.song-list-item img.album-art-small {
+    width: 40px;
+    /* Hoặc kích thước bạn muốn */
+    height: 40px;
+    /* Đặt chiều cao bằng chiều rộng để đảm bảo vuông */
+    /* Hoặc dùng aspect-ratio: 1 / 1; nếu width có thể thay đổi */
+    /* aspect-ratio: 1 / 1; */
+
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 4px;
+}
+
+.song-list-item .song-details {
+    flex-grow: 1;
+}
+
+.song-list-item .song-title {
+    font-weight: 500;
+    color: #fff;
+}
+
+.song-list-item .song-plays,
+.song-list-item .song-duration {
+    font-size: 0.85em;
+    color: #b3b3b3;
+}
+
+.song-list-item .song-duration {
+    min-width: 40px;
+    text-align: right;
+}
+
+.song-list-item .song-actions button {
+    font-size: 1.2em;
+    padding: 4px;
+}

@@ -1,0 +1,116 @@
+/* --- Styling cho Main Content Footer --- */
+
+.main-content-footer {
+    padding: 80px 0 40px 0;
+    color: #fff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 50px; /* Tạo khoảng cách với nội dung bên trên */
+}
+
+.footer-links-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 160px;
+    margin-bottom: 30px;
+}
+
+.footer-column h4 {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li {
+    margin-bottom: 15px;
+}
+
+.footer-column a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s;
+}
+
+.footer-column a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.social-links-column {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #292929;
+    border-radius: 50%;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+.social-icon:hover {
+    background-color: #727272;
+}
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 20px 30px 20px;
+}
+
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+    color: #b3b3b3;
+    padding: 0 20px;
+}
+
+.legal-links a {
+    color: #b3b3b3;
+    text-decoration: none;
+    margin-right: 20px;
+}
+.legal-links a:hover {
+    color: #fff;
+}
+
+.copyright {
+  text-align: center; /* Căn giữa nội dung */
+  padding: 25px 15px; /* Tạo khoảng trống trên/dưới và trái/phải */
+  color: #888; /* Màu chữ xám nhẹ cho dòng copyright chính */
+  font-size: 14px; /* Cỡ chữ vừa phải */
+  line-height: 1.6; /* Tăng khoảng cách giữa các dòng cho dễ đọc */
+}
+
+.academic-disclaimer {
+  color: #aaa; /* Màu chữ xám nhạt hơn để làm nó ít nổi bật hơn */
+  font-size: 12px; /* Cỡ chữ nhỏ hơn dòng trên */
+  font-style: italic; /* In nghiêng để tạo sự khác biệt */
+}

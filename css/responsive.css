@@ -1,0 +1,371 @@
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablet và các thiết bị nhỏ hơn (ví dụ: < 769px) */
+@media (max-width: 768px) {
+    .music-player-container {
+        grid-template-columns: 1fr;
+        /* Chỉ còn main content và player bar */
+        grid-template-rows: auto 1fr auto;
+        /* Top-bar (nếu có), main-content, player-bar */
+        grid-template-areas:
+            /* "top-bar" */
+            /* Nếu bạn muốn có một top-bar riêng cho mobile */
+            "main-content"
+            "player-bar";
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -280px;
+        /* Ẩn hoàn toàn sidebar (width 240px + padding + an toàn) */
+        top: 0;
+        bottom: 0;
+        width: 240px;
+        /* Giữ nguyên width của sidebar khi hiện */
+        z-index: 1000;
+        /* Đảm bảo nó nổi lên trên */
+        transition: left 0.3s ease-in-out;
+        box-shadow: 4px 0px 15px rgba(0, 0, 0, 0.5);
+        height: 100vh;
+        /* Đảm bảo chiều cao full */
+    }
+
+    .sidebar.active {
+        left: 0;
+        /* Hiện sidebar */
+    }
+
+    .menu-toggle-btn {
+        display: block;
+        /* Hiện nút menu trên mobile */
+    }
+
+    .main-content {
+        /* Thêm padding top để không bị nút menu che */
+        /* Điều chỉnh giá trị này nếu bạn có top-bar */
+        padding-top: 60px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .main-content h1 {
+        font-size: 1.8em;
+    }
+
+
+    .card .play-button-overlay {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3em;
+        bottom: 70px;
+        /* Điều chỉnh vị trí nút play trên card */
+        right: 15px;
+    }
+
+    .card h3.song-title,
+    .card p.song-artist {
+        font-size: 0.9em;
+    }
+
+
+    /* Player Bar adjustments */
+    .player-bar {
+        height: 75px;
+        /* Có thể giảm chiều cao một chút */
+        padding: 0 10px;
+    }
+
+    .player-bar .song-info {
+        min-width: 0;
+        /* Cho phép co lại nhiều hơn */
+        flex-basis: 100px;
+        /* Giảm không gian cơ bản */
+        margin-right: 5px;
+    }
+
+    /* Điều chỉnh cho responsive nếu cần */
+
+    .player-bar .song-info img#now-playing-art {
+        width: 48px;
+        height: 48px;
+        /* Đảm bảo vuông */
+    }
+
+    .player-bar .song-info .text-details h4#now-playing-title {
+        font-size: 0.85em;
+    }
+
+    .player-bar .song-info .text-details p#now-playing-artist {
+        font-size: 0.7em;
+    }
+
+    .player-bar .song-info .actions {
+        display: none;
+        /* Ẩn nút like/options ở đây để tiết kiệm không gian */
+    }
+
+    .player-bar .player-controls .buttons {
+        gap: 10px;
+        /* Giảm khoảng cách giữa các nút control */
+    }
+
+    .player-bar .player-controls .buttons button {
+        font-size: 1.1em;
+        /* Kích thước icon control */
+    }
+
+    .player-bar .player-controls .buttons .play-pause-btn {
+        font-size: 1.6em;
+        /* Nút play/pause chính */
+        width: 36px;
+        height: 36px;
+    }
+
+    .player-bar .progress-bar-container span {
+        /* Ẩn thời gian */
+        display: none;
+    }
+
+    .player-bar .progress-bar-container input#progress-bar[type="range"] {
+        margin: 0 5px;
+        /* Thêm chút margin nếu thời gian bị ẩn */
+    }
+
+
+    .player-bar .other-controls {
+        min-width: 0;
+        flex-basis: auto;
+        /* Cho phép co lại */
+        justify-content: flex-end;
+    }
+
+    .player-bar .other-controls .volume-bar-container {
+        display: none;
+        /* Ẩn thanh âm lượng, người dùng có thể dùng nút cứng điện thoại */
+    }
+
+    .player-bar .other-controls button[title="Lời bài hát"],
+    .player-bar .other-controls button[title="Hàng đợi"] {
+        margin-left: 8px;
+        font-size: 1em;
+    }
+
+    /* Có thể ẩn bớt 1 trong 2 nút nếu quá chật trên màn hình rất nhỏ */
+}
+
+
+/* Điện thoại di động (ví dụ: < 481px) */
+@media (max-width: 480px) {
+    .main-content {
+        padding-top: 55px;
+    }
+
+    .main-content h1 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .content-section h2 {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+
+    .card {
+        padding: 12px;
+    }
+
+    .card .play-button-overlay {
+        bottom: 60px;
+    }
+
+    /* Player bar trên mobile nhỏ */
+    .player-bar .player-controls .buttons button[title="Ngẫu nhiên"],
+    .player-bar .player-controls .buttons button[title="Lặp lại"] {
+        display: none;
+        /* Ẩn nút shuffle/repeat để tiết kiệm không gian */
+    }
+
+    .player-bar .player-controls .buttons {
+        gap: 15px;
+        /* Tăng nhẹ khoảng cách khi đã ẩn bớt nút */
+    }
+
+    .player-bar .other-controls button[title="Hàng đợi"] {
+        display: none;
+        /* Ẩn thêm nút hàng đợi nếu cần */
+    }
+}
+
+/* CSS cho Artist Page Responsive (thêm vào cuối styles.css hoặc trong <style> của artist_page.html) */
+@media (max-width: 768px) {
+    .artist-header {
+        height: auto;
+        /* Chiều cao tự động */
+        padding: 20px 15px;
+        margin: -60px -15px 0;
+        /* Điều chỉnh theo padding-top của main-content */
+        flex-direction: column;
+        /* Stack avatar và info */
+        align-items: center;
+        /* Căn giữa */
+        text-align: center;
+    }
+
+    .artist-header-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .artist-avatar img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .artist-info .artist-name {
+        font-size: 2.5em;
+    }
+
+    .artist-actions {
+        justify-content: center;
+        /* Căn giữa các nút action */
+        margin-bottom: 20px;
+    }
+
+    .song-list-item {
+        padding: 8px 5px;
+    }
+
+    .song-list-item .song-plays {
+        display: none;
+        /* Ẩn số lượt nghe trên mobile để gọn */
+    }
+
+    .song-list-item .song-details {
+        margin-right: 5px;
+        /* Giảm khoảng cách */
+    }
+}
+
+@media (max-width: 480px) {
+    .artist-header {
+        margin-top: -55px;
+    }
+
+    .artist-avatar img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .artist-info .artist-name {
+        font-size: 2em;
+    }
+
+    .artist-actions .play-button-large {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5em;
+    }
+
+    .artist-actions .follow-button {
+        padding: 6px 15px;
+        font-size: 0.75em;
+    }
+}
+
+/* Responsive cho danh sách bài hát */
+@media (max-width: 768px) {
+    .song-list-item .song-plays,
+    .song-list-header .song-plays {
+        display: none;
+    }
+     .song-list-item .song-artist-column, /* Ẩn cột nghệ sĩ riêng trên tablet */
+     .song-list-header .song-artist-header {
+        display: none;
+    }
+    /* Khi ẩn cột nghệ sĩ, tên nghệ sĩ trong .song-details sẽ tự hiển thị */
+}
+
+
+@media (max-width: 480px) {
+    .song-list-item {
+        gap: 8px;
+        padding: 8px 5px;
+    }
+    .song-list-item .song-index {
+        font-size: 0.9em;
+        width: 20px;
+    }
+    .song-list-item img.album-art-small {
+        width: 36px;
+        height: 36px;
+    }
+    .song-list-item .song-title {
+        font-size: 0.9em;
+    }
+    .song-list-item .song-artist-name-in-list {
+        font-size: 0.75em;
+    }
+     .song-list-item .song-actions {
+        min-width: 30px;
+    }
+     .song-list-item .song-actions button {
+        font-size: 1em;
+    }
+    /* Có thể ẩn cả duration nếu quá chật */
+    /*
+    .song-list-item .song-duration {
+        display: none;
+    }
+    .song-list-header .song-duration {
+        display: none;
+    }
+    */
+}
+
+/* Responsive cho thanh tìm kiếm */
+@media (max-width: 768px) {
+    .search-bar {
+        max-width: none;
+        /* Chiếm toàn bộ chiều rộng trên mobile */
+    }
+
+    .search-title {
+        font-size: 1.8em;
+    }
+
+    .search-description {
+        margin-bottom: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-title {
+        font-size: 1.5em;
+    }
+
+    .search-description {
+        font-size: 0.85em;
+        margin-bottom: 20px;
+    }
+
+    .search-input-field {
+        font-size: 0.9em;
+    }
+}
+
+/* Ví dụ responsive cho card-grid (nên có trong CSS chung) */
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+    }
+}
