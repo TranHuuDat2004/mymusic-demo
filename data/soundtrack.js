@@ -490,7 +490,26 @@ const ALL_MUSIC_SECTIONS = [
                 audioSrc: "audio/Luminous Memory (Cover).mp3",
                 isFavorite: true,
                 plays: "2.501.337"
+            }, {
+                id: "suno7",
+                title: "(Cover) Constant Moderato Anime",
+                artistData: "SUNO AI",
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/Constant_Moderato_Anime.png",
+                audioSrc: "audio/Constant_Moderato_Anime (Cover).mp3",
+                isFavorite: true,
+                plays: "2.777.999"
+            }, {
+                id: "suno8",
+                title: "(Extended) Constant Moderato Anime",
+                artistData: "SUNO AI",
+                displayArtist: { name: "SUNO AI", id: "SUNO-AI" },
+                artUrl: "img/Constant_Moderato_Anime.png",
+                audioSrc: "audio/Constant_Moderato_Anime (Extended).mp3",
+                isFavorite: true,
+                plays: "2.777.999"
             },
+
         ]
     },
     {
