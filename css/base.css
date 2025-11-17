@@ -1,3 +1,17 @@
+:root {
+    --primary-color: #1db954;
+    --primary-color-dark: #1aa34a;
+    --bg-color-dark: #121212;
+    --bg-color-light: #181818;
+    --bg-color-hover: #282828;
+    --text-color-primary: #ffffff;
+    --text-color-secondary: #b3b3b3;
+    --icon-color: #b3b3b3;
+    --border-color: #282828;
+    --shadow-light: rgba(0, 0, 0, 0.2);
+    --input-bg-color: #282828;
+}
+
 html {
     height: 100%;
     /* Đảm bảo html chiếm toàn bộ chiều cao */

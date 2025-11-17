@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="copyright">
                 <span>© ${new Date().getFullYear()} MyMusic by Tran Huu Dat</span><br>
-                <span class="academic-disclaimer">Đây là một dự án phục vụ cho mục đích học tập. Mọi nội dung chỉ mang tính chất minh họa và không được sử dụng cho bất kỳ mục đích thương mại nào</span>
+                <span class="project-disclaimer">Dự án này chỉ nhằm mục đích demo và học hỏi. Tất cả các bản nhạc được sử dụng trong dự án này đều thuộc bản quyền của các nghệ sĩ và nhà sản xuất gốc. Chúng tôi không sở hữu bất kỳ bản nhạc nào.</span><br>
             </div>
         </div>
     `;

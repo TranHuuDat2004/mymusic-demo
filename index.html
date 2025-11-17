@@ -12,11 +12,22 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/music-player.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/popup.css">
 
     <link rel="icon" href="img/favicon.png" type="image/png">
 </head>
 
 <body>
+
+    <!-- Disclaimer Popup -->
+    <div class="popup-overlay" id="disclaimer-popup">
+        <div class="popup-content">
+            <button class="popup-close-btn" id="popup-close" aria-label="Đóng">×</button>
+            <h2>Thông Báo</h2>
+            <p>Dự án này chỉ nhằm mục đích demo và học hỏi. Tất cả các bản nhạc được sử dụng trong dự án này đều thuộc bản quyền của các nghệ sĩ và nhà sản xuất gốc. Chúng tôi không sở hữu bất kỳ bản nhạc nào.</p>
+            <button class="popup-confirm-btn" id="popup-confirm">Tôi đã hiểu</button>
+        </div>
+    </div>
 
     <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
     <audio id="audio-player"></audio> <!-- THE AUDIO ELEMENT -->
@@ -50,6 +61,7 @@
     <script src="js/utils.js"></script> <!-- Nạp file utils -->
     <script src="js/player.js"></script>
     <script src="js/main.js"></script> <!-- Thay vì search.js -->
+    <script src="js/popup.js" defer></script> <!-- Script cho popup -->
     <!-- <script src="artist_page.js"></script> Nếu dùng -->
     <script src="js/sidebar.js" defer></script> <!-- Nạp sidebar.js -->
     <!-- Trong các file HTML -->
