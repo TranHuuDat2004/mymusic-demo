@@ -1,0 +1,104 @@
+/* css/search.css */
+
+.search-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: var(--bg-color-light); /* Assuming a variable for light background */
+    border-radius: 8px;
+    box-shadow: var(--shadow-light); /* Assuming a variable for light shadow */
+}
+
+.search-title {
+    font-size: 2.5em;
+    color: var(--text-color-primary);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.search-description {
+    font-size: 1.1em;
+    color: var(--text-color-secondary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--input-bg-color); /* Assuming a variable for input background */
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.search-icon {
+    color: var(--icon-color);
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.search-input-field {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.1em;
+    color: var(--text-color-primary);
+    padding: 5px 0;
+}
+
+.search-input-field::placeholder {
+    color: var(--text-color-secondary);
+    opacity: 0.7;
+}
+
+.clear-search-btn {
+    background: none;
+    border: none;
+    color: var(--text-color-secondary);
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0 5px;
+    line-height: 1;
+}
+
+.clear-search-btn:hover {
+    color: var(--primary-color); /* Assuming a primary color variable */
+}
+
+.search-results {
+    margin-top: 20px;
+}
+
+.search-initial-message {
+    text-align: center;
+    color: var(--text-color-secondary);
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .search-container {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .search-title {
+        font-size: 2em;
+    }
+
+    .search-input-field {
+        font-size: 1em;
+    }
+}

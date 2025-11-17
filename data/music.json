@@ -7,7 +7,10 @@
                 "id": "fav3",
                 "title": "Thay Lòng",
                 "artistData": "Nal",
-                "displayArtist": { "name": "Nal", "id": "nal" },
+                "displayArtist": {
+                    "name": "Nal",
+                    "id": "nal"
+                },
                 "artUrl": "img/nal.png",
                 "audioSrc": "audio/thay-long-nal.mp3",
                 "isFavorite": false,
@@ -17,25 +20,29 @@
                 "id": "fav4",
                 "title": "Making My Way",
                 "artistData": "Sơn Tùng M-TP",
-                "displayArtist": { "name": "Sơn Tùng MTP", "id": "son-tung-mtp" },
+                "displayArtist": {
+                    "name": "Sơn Tùng MTP",
+                    "id": "son-tung-mtp"
+                },
                 "artUrl": "img/making-my-way.jpg",
                 "audioSrc": "audio/making-my-way.mp3",
                 "isFavorite": false,
                 "plays": "85.321.678"
             }
-
         ]
     },
     {
         "id": "VpopRemix",
         "title": "Nhạc Remix Cực Căng",
         "songs": [
-
             {
                 "id": "fav5",
                 "title": "Tái Sinh Remix",
                 "artistData": "Tùng Dương",
-                "displayArtist": { "name": "Tùng Dương", "id": "tung-duong" },
+                "displayArtist": {
+                    "name": "Tùng Dương",
+                    "id": "tung-duong"
+                },
                 "artUrl": "img/tai-sinh-remix.webp",
                 "audioSrc": "audio/tai-sinh-remix.mp3",
                 "isFavorite": false,
@@ -45,7 +52,10 @@
                 "id": "fav6",
                 "title": "Ải hồng nhan Remix",
                 "artistData": "Cần Vinh, Lee Ken",
-                "displayArtist": { "name": "Cần Vinh, Lee Ken", "id": "can-vinh" },
+                "displayArtist": {
+                    "name": "Cần Vinh, Lee Ken",
+                    "id": "can-vinh"
+                },
                 "artUrl": "img/ai-hong-nhan.jpg",
                 "audioSrc": "audio/ai-hong-nhan-remix.mp3",
                 "isFavorite": false,
@@ -55,7 +65,10 @@
                 "id": "fav10",
                 "title": "Khúc Vương Tình Remix ",
                 "artistData": "Cần Vinh, Lee Ken",
-                "displayArtist": { "name": "Cần Vinh, Lee Ken", "id": "can-vinh" },
+                "displayArtist": {
+                    "name": "Cần Vinh, Lee Ken",
+                    "id": "can-vinh"
+                },
                 "artUrl": "img/Khúc Vương Tình Remix (Cần Vinh, Lee Ken).png",
                 "audioSrc": "audio/Khúc Vương Tình Remix (Cần Vinh, Lee Ken).mp3",
                 "isFavorite": false,
@@ -65,7 +78,10 @@
                 "id": "fav7",
                 "title": "Nên Chờ Hay Nên Quên Remix",
                 "artistData": "Cần Vinh, Lee Ken",
-                "displayArtist": { "name": "Chu Thúy Quỳnh", "id": "chu-thuy-quynh" },
+                "displayArtist": {
+                    "name": "Chu Thúy Quỳnh",
+                    "id": "chu-thuy-quynh"
+                },
                 "artUrl": "img/Nên Chờ Hay Nên Quên Remix.png",
                 "audioSrc": "audio/Nên Chờ Hay Nên Quên Remix.mp3",
                 "isFavorite": false,
@@ -75,7 +91,10 @@
                 "id": "vpop_trucxinh",
                 "title": "Trúc Xinh",
                 "artistData": "Minh Vương M4U ft. Việt (ACV Remix)",
-                "displayArtist": { "name": "Minh Vương M4U ft. Việt", "id": "minhvuong-m4u-viet" },
+                "displayArtist": {
+                    "name": "Minh Vương M4U ft. Việt",
+                    "id": "minhvuong-m4u-viet"
+                },
                 "artUrl": "img/Trúc xinh.png",
                 "audioSrc": "audio/Trúc xinh.mp3",
                 "isFavorite": false,
@@ -85,7 +104,10 @@
                 "id": "vpop_tralaithanhxuan",
                 "title": "Trả Lại Thanh Xuân Cho Em",
                 "artistData": "H2K (H2O Remix)",
-                "displayArtist": { "name": "H2K", "id": "h2k" },
+                "displayArtist": {
+                    "name": "H2K",
+                    "id": "h2k"
+                },
                 "artUrl": "img/Trả Lại Thanh Xuân Cho Em.png",
                 "audioSrc": "audio/Trả Lại Thanh Xuân Cho Em.mp3",
                 "isFavorite": false,
@@ -95,7 +117,10 @@
                 "id": "vpop_ruoumung",
                 "title": "Rượu Mừng Hóa Người Dưng",
                 "artistData": "TLong (H2O Remix)",
-                "displayArtist": { "name": "TLong", "id": "tlong" },
+                "displayArtist": {
+                    "name": "TLong",
+                    "id": "tlong"
+                },
                 "artUrl": "img/Rượu mừng hóa người dưng.png",
                 "audioSrc": "audio/Rượu mừng hóa người dưng.mp3",
                 "isFavorite": false,
@@ -105,7 +130,10 @@
                 "id": "vpop_nucuoi1820",
                 "title": "Nụ Cười 18 20",
                 "artistData": "Đoàn Hiếu (ACV Remix)",
-                "displayArtist": { "name": "Đoàn Hiếu", "id": "doan-hieu" },
+                "displayArtist": {
+                    "name": "Đoàn Hiếu",
+                    "id": "doan-hieu"
+                },
                 "artUrl": "img/Nụ cười 18 20.png",
                 "audioSrc": "audio/nu-cuoi.mp3",
                 "isFavorite": false,
@@ -115,7 +143,10 @@
                 "id": "vpop_mayremix",
                 "title": "Mây (Remix)",
                 "artistData": "Jank & Sỹ Tây (Orinn Remix)",
-                "displayArtist": { "name": "Jank & Sỹ Tây", "id": "jank-sy-tay" },
+                "displayArtist": {
+                    "name": "Jank & Sỹ Tây",
+                    "id": "jank-sy-tay"
+                },
                 "artUrl": "img/Mây Remix.png",
                 "audioSrc": "audio/Mây Remix.mp3",
                 "isFavorite": false,
@@ -125,7 +156,10 @@
                 "id": "vpop_ketheoduoianhsang",
                 "title": "Kẻ Theo Đuổi Ánh Sáng",
                 "artistData": "Huy Vạc X Tiến Nguyễn (Orinn Remix)",
-                "displayArtist": { "name": "Huy Vạc X Tiến Nguyễn", "id": "huyvac-tiennguyen" },
+                "displayArtist": {
+                    "name": "Huy Vạc X Tiến Nguyễn",
+                    "id": "huyvac-tiennguyen"
+                },
                 "artUrl": "img/Kẻ Theo Đuổi Ánh Sáng.png",
                 "audioSrc": "audio/Kẻ Theo Đuổi Ánh Sáng.mp3",
                 "isFavorite": false,
@@ -135,7 +169,10 @@
                 "id": "vpop_dunglonhecoanhday",
                 "title": "Đừng Lo Nhé Có Anh Đây",
                 "artistData": "Thiên Tú (Orinn Remix)",
-                "displayArtist": { "name": "Thiên Tú", "id": "thien-tu" },
+                "displayArtist": {
+                    "name": "Thiên Tú",
+                    "id": "thien-tu"
+                },
                 "artUrl": "img/Đừng lo nhé có anh đây.png",
                 "audioSrc": "audio/Đừng lo nhé có anh đây.mp3",
                 "isFavorite": false,
@@ -145,7 +182,10 @@
                 "id": "vpop_dauconday",
                 "title": "Đâu Còn Đây",
                 "artistData": "Lee Ken X Nal (Orinn Remix)",
-                "displayArtist": { "name": "Lee Ken X Nal", "id": "leeken-nal" },
+                "displayArtist": {
+                    "name": "Lee Ken X Nal",
+                    "id": "leeken-nal"
+                },
                 "artUrl": "img/Đâu Còn Đây.png",
                 "audioSrc": "audio/Đâu-Còn-Đây.mp3",
                 "isFavorite": false,
@@ -161,7 +201,10 @@
                 "id": "edm_a_moment_apart",
                 "title": "A Moment Apart",
                 "artistData": "ODESZA",
-                "displayArtist": { "name": "ODESZA", "id": "odesza" },
+                "displayArtist": {
+                    "name": "ODESZA",
+                    "id": "odesza"
+                },
                 "artUrl": "img/A Moment Apart.png",
                 "audioSrc": "audio/ODESZA - A Moment Apart.mp3",
                 "isFavorite": false,
@@ -171,7 +214,10 @@
                 "id": "edm_faded",
                 "title": "Faded",
                 "artistData": "Alan Walker",
-                "displayArtist": { "name": "Alan Walker", "id": "alanwalker" },
+                "displayArtist": {
+                    "name": "Alan Walker",
+                    "id": "alanwalker"
+                },
                 "artUrl": "img/faded.png",
                 "audioSrc": "audio/Alan Walker - Faded (Lyrics).mp3",
                 "isFavorite": false,
@@ -181,7 +227,10 @@
                 "id": "edm_lily",
                 "title": "Lily",
                 "artistData": "Alan Walker, K-391 & Emelie Hollow",
-                "displayArtist": { "name": "Alan Walker", "id": "alanwalker" },
+                "displayArtist": {
+                    "name": "Alan Walker",
+                    "id": "alanwalker"
+                },
                 "artUrl": "img/lily.jpg",
                 "audioSrc": "audio/Alan Walker, K-391 & Emelie Hollow - Lily (Lyrics).mp3",
                 "isFavorite": true,
@@ -191,7 +240,10 @@
                 "id": "edm_spectre",
                 "title": "The Spectre",
                 "artistData": "Alan Walker",
-                "displayArtist": { "name": "Alan Walker", "id": "alanwalker" },
+                "displayArtist": {
+                    "name": "Alan Walker",
+                    "id": "alanwalker"
+                },
                 "artUrl": "img/spectre.jpg",
                 "audioSrc": "audio/Alan Walker - The Spectre (Lyrics).mp3",
                 "isFavorite": false,
@@ -201,7 +253,10 @@
                 "id": "edm_all_falls_down",
                 "title": "All Falls Down",
                 "artistData": "Alan Walker ft. Noah Cyrus",
-                "displayArtist": { "name": "Alan Walker", "id": "alanwalker" },
+                "displayArtist": {
+                    "name": "Alan Walker",
+                    "id": "alanwalker"
+                },
                 "artUrl": "img/Alan_Walker_All_Falls_Down.jpg",
                 "audioSrc": "audio/Alan Walker - All Falls Down (feat. Noah Cyrus with Digital Farm Animals).mp3",
                 "isFavorite": false,
@@ -211,7 +266,10 @@
                 "id": "edm_ignite",
                 "title": "Ignite",
                 "artistData": "K-391 & Alan Walker",
-                "displayArtist": { "name": "K-391", "id": "k391" },
+                "displayArtist": {
+                    "name": "K-391",
+                    "id": "k391"
+                },
                 "artUrl": "img/K-391-Ignite.png",
                 "audioSrc": "audio/K-391 & Alan Walker - Ignite (feat. Julie Bergan & Seungri).mp3",
                 "isFavorite": false,
@@ -221,7 +279,10 @@
                 "id": "edm_on_on",
                 "title": "On & On",
                 "artistData": "Cartoon ft. Daniel Levi",
-                "displayArtist": { "name": "Cartoon", "id": "cartoon" },
+                "displayArtist": {
+                    "name": "Cartoon",
+                    "id": "cartoon"
+                },
                 "artUrl": "img/on&on.png",
                 "audioSrc": "audio/Cartoon, Jéja - On & On (Lyrics) feat. Daniel Levi.mp3",
                 "isFavorite": true,
@@ -231,7 +292,10 @@
                 "id": "edm_way_back_home",
                 "title": "Way Back Home",
                 "artistData": "SHAUN ft. Conor Maynard (Sam Feldt Edit)",
-                "displayArtist": { "name": "SHAUN", "id": "shaun" },
+                "displayArtist": {
+                    "name": "SHAUN",
+                    "id": "shaun"
+                },
                 "artUrl": "img/Way Back Home.jpg",
                 "audioSrc": "audio/SHAUN feat. Conor Maynard - Way Back Home (Lyrics) Sam Feldt Edit.mp3",
                 "isFavorite": false,
@@ -241,7 +305,10 @@
                 "id": "vpop_ngau_hung",
                 "title": "Ngẫu Hứng",
                 "artistData": "Hoaprox",
-                "displayArtist": { "name": "Hoaprox", "id": "hoaprox" },
+                "displayArtist": {
+                    "name": "Hoaprox",
+                    "id": "hoaprox"
+                },
                 "artUrl": "img/ngau-hung.PNG",
                 "audioSrc": "audio/WITH YOU (NGẪU HỨNG) - HOAPROX, NICK STRAND & MIO - OFFICIAL MV.mp3",
                 "isFavorite": false,
@@ -251,7 +318,10 @@
                 "id": "vpop_that_girl",
                 "title": "That Girl",
                 "artistData": "Olly Murs",
-                "displayArtist": { "name": "Olly Murs", "id": "ollymurs" },
+                "displayArtist": {
+                    "name": "Olly Murs",
+                    "id": "ollymurs"
+                },
                 "artUrl": "img/that girl.png",
                 "audioSrc": "audio/[Vietsub + Kara] That Girl - Olly Murs (lyrics) - Tik Tok.mp3",
                 "isFavorite": false,
@@ -267,7 +337,10 @@
                 "id": "lyco_alive",
                 "title": "ALIVE",
                 "artistData": "ClariS",
-                "displayArtist": { "name": "ClariS", "id": "claris" },
+                "displayArtist": {
+                    "name": "ClariS",
+                    "id": "claris"
+                },
                 "artUrl": "img/ALIVE.png",
                 "audioSrc": "audio/ALIVE.mp3",
                 "isFavorite": false,
@@ -277,7 +350,10 @@
                 "id": "lyco_tower",
                 "title": "Tower of Flower",
                 "artistData": "Sayuri",
-                "displayArtist": { "name": "Sayuri", "id": "sayuri" },
+                "displayArtist": {
+                    "name": "Sayuri",
+                    "id": "sayuri"
+                },
                 "artUrl": "img/Tower of Flower.png",
                 "audioSrc": "audio/Tower of Flower.mp3",
                 "isFavorite": false,
@@ -287,7 +363,10 @@
                 "id": "lyco_alive_inst",
                 "title": "ALIVE (Instrumental)",
                 "artistData": "ClariS",
-                "displayArtist": { "name": "ClariS", "id": "claris" },
+                "displayArtist": {
+                    "name": "ClariS",
+                    "id": "claris"
+                },
                 "artUrl": "img/ALIVE-Instrumental.jpg",
                 "audioSrc": "audio/ALIVE-Instrumental.mp3",
                 "isFavorite": false,
@@ -297,7 +376,10 @@
                 "id": "lyco_tower_inst",
                 "title": "Tower of Flower (Instrumental)",
                 "artistData": "Sayuri",
-                "displayArtist": { "name": "Sayuri", "id": "sayuri" },
+                "displayArtist": {
+                    "name": "Sayuri",
+                    "id": "sayuri"
+                },
                 "artUrl": "img/Tower of Flower instrumental.jpg",
                 "audioSrc": "audio/Tower of Flower instrumental.mp3",
                 "isFavorite": false,
@@ -313,7 +395,10 @@
                 "id": "mahiru1",
                 "title": "小さな恋のうた",
                 "artistData": "椎名真昼 (CV: 石見舞菜香)",
-                "displayArtist": { "name": "椎名真昼 (CV: 石見舞菜香)", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru1.png",
                 "audioSrc": "audio/mahiru_ed1.mp3",
                 "isFavorite": true,
@@ -323,7 +408,10 @@
                 "id": "mahiru2",
                 "title": "愛唄",
                 "artistData": "椎名真昼 (CV: 石見舞菜香)",
-                "displayArtist": { "name": "椎名真昼 (CV: 石見舞菜香)", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru2.png",
                 "audioSrc": "audio/mahiru_ed2.mp3",
                 "isFavorite": true,
@@ -333,7 +421,10 @@
                 "id": "mahiru3",
                 "title": "君に届け",
                 "artistData": "椎名真昼 (CV: 石見舞菜香)",
-                "displayArtist": { "name": "椎名真昼 (CV: 石見舞菜香)", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru3.png",
                 "audioSrc": "audio/mahiru_ed3.mp3",
                 "isFavorite": true,
@@ -343,7 +434,10 @@
                 "id": "mahiru4",
                 "title": "君に届け - Instrumental",
                 "artistData": "Instrumental",
-                "displayArtist": { "name": "椎名真昼 (CV: 石見舞菜香)", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru4.png",
                 "audioSrc": "audio/mahiru_ed3_Instrumental.mp3",
                 "isFavorite": true,
@@ -353,7 +447,10 @@
                 "id": "mahiru5",
                 "title": "ギフト - Pf Solo ver.",
                 "artistData": "Instrumental",
-                "displayArtist": { "name": "椎名真昼 (CV: 石見舞菜香)", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru_gift.png",
                 "audioSrc": "audio/mahiru_gift.mp3",
                 "isFavorite": true,
@@ -363,7 +460,10 @@
                 "id": "mahiru6",
                 "title": "君に届け - Piano.",
                 "artistData": "Instrumental",
-                "displayArtist": { "name": "Instrumental", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "Instrumental",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru5.png",
                 "audioSrc": "audio/mahiru_ed3_piano.mp3",
                 "isFavorite": true,
@@ -373,7 +473,10 @@
                 "id": "mahiru7",
                 "title": "Little Love Song",
                 "artistData": "Ru's Piano Ru味春捲",
-                "displayArtist": { "name": "Ru's Piano Ru味春捲", "id": "MahiruShiina" },
+                "displayArtist": {
+                    "name": "Ru's Piano Ru味春捲",
+                    "id": "MahiruShiina"
+                },
                 "artUrl": "img/mahiru6.png",
                 "audioSrc": "audio/Little_Love_Song.mp3",
                 "isFavorite": true,
@@ -389,7 +492,10 @@
                 "id": "sp1",
                 "title": "アルカレイド (Alkaleido)",
                 "artistData": "鈴木このみ (Konomi Suzuki)",
-                "displayArtist": { "name": "Konomi Suzuki", "id": "KonomiSuzuki" },
+                "displayArtist": {
+                    "name": "Konomi Suzuki",
+                    "id": "KonomiSuzuki"
+                },
                 "artUrl": "img/summer_pockets_op.png",
                 "audioSrc": "audio/summer_pockets_op.mp3",
                 "isFavorite": true,
@@ -399,7 +505,10 @@
                 "id": "sp2",
                 "title": "Lasting Moment",
                 "artistData": "鈴木このみ (Konomi Suzuki)",
-                "displayArtist": { "name": "Konomi Suzuki", "id": "KonomiSuzuki" },
+                "displayArtist": {
+                    "name": "Konomi Suzuki",
+                    "id": "KonomiSuzuki"
+                },
                 "artUrl": "img/Tsumugi.png",
                 "audioSrc": "audio/summer_pockets_ed.mp3",
                 "isFavorite": false,
@@ -409,7 +518,10 @@
                 "id": "sp3",
                 "title": "羽のゆりかご",
                 "artistData": "水谷瑠奈 (NanosizeMir)",
-                "displayArtist": { "name": "水谷瑠奈 (NanosizeMir)", "id": "RunaMizutani" },
+                "displayArtist": {
+                    "name": "水谷瑠奈 (NanosizeMir)",
+                    "id": "RunaMizutani"
+                },
                 "artUrl": "img/Hane no Yurikago.png",
                 "audioSrc": "audio/Hane no Yurikago.mp3",
                 "isFavorite": false,
@@ -419,7 +531,10 @@
                 "id": "sp4",
                 "title": "Sea, You & Me",
                 "artistData": "紬ヴェンダース (CV: 岩井映美里)",
-                "displayArtist": { "name": "紬ヴェンダース", "id": "TsumugiWenders" },
+                "displayArtist": {
+                    "name": "紬ヴェンダース",
+                    "id": "TsumugiWenders"
+                },
                 "artUrl": "img/Tsumugi.png",
                 "audioSrc": "audio/Tsumugi.mp3",
                 "isFavorite": true,
@@ -429,7 +544,10 @@
                 "id": "sp5",
                 "title": "Hamu 20th Anniversary",
                 "artistData": "Instrumental",
-                "displayArtist": { "name": "Key Sound Label", "id": "KeySoundLabel" },
+                "displayArtist": {
+                    "name": "Key Sound Label",
+                    "id": "KeySoundLabel"
+                },
                 "artUrl": "img/key20th.png",
                 "audioSrc": "audio/summer_pockets_op_20th_Key.mp3",
                 "isFavorite": false,
@@ -439,7 +557,10 @@
                 "id": "sp6",
                 "title": "アスタロア (Asterlore)",
                 "artistData": "riya (eufonius)",
-                "displayArtist": { "name": "riya (eufonius)", "id": "riyaEufonius" },
+                "displayArtist": {
+                    "name": "riya (eufonius)",
+                    "id": "riyaEufonius"
+                },
                 "artUrl": "img/Summer_Pockets_Asterlore.png",
                 "audioSrc": "audio/Summer_Pockets_Asterlore.mp3",
                 "isFavorite": true,
@@ -449,7 +570,10 @@
                 "id": "sp7",
                 "title": "羽のゆりかご - Instrumental",
                 "artistData": "水谷瑠奈 (NanosizeMir)",
-                "displayArtist": { "name": "水谷瑠奈 (NanosizeMir)", "id": "RunaMizutani" },
+                "displayArtist": {
+                    "name": "水谷瑠奈 (NanosizeMir)",
+                    "id": "RunaMizutani"
+                },
                 "artUrl": "img/Hane no Yurikago Instrumental.png",
                 "audioSrc": "audio/Hane no Yurikago Instrumental.mp3",
                 "isFavorite": false,
@@ -465,7 +589,10 @@
                 "id": "conan28",
                 "title": "TWILIGHT",
                 "artistData": "King Gnu",
-                "displayArtist": { "name": "King Gnu", "id": "KingGnu" },
+                "displayArtist": {
+                    "name": "King Gnu",
+                    "id": "KingGnu"
+                },
                 "artUrl": "img/conan28.jpg",
                 "audioSrc": "audio/TWILIGHT.mp3",
                 "isFavorite": false,
@@ -475,7 +602,10 @@
                 "id": "conan26",
                 "title": "Utsukushii Hire",
                 "artistData": "Spitz",
-                "displayArtist": { "name": "Spitz ", "id": "Spitz" },
+                "displayArtist": {
+                    "name": "Spitz ",
+                    "id": "Spitz"
+                },
                 "artUrl": "img/Utsukushii Hire.jpg",
                 "audioSrc": "audio/Utsukushii Hire.mp3",
                 "isFavorite": false,
@@ -484,29 +614,113 @@
         ]
     },
     {
-    "id": "KaguyaSama",
-    "title": "Kaguya-sama: Love Is War",
-    "songs": [
-        {
-            "id": "kaguya01",
-            "title": "Sentimental Crisis",
-            "artistData": "halca",
-            "displayArtist": { "name": "halca", "id": "halca" },
-            "artUrl": "img/love is war.jpg",
-            "audioSrc": "audio/Sentimental Crisis.mp3",
-            "isFavorite": true,
-            "plays": "8,412,991"
-        },
-        {
-            "id": "kaguya02",
-            "title": "Sentimental Crisis (Instrumental)",
-            "artistData": "Ryuhei Yamada",
-            "displayArtist": { "name": "Ryuhei Yamada", "id": "RyuheiYamada" },
-            "artUrl": "img/love is war.jpg",
-            "audioSrc": "audio/Sentimental Crisis (Instrumental).mp3",
-            "isFavorite": false,
-            "plays": "2,157,304"
-        }
-    ]
-}
+        "id": "KaguyaSama",
+        "title": "Kaguya-sama: Love Is War",
+        "songs": [
+            {
+                "id": "kaguya01",
+                "title": "Sentimental Crisis",
+                "artistData": "halca",
+                "displayArtist": {
+                    "name": "halca",
+                    "id": "halca"
+                },
+                "artUrl": "img/love is war.jpg",
+                "audioSrc": "audio/Sentimental Crisis.mp3",
+                "isFavorite": true,
+                "plays": "8,412,991"
+            },
+            {
+                "id": "kaguya02",
+                "title": "Sentimental Crisis (Instrumental)",
+                "artistData": "Ryuhei Yamada",
+                "displayArtist": {
+                    "name": "Ryuhei Yamada",
+                    "id": "RyuheiYamada"
+                },
+                "artUrl": "img/love is war.jpg",
+                "audioSrc": "audio/Sentimental Crisis (Instrumental).mp3",
+                "isFavorite": false,
+                "plays": "2,157,304"
+            }
+        ]
+    },
+    {
+        "id": "KaguyaSamaPianoEP",
+        "title": "Kaguya - Sama: Love Is War - Piano Reflections - EP",
+        "songs": [
+            {
+                "id": "kaguya_piano_01",
+                "title": "Kansetsu Ki (Main Theme)",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/main theme.mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "kaguya_piano_02",
+                "title": "Sentimental Crisis Piano",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/Sentimental Crisis piano.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "kaguya_piano_03",
+                "title": "Kaze Ni Fukarete",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/Kaze Ni Fukarete.mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "kaguya_piano_04",
+                "title": "Heart Ha Oteage",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/Heart ha oteage.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "kaguya_piano_05",
+                "title": "Heart Notes",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/heart note.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "kaguya_piano_06",
+                "title": "That Kind of Summer",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/the kind of summer.mp3",
+                "isFavorite": false
+            }
+        ]
+    }
 ]

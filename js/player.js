@@ -1,5 +1,153 @@
-// js/player.js (Hoàn chỉnh với chức năng Fullscreen)
+// js/player.js (FIXED for data registration)
 
+// --- 3. QUẢN LÝ TRẠNG THÁI PLAYER (Moved to global scope) ---
+let allSongsFlat = [], currentQueue = [], currentIndex = -1;
+let isShuffle = false, repeatMode = 'none', isVolumeInitialized = false, lastVolume = 0.7;
+let showBg = localStorage.getItem('showBg') === 'true';
+let audioPlayer; // Will be assigned in DOMContentLoaded
+
+/**
+ * CRITICAL FIX: Allows asynchronous pages (like library.js) to register their song data with the player.
+ * @param {Array} songs - The flat array of all song objects.
+ */
+window.registerSongDatabase = (songs) => {
+    console.log(`Player received ${songs.length} songs.`);
+    allSongsFlat = songs;
+};
+
+
+// --- HÀM TIỆN ÍCH (Moved to global scope for access) ---
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "0:00";
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+}
+// Expose to window object so other scripts can use it if needed
+window.formatTime = formatTime;
+
+// --- HÀM CẬP NHẬT FAVICON (Global Scope) ---
+function updateFavicon(iconUrl) {
+    const oldLinks = document.querySelectorAll("link[rel*='icon']");
+    oldLinks.forEach(link => link.parentNode.removeChild(link));
+    const newLink = document.createElement('link');
+    newLink.rel = 'icon';
+    newLink.type = 'image/png';
+    newLink.href = iconUrl;
+    document.head.appendChild(newLink);
+}
+
+// --- HÀM PLAYER CHÍNH (Moved to global scope) ---
+function playSongByIndex(index) {
+    if (!audioPlayer) return; // Guard against player not being initialized
+    if (index < 0 || index >= currentQueue.length) {
+        document.title = "MyMusic Player";
+        updateFavicon("img/favicon.png");
+        return;
+    }
+
+    currentIndex = index;
+    const songData = currentQueue[currentIndex];
+
+    if ('mediaSession' in navigator) {
+        const imageUrl = songData.artUrl || 'img/favicon-512x512.png';
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: songData.title || "Không có tiêu đề",
+            artist: songData.artistData || "Nghệ sĩ không xác định",
+            album: 'MyMusic Player',
+            artwork: [
+                { src: imageUrl, sizes: '96x96', type: 'image/png' },
+                { src: imageUrl, sizes: '128x128', type: 'image/png' },
+                { src: imageUrl, sizes: '192x192', type: 'image/png' },
+                { src: imageUrl, sizes: '256x256', type: 'image/png' },
+                { src: imageUrl, sizes: '384x384', type: 'image/png' },
+                { src: imageUrl, sizes: '512x512', type: 'image/png' },
+            ]
+        });
+        // Action handlers are set inside DOMContentLoaded
+    }
+
+    document.title = `${songData.title} - ${songData.artistData}`;
+    updateFavicon(songData.artUrl || "img/favicon.png");
+
+    // DOM elements for song info - these need to be accessed safely
+    const nowPlayingTitle = document.getElementById('now-playing-title');
+    const nowPlayingArtist = document.getElementById('now-playing-artist');
+    const nowPlayingArt = document.getElementById('now-playing-art');
+    const npFsTitle = document.getElementById('np-fullscreen-title');
+    const npFsArtist = document.getElementById('np-fullscreen-artist');
+    const npFsArt = document.getElementById('np-fullscreen-art');
+    const likeBtn = document.getElementById('like-btn');
+
+    if (nowPlayingTitle) nowPlayingTitle.textContent = songData.title;
+    if (nowPlayingArtist) nowPlayingArtist.textContent = songData.artistData;
+    if (nowPlayingArt) nowPlayingArt.src = songData.artUrl;
+    if (npFsTitle) npFsTitle.textContent = songData.title;
+    if (npFsArtist) npFsArtist.textContent = songData.artistData;
+    if (npFsArt) npFsArt.src = songData.artUrl;
+    if (likeBtn) likeBtn.classList.toggle('active', !!songData.isFavorite);
+
+    const npFsBg = document.getElementById('np-fullscreen-bg');
+    if (npFsBg && showBg) {
+        npFsBg.style.backgroundImage = `url('${songData.artUrl}')`;
+    }
+
+    audioPlayer.src = songData.audioSrc;
+    const playPromise = audioPlayer.play();
+    if (playPromise) {
+        playPromise.catch(error => {
+            if (error.name !== 'AbortError') {
+                console.error(`Lỗi khi phát "${songData.title}":`, error);
+                if (nowPlayingTitle) nowPlayingTitle.textContent = "Lỗi tải nhạc";
+            }
+        });
+    }
+}
+
+// --- EXPOSE FUNCTIONS TO GLOBAL SCOPE (CRITICAL FIX) ---
+window.playSongFromData = (clickedSong, playlistContext = null) => {
+    // On pages that load data synchronously, allSongsFlat might be empty initially.
+    // This fallback ensures it gets populated.
+    if (allSongsFlat.length === 0 && typeof ALL_MUSIC_SECTIONS !== 'undefined' && Array.isArray(ALL_MUSIC_SECTIONS)) {
+        window.registerSongDatabase(ALL_MUSIC_SECTIONS.flatMap(section => section.songs));
+    }
+
+    currentQueue = (playlistContext && Array.isArray(playlistContext)) ? [...playlistContext] : [...allSongsFlat];
+    const index = currentQueue.findIndex(song => song.audioSrc === clickedSong.audioSrc);
+    if (index === -1) {
+        console.warn("Song not found in current queue:", clickedSong);
+        return;
+    }
+
+    if (isShuffle) {
+        const firstSong = currentQueue.splice(index, 1)[0];
+        currentQueue.sort(() => Math.random() - 0.5);
+        currentQueue.unshift(firstSong);
+        playSongByIndex(0);
+    } else {
+        playSongByIndex(index);
+    }
+};
+
+window.addCardClickListener = (cardElement) => {
+    if (!cardElement) return;
+    cardElement.addEventListener('click', () => {
+        // This fallback is for pages that load data synchronously (like index.html)
+        if (allSongsFlat.length === 0 && typeof ALL_MUSIC_SECTIONS !== 'undefined' && Array.isArray(ALL_MUSIC_SECTIONS)) {
+            window.registerSongDatabase(ALL_MUSIC_SECTIONS.flatMap(section => section.songs));
+        }
+        
+        const clickedSong = allSongsFlat.find(song => song.audioSrc === cardElement.dataset.src);
+        if (clickedSong) {
+            window.playSongFromData(clickedSong);
+        } else {
+            console.warn("Could not find song data for card:", cardElement.dataset);
+        }
+    });
+};
+
+
+// This listener now handles DOM manipulation and event binding
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Player DOMContentLoaded Start");
 
@@ -82,16 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
     fullscreenPlayerContainer.innerHTML = fullscreenPlayerHTML;
 
     // --- 2. LẤY CÁC PHẦN TỬ DOM ---
-    const audioPlayer = document.getElementById('audio-player');
+    audioPlayer = document.getElementById('audio-player'); // Assign to global variable
     // Player Bar elements
     const mainPlayPauseBtn = document.getElementById('main-play-pause-btn');
     const progressBar = document.getElementById('progress-bar');
     const currentTimeEl = document.getElementById('current-time');
     const totalTimeEl = document.getElementById('total-time');
     const volumeBar = document.getElementById('volume-bar');
-    const nowPlayingArt = document.getElementById('now-playing-art');
-    const nowPlayingTitle = document.getElementById('now-playing-title');
-    const nowPlayingArtist = document.getElementById('now-playing-artist');
     const shuffleBtn = document.getElementById('shuffle-btn');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -100,11 +245,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const volumeBtn = document.getElementById('volume-btn');
     // Fullscreen elements
     const npCloseBtn = document.getElementById('np-close-btn');
-    const npFsArt = document.getElementById('np-fullscreen-art');
-    const npFsTitle = document.getElementById('np-fullscreen-title');
-    const npFsArtist = document.getElementById('np-fullscreen-artist');
-    const npFsCurrentTime = document.getElementById('np-fullscreen-current-time');
-    const npFsTotalTime = document.getElementById('np-fullscreen-total-time');
     const npFsProgressBar = document.getElementById('np-fullscreen-progress-bar');
     const npFsPlayPauseBtn = document.getElementById('np-fullscreen-play-pause-btn');
     const npFsPrevBtn = document.getElementById('np-fullscreen-prev-btn');
@@ -125,12 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tooltip.style.display = 'block';
             const rect = e.target.getBoundingClientRect();
             let left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
-            if (left < 0) {
-                left = 0;
-            }
-            if (left + tooltip.offsetWidth > window.innerWidth) {
-                left = window.innerWidth - tooltip.offsetWidth;
-            }
+            if (left < 0) left = 0;
+            if (left + tooltip.offsetWidth > window.innerWidth) left = window.innerWidth - tooltip.offsetWidth;
             tooltip.style.left = `${left}px`;
             tooltip.style.top = `${rect.top - tooltip.offsetHeight - 5}px`;
         });
@@ -150,16 +286,13 @@ document.addEventListener('DOMContentLoaded', () => {
     addTooltip(progressBar, 'Thanh tiến trình');
     addTooltip(volumeBar, 'Thanh âm lượng');
 
-    // --- 3. QUẢN LÝ TRẠNG THÁI PLAYER ---
-    let allSongsFlat = [], currentQueue = [], currentIndex = -1;
-    let isShuffle = false, repeatMode = 'none', isVolumeInitialized = false, lastVolume = 0.7;
-    let showBg = localStorage.getItem('showBg') === 'true';
-
     fullscreenPlayerContainer.classList.toggle('show-background', showBg);
     toggleBgBtn.classList.toggle('active', showBg);
 
+    // On pages that load data synchronously, this will populate the song list.
+    // On async pages, this will be empty, but registerSongDatabase will fill it.
     if (typeof ALL_MUSIC_SECTIONS !== 'undefined' && Array.isArray(ALL_MUSIC_SECTIONS)) {
-        allSongsFlat = ALL_MUSIC_SECTIONS.flatMap(section => section.songs);
+        window.registerSongDatabase(ALL_MUSIC_SECTIONS.flatMap(section => section.songs));
     }
 
     const playIconSVG = '<svg viewBox="0 0 24 24" width="24" height="24" class="icon-play"><path d="M8 5v14l11-7z"></path></svg>';
@@ -167,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const repeatIconSVG_HTML = '<svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"></path></svg>';
     const repeatOneIconSVG_HTML = '<svg viewBox="0 0 24 24" width="20" height="20" class="icon-repeat"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4zM13 15V9h-1l-2 1v1h1.5v4H13z"></path></svg>';
 
-    // --- 4. HỆ THỐNG NOTIFICATION & HÀM TIỆN ÍCH ---
     const notificationContainer = document.getElementById('notification-container');
     let notificationTimeout;
     function showNotification(message) {
@@ -178,116 +310,13 @@ document.addEventListener('DOMContentLoaded', () => {
         notificationTimeout = setTimeout(() => notificationContainer.classList.remove('active'), 2000);
     }
 
-    // --- HÀM CẬP NHẬT FAVICON - PHIÊN BẢN TƯƠNG THÍCH SAFARI/IOS ---
-    function updateFavicon(iconUrl) {
-        // Bước 1: Tìm và xóa tất cả các thẻ link favicon cũ.
-        // Dùng querySelectorAll để đảm bảo xóa hết mọi loại (icon, shortcut icon, apple-touch-icon).
-        const oldLinks = document.querySelectorAll("link[rel*='icon']");
-        oldLinks.forEach(link => link.parentNode.removeChild(link));
-
-        // Bước 2: Tạo một thẻ link mới hoàn toàn.
-        const newLink = document.createElement('link');
-        newLink.rel = 'icon';
-        newLink.type = 'image/png'; // Thêm type để rõ ràng hơn
-        newLink.href = iconUrl;
-
-        // Bước 3: Thêm thẻ link mới vào <head>.
-        // Việc này sẽ buộc trình duyệt phải tải lại tài nguyên.
-        document.head.appendChild(newLink);
+    // Set Media Session action handlers now that the buttons are available
+    if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('play', () => { mainPlayPauseBtn.click(); });
+        navigator.mediaSession.setActionHandler('pause', () => { mainPlayPauseBtn.click(); });
+        navigator.mediaSession.setActionHandler('previoustrack', () => { prevBtn.click(); });
+        navigator.mediaSession.setActionHandler('nexttrack', () => { nextBtn.click(); });
     }
-
-    // --- 5. CÁC HÀM XỬ LÝ PLAYER CHÍNH ---
-    function playSongByIndex(index) {
-        if (index < 0 || index >= currentQueue.length) {
-            document.title = "MyMusic Player";
-            updateFavicon("img/favicon.png");
-            return;
-        }
-
-        currentIndex = index;
-        const songData = currentQueue[currentIndex];
-
-        // --- BẮT ĐẦU: CẬP NHẬT MEDIA SESSION API (PHIÊN BẢN ĐÃ SỬA) ---
-        if ('mediaSession' in navigator) {
-            // Xác định URL ảnh sẽ sử dụng: ưu tiên ảnh bìa của bài hát,
-            // nếu không có thì mới dùng ảnh mặc định.
-            const imageUrl = songData.artUrl || 'img/favicon-512x512.png'; // Dùng ảnh favicon lớn nhất làm ảnh dự phòng
-
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: songData.title || "Không có tiêu đề",
-                artist: songData.artistData || "Nghệ sĩ không xác định",
-                album: 'MyMusic Player',
-                artwork: [
-                    // LUÔN SỬ DỤNG imageUrl (là ảnh bìa hoặc ảnh dự phòng)
-                    { src: imageUrl, sizes: '96x96', type: 'image/png' },
-                    { src: imageUrl, sizes: '128x128', type: 'image/png' },
-                    { src: imageUrl, sizes: '192x192', type: 'image/png' },
-                    { src: imageUrl, sizes: '256x256', type: 'image/png' },
-                    { src: imageUrl, sizes: '384x384', type: 'image/png' },
-                    { src: imageUrl, sizes: '512x512', type: 'image/png' },
-                ]
-            });
-
-            // Cập nhật hành động cho các nút trên widget media
-            navigator.mediaSession.setActionHandler('play', () => { mainPlayPauseBtn.click(); });
-            navigator.mediaSession.setActionHandler('pause', () => { mainPlayPauseBtn.click(); });
-            navigator.mediaSession.setActionHandler('previoustrack', () => { prevBtn.click(); });
-            navigator.mediaSession.setActionHandler('nexttrack', () => { nextBtn.click(); });
-        }
-        // --- KẾT THÚC: CẬP NHẬT MEDIA SESSION API ---
-
-
-        document.title = `${songData.title} - ${songData.artistData}`;
-        updateFavicon(songData.artUrl || "img/favicon.png");
-
-        nowPlayingTitle.textContent = songData.title;
-        nowPlayingArtist.textContent = songData.artistData;
-        nowPlayingArt.src = songData.artUrl;
-
-        npFsTitle.textContent = songData.title;
-        npFsArtist.textContent = songData.artistData;
-        npFsArt.src = songData.artUrl;
-
-        const npFsBg = document.getElementById('np-fullscreen-bg');
-        if (npFsBg && showBg) {
-            npFsBg.style.backgroundImage = `url('${songData.artUrl}')`;
-        }
-
-        audioPlayer.src = songData.audioSrc;
-        likeBtn.classList.toggle('active', !!songData.isFavorite);
-
-        const playPromise = audioPlayer.play();
-        if (playPromise) {
-            playPromise.catch(error => {
-                if (error.name !== 'AbortError') {
-                    console.error(`Lỗi khi phát "${songData.title}":`, error);
-                    nowPlayingTitle.textContent = "Lỗi tải nhạc";
-                }
-            });
-        }
-    }
-
-    window.playSongFromData = (clickedSong, playlistContext = null) => {
-        currentQueue = (playlistContext && Array.isArray(playlistContext)) ? [...playlistContext] : [...allSongsFlat];
-        const index = currentQueue.findIndex(song => song.audioSrc === clickedSong.audioSrc);
-        if (index === -1) return;
-        if (isShuffle) {
-            const firstSong = currentQueue.splice(index, 1)[0];
-            currentQueue.sort(() => Math.random() - 0.5);
-            currentQueue.unshift(firstSong);
-            playSongByIndex(0);
-        } else {
-            playSongByIndex(index);
-        }
-    };
-
-    window.addCardClickListener = (cardElement) => {
-        if (!cardElement) return;
-        cardElement.addEventListener('click', () => {
-            const clickedSong = allSongsFlat.find(song => song.audioSrc === cardElement.dataset.src);
-            if (clickedSong) window.playSongFromData(clickedSong);
-        });
-    };
 
     function playNext() {
         if (currentQueue.length === 0) return;
@@ -304,7 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 6. GẮN CÁC LISTENER ---
-    // Mở/Đóng Fullscreen
     const songInfoDiv = playerContainer.querySelector('.song-info');
     songInfoDiv.addEventListener('click', (e) => {
         if (e.target.closest('#like-btn')) return;
@@ -312,7 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     npCloseBtn.addEventListener('click', () => fullscreenPlayerContainer.classList.remove('active'));
 
-    // Các nút điều khiển
     mainPlayPauseBtn.addEventListener('click', () => {
         if (!isVolumeInitialized) { audioPlayer.volume = volumeBar.value / 100; isVolumeInitialized = true; }
         if (currentIndex === -1 && allSongsFlat.length > 0) window.playSongFromData(allSongsFlat[0]);
@@ -321,12 +348,10 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', playNext);
     prevBtn.addEventListener('click', playPrev);
 
-    // Đồng bộ click
     npFsPlayPauseBtn.addEventListener('click', () => mainPlayPauseBtn.click());
     npFsNextBtn.addEventListener('click', () => nextBtn.click());
     npFsPrevBtn.addEventListener('click', () => prevBtn.click());
 
-    // Các nút trạng thái (logic và UI cập nhật cùng lúc)
     const toggleShuffle = () => {
         isShuffle = !isShuffle;
         shuffleBtn.classList.toggle('active', isShuffle);
@@ -361,9 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (showBg && currentQueue[currentIndex]) {
             const songData = currentQueue[currentIndex];
             const npFsBg = document.getElementById('np-fullscreen-bg');
-            if (npFsBg) {
-                npFsBg.style.backgroundImage = `url('${songData.artUrl}')`;
-            }
+            if (npFsBg) npFsBg.style.backgroundImage = `url('${songData.artUrl}')`;
         }
     });
 
@@ -379,7 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
     volumeBtn.addEventListener('click', toggleMute);
     npFsVolumeBtn.addEventListener('click', toggleMute);
 
-    // Listeners cho Audio Element
     audioPlayer.addEventListener('play', () => {
         mainPlayPauseBtn.innerHTML = pauseIconSVG;
         npFsPlayPauseBtn.innerHTML = pauseIconSVG.replace('width="24" height="24"', 'width="60" height="60"');
@@ -402,12 +424,12 @@ document.addEventListener('DOMContentLoaded', () => {
     audioPlayer.addEventListener('timeupdate', () => {
         const currentTime = audioPlayer.currentTime || 0;
         [progressBar, npFsProgressBar].forEach(bar => bar.value = currentTime);
-        [currentTimeEl, npFsCurrentTime].forEach(el => el.textContent = window.formatTime(currentTime));
+        [currentTimeEl, document.getElementById('np-fullscreen-current-time')].forEach(el => el.textContent = formatTime(currentTime));
     });
     audioPlayer.addEventListener('loadedmetadata', () => {
         const duration = audioPlayer.duration || 0;
         [progressBar, npFsProgressBar].forEach(bar => bar.max = duration);
-        [totalTimeEl, npFsTotalTime].forEach(el => el.textContent = window.formatTime(duration));
+        [totalTimeEl, document.getElementById('np-fullscreen-total-time')].forEach(el => el.textContent = formatTime(duration));
     });
     audioPlayer.addEventListener('ended', () => {
         if (repeatMode === 'one') playSongByIndex(currentIndex);
@@ -417,7 +439,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else playNext();
     });
 
-    // Listeners cho các thanh trượt
     const handleProgressInput = (e) => { if (audioPlayer.src) audioPlayer.currentTime = e.target.value; };
     progressBar.addEventListener('input', handleProgressInput);
     npFsProgressBar.addEventListener('input', handleProgressInput);
@@ -429,12 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
     volumeBar.addEventListener('input', handleVolumeInput);
     npFsVolumeBar.addEventListener('input', handleVolumeInput);
 
-    // --- LOGIC SIDEBAR TOGGLE ---
-    const menuToggleBtn = document.querySelector('.menu-toggle-btn');
-    const sidebar = document.querySelector('.sidebar');
-    if (menuToggleBtn && sidebar) { /* ... giữ nguyên logic sidebar ... */ }
-
     console.log("Player DOMContentLoaded End");
 });
 
-console.log("player.js loaded");
+console.log("player.js loaded and functions exposed.");
