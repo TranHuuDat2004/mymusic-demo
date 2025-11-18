@@ -642,6 +642,19 @@
                 "audioSrc": "audio/Sentimental Crisis (Instrumental).mp3",
                 "isFavorite": false,
                 "plays": "2,157,304"
+            },
+                        {
+                "id": "kaguya03",
+                "title": "Heart Notes",
+                "artistData": "Airi Suzuki",
+                "displayArtist": {
+                    "name": "Airi Suzuki",
+                    "id": "AiriSuzuki"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/heart notes.mp3",
+                "isFavorite": false,
+                "plays": "2,157,311"
             }
         ]
     },
