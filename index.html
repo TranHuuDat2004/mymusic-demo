@@ -19,15 +19,31 @@
 
 <body>
 
-    <!-- Disclaimer Popup -->
-    <div class="popup-overlay" id="disclaimer-popup">
-        <div class="popup-content">
-            <button class="popup-close-btn" id="popup-close" aria-label="Đóng">×</button>
+<!-- Disclaimer Popup - Phiên bản đa ngôn ngữ -->
+<div class="popup-overlay" id="disclaimer-popup">
+    <div class="popup-content">
+        <button class="popup-close-btn" id="popup-close" aria-label="Đóng">×</button>
+
+        <!-- Khối Tiếng Việt (Hiển thị mặc định) -->
+        <div id="popup-content-vi">
             <h2>Thông Báo</h2>
-            <p>Dự án này chỉ nhằm mục đích demo và học hỏi. Tất cả các bản nhạc được sử dụng trong dự án này đều thuộc bản quyền của các nghệ sĩ và nhà sản xuất gốc. Chúng tôi không sở hữu bất kỳ bản nhạc nào.</p>
-            <button class="popup-confirm-btn" id="popup-confirm">Tôi đã hiểu</button>
+            <p>
+                Dự án này chỉ nhằm mục đích demo và học hỏi. Tất cả các bản nhạc được sử dụng trong dự án này đều thuộc bản quyền của các nghệ sĩ và nhà sản xuất gốc. Chúng tôi không sở hữu bất kỳ bản nhạc nào.
+            </p>
         </div>
+
+        <!-- Khối Tiếng Anh (Ẩn mặc định) -->
+        <div id="popup-content-en" style="display: none;">
+            <h2>Disclaimer</h2>
+            <p>
+                This project is for demonstration and educational purposes only. All music used in this project is the copyright of the original artists and producers. We do not own any of the music tracks.
+            </p>
+        </div>
+
+        <!-- Nút xác nhận - Text sẽ được thay đổi bằng JS -->
+        <button class="popup-confirm-btn" id="popup-confirm">Tôi đã hiểu</button>
     </div>
+</div>
 
     <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
     <audio id="audio-player"></audio> <!-- THE AUDIO ELEMENT -->
