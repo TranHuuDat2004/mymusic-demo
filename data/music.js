@@ -514,31 +514,128 @@ const ALL_MUSIC_SECTIONS = [
     },
 
     {
-    "id": "KaguyaSama",
-    "title": "Kaguya-sama: Love Is War",
-    "songs": [
-        {
-            "id": "kaguya01",
-            "title": "Sentimental Crisis",
-            "artistData": "halca",
-            "displayArtist": { "name": "halca", "id": "halca" },
-            "artUrl": "img/love is war.jpg",
-            "audioSrc": "audio/Sentimental Crisis.mp3",
-            "isFavorite": true,
-            "plays": "8,412,991"
-        },
-        {
-            "id": "kaguya02",
-            "title": "Sentimental Crisis (Instrumental)",
-            "artistData": "Ryuhei Yamada",
-            "displayArtist": { "name": "Ryuhei Yamada", "id": "RyuheiYamada" },
-            "artUrl": "img/love is war.jpg",
-            "audioSrc": "audio/Sentimental Crisis (Instrumental).mp3",
-            "isFavorite": false,
-            "plays": "2,157,304"
-        }
-    ]
-},
+        "id": "KaguyaSama",
+        "title": "Kaguya-sama: Love Is War",
+        "songs": [
+            {
+                "id": "kaguya01",
+                "title": "Sentimental Crisis",
+                "artistData": "halca",
+                "displayArtist": {
+                    "name": "halca",
+                    "id": "halca"
+                },
+                "artUrl": "img/love is war.jpg",
+                "audioSrc": "audio/Sentimental Crisis.mp3",
+                "isFavorite": true,
+                "plays": "8,412,991"
+            },
+            {
+                "id": "kaguya02",
+                "title": "Sentimental Crisis (Instrumental)",
+                "artistData": "Ryuhei Yamada",
+                "displayArtist": {
+                    "name": "Ryuhei Yamada",
+                    "id": "RyuheiYamada"
+                },
+                "artUrl": "img/love is war.jpg",
+                "audioSrc": "audio/Sentimental Crisis (Instrumental).mp3",
+                "isFavorite": false,
+                "plays": "2,157,304"
+            },
+                        {
+                "id": "kaguya03",
+                "title": "Heart Notes",
+                "artistData": "Airi Suzuki",
+                "displayArtist": {
+                    "name": "Airi Suzuki",
+                    "id": "AiriSuzuki"
+                },
+                "artUrl": "img/kaguya.png",
+                "audioSrc": "audio/heart notes.mp3",
+                "isFavorite": false,
+                "plays": "2,157,311"
+            }
+        ]
+    },
+    {
+        "id": "KaguyaSamaPianoEP",
+        "title": "Kaguya - Sama: Love Is War - Piano Reflections - EP",
+        "songs": [
+            {
+                "id": "kaguya_piano_01",
+                "title": "Kansetsu Ki (Main Theme)",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/hayasaka-wallpaper1.jpg",
+                "audioSrc": "audio/main theme.mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "kaguya_piano_02",
+                "title": "Sentimental Crisis Piano",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/hayasaka-wallpaper2.jpg",
+                "audioSrc": "audio/Sentimental Crisis piano.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "kaguya_piano_03",
+                "title": "Kaze Ni Fukarete",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya-wallpaper.jpeg",
+                "audioSrc": "audio/Kaze Ni Fukarete.mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "kaguya_piano_04",
+                "title": "Heart Ha Oteage",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya-minimalist3.png",
+                "audioSrc": "audio/Heart ha oteage.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "kaguya_piano_05",
+                "title": "Heart Notes",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya-minimalist2.png",
+                "audioSrc": "audio/heart note.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "kaguya_piano_06",
+                "title": "That Kind of Summer",
+                "artistData": "Torby Brand",
+                "displayArtist": {
+                    "name": "Torby Brand",
+                    "id": "TorbyBrand"
+                },
+                "artUrl": "img/kaguya-minimalist.png",
+                "audioSrc": "audio/the kind of summer.mp3",
+                "isFavorite": false
+            }
+        ]
+    },
 
     // Dán toàn bộ khối mã này vào trong mảng ALL_MUSIC_SECTIONS của file data/music.js
 

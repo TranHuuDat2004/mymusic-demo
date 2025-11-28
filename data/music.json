@@ -670,7 +670,7 @@
                     "name": "Torby Brand",
                     "id": "TorbyBrand"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/hayasaka-wallpaper1.jpg",
                 "audioSrc": "audio/main theme.mp3",
                 "isFavorite": false
             },
@@ -682,7 +682,7 @@
                     "name": "Torby Brand",
                     "id": "TorbyBrand"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/hayasaka-wallpaper2.jpg",
                 "audioSrc": "audio/Sentimental Crisis piano.mp3",
                 "isFavorite": true
             },
@@ -694,7 +694,7 @@
                     "name": "Torby Brand",
                     "id": "TorbyBrand"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/kaguya-wallpaper.jpeg",
                 "audioSrc": "audio/Kaze Ni Fukarete.mp3",
                 "isFavorite": false
             },
@@ -706,7 +706,7 @@
                     "name": "Torby Brand",
                     "id": "TorbyBrand"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/kaguya-minimalist3.png",
                 "audioSrc": "audio/Heart ha oteage.mp3",
                 "isFavorite": true
             },
@@ -718,7 +718,7 @@
                     "name": "Torby Brand",
                     "id": "TorbyBrand"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/kaguya-minimalist2.png",
                 "audioSrc": "audio/heart note.mp3",
                 "isFavorite": true
             },
@@ -730,7 +730,7 @@
                     "name": "Torby Brand",
                     "id": "TorbyBrand"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/kaguya-minimalist.png",
                 "audioSrc": "audio/the kind of summer.mp3",
                 "isFavorite": false
             }
