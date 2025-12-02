@@ -543,7 +543,7 @@ const ALL_MUSIC_SECTIONS = [
                 "isFavorite": false,
                 "plays": "2,157,304"
             },
-                        {
+            {
                 "id": "kaguya03",
                 "title": "Heart Notes",
                 "artistData": "Airi Suzuki",
@@ -552,7 +552,7 @@ const ALL_MUSIC_SECTIONS = [
                     "id": "AiriSuzuki"
                 },
                 "artUrl": "img/kaguya.png",
-                "audioSrc": "audio/heart notes.mp3",
+                "audioSrc": "audio/heart-notes.mp3",
                 "isFavorite": false,
                 "plays": "2,157,311"
             }
@@ -636,7 +636,84 @@ const ALL_MUSIC_SECTIONS = [
             }
         ]
     },
-
+    {
+        "id": "GotoubunNoHanayomeEP",
+        "title": "Gotoubun no Hanayome Collection",
+        "songs": [
+            {
+                "id": "gotoubun_01",
+                "title": "Hatsukoi - Strings & Piano Arrange",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/Miku.jpeg",
+                "audioSrc": "audio/Hatsukoi - Strings & Piano Arrange.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "gotoubun_02",
+                "title": "Arigatou no Hana (Orchestra)",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/Arigatou no Hana (Orchestra).jpg",
+                "audioSrc": "audio/Arigatou no Hana (Orchestra).mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "gotoubun_03",
+                "title": "Arigatou no Hana (Cover)",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/Nino.jpeg",
+                "audioSrc": "audio/Arigatou no Hana (Cover).mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "gotoubun_04",
+                "title": "Arigatou no Hana (Original)",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun.jpg",
+                "audioSrc": "audio/Arigatou no Hana.mp3",
+                "isFavorite": true
+            },
+            {
+                "id": "gotoubun_05",
+                "title": "Hatsukoi (Instrumental)",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/Hatsukoi.png",
+                "audioSrc": "audio/Hatsukoi (Instrumental).mp3",
+                "isFavorite": false
+            },
+            {
+                "id": "gotoubun_06",
+                "title": "Arigatou no Hana (Instrumental)",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/Arigatou no Hana.png",
+                "audioSrc": "audio/Arigatou no Hana (Instrumental).mp3",
+                "isFavorite": false
+            }
+        ]
+    }
     // Dán toàn bộ khối mã này vào trong mảng ALL_MUSIC_SECTIONS của file data/music.js
 
 
