@@ -20,10 +20,8 @@
     <audio id="audio-player"></audio>
 
     <div class="music-player-container">
-        <!-- Sidebar sẽ được chèn tự động bởi sidebar.js -->
         <nav id="sidebar-container" class="sidebar"></nav>
 
-        <!-- 2. Main Content Area for Artist -->
         <main class="main-content" id="artist-main-content">
             <header class="artist-header" id="artist-header-banner">
                 <div class="artist-header-content">
@@ -69,20 +67,13 @@
             <div id="footer-placeholder"></div>
         </main>
 
-        <!-- Player Bar và các thành phần khác -->
         <footer id="player-bar-container"></footer>
         <div id="now-playing-fullscreen-container"></div>
         <div id="notification-container"></div>
     </div>
 
-    <!-- Scripts -->
-    <script src="data/music.js"></script>
-
-    <!-- Toàn bộ JavaScript cần thiết cho trang này được nhúng vào đây -->
     <script>
-        // <<< BẮT ĐẦU: CODE TỪ UTILS.JS VÀ ARTIST_PAGE.JS >>>
-
-        // --- CÁC HÀM TIỆN ÍCH (TỪ UTILS.JS) ---
+        // --- CÁC HÀM TIỆN ÍCH (HELPER FUNCTIONS) ---
         function formatTime(seconds) {
             if (isNaN(seconds) || !isFinite(seconds) || seconds < 0) return "N/A";
             const minutes = Math.floor(seconds / 60);
@@ -99,7 +90,7 @@
                     if (audio.duration && isFinite(audio.duration)) {
                         resolve(formatTime(audio.duration));
                     } else { resolve("N/A"); }
-                    audio.src = ""; audio.load();
+                    audio.src = ""; audio.load(); // Dọn dẹp
                 };
                 audio.onerror = () => resolve("N/A");
                 try { audio.src = audioSrc; } catch { resolve("N/A"); }
@@ -111,14 +102,15 @@
             songItem.classList.add('song-list-item');
             songItem.innerHTML = `
                 <span class="song-index">${index}</span>
-                <img src="${songData.artUrl || 'img/song-holder.png'}" alt="${songData.title}" class="album-art-small">
+                <img src="${songData.artUrl || 'img/song-holder.png'}" alt="${songData.title}" class="album-art-small" loading="lazy">
                 <div class="song-details"><div class="song-title">${songData.title || 'Không có tiêu đề'}</div></div>
                 <div class="song-artist-column">${artistNameToDisplay || 'Nghệ sĩ không xác định'}</div>
                 <div class="song-plays">${songData.plays || 'N/A'}</div>
-                <div class="song-duration">${songData.duration || 'N/A'}</div>
+                <div class="song-duration">${songData.duration || '...'}</div>
                 <div class="song-actions">
                     <button title="Thích" class="like-song-btn" data-song-id="${songData.id || ''}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
                 </div>`;
+            
             const likeBtn = songItem.querySelector('.like-song-btn');
             if (likeBtn) {
                 if (songData.isFavorite) {
@@ -126,16 +118,18 @@
                     likeBtn.querySelector('svg').setAttribute('fill', '#1DB954');
                 }
                 likeBtn.addEventListener('click', function (e) {
-                    e.stopPropagation(); this.classList.toggle('liked'); songData.isFavorite = this.classList.contains('liked');
+                    e.stopPropagation(); 
+                    this.classList.toggle('liked'); 
+                    songData.isFavorite = this.classList.contains('liked');
                     this.querySelector('svg').setAttribute('fill', songData.isFavorite ? '#1DB954' : 'currentColor');
                 });
             }
             return songItem;
         }
 
-        // --- LOGIC CỦA TRANG ARTIST_PAGE.JS ---
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log("Artist Page (inline script) DOMContentLoaded Start");
+        // --- LOGIC CHÍNH ---
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Artist Page DOMContentLoaded Start");
 
             const mainContentContainer = document.getElementById('artist-main-content');
             const artistHeaderBanner = document.getElementById('artist-header-banner');
@@ -150,55 +144,95 @@
             const artistId = params.get('artistId');
             const fallbackImage = 'img/singer-holder.png';
 
-            if (!artistId || typeof ALL_MUSIC_SECTIONS === 'undefined') {
-                mainContentContainer.innerHTML = `<div class="content-section" style="text-align:center;"><h2>Lỗi</h2><p>Không tìm thấy ID nghệ sĩ hoặc dữ liệu nhạc.</p></div>`;
+            // 1. Kiểm tra ID
+            if (!artistId) {
+                mainContentContainer.innerHTML = `<div class="content-section" style="text-align:center;"><h2>Lỗi</h2><p>Không tìm thấy ID nghệ sĩ.</p></div>`;
                 return;
             }
 
-            function buildArtistDataFromMusicLibrary(id) {
-                const artistSongs = ALL_MUSIC_SECTIONS.flatMap(s => s.songs).filter(song => song.displayArtist && song.displayArtist.id === id);
-                if (artistSongs.length === 0) return null;
-                return {
-                    id: id,
-                    name: artistSongs[0].displayArtist.name,
-                    avatarUrl: artistSongs[0].artUrl || fallbackImage,
-                    bannerUrl: (artistSongs.length > 1 ? artistSongs[1].artUrl : artistSongs[0].artUrl) || fallbackImage,
-                    popularSongs: [...artistSongs].sort((a, b) => (parseInt(String(b.plays).replace(/\D/g, '')) || 0) - (parseInt(String(a.plays).replace(/\D/g, '')) || 0)),
-                    albums: [], // Tạm để trống
-                    singles: [], // Tạm để trống
-                    bio: `Thông tin về nghệ sĩ ${artistSongs[0].displayArtist.name} đang được cập nhật.`,
-                    monthlyListeners: "N/A"
-                };
-            }
+            // 2. Tải dữ liệu từ JSON
+            fetch('data/music.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(async (data) => {
+                    // --- A. Xử lý dữ liệu thô ---
+                    // Gộp tất cả bài hát từ các playlist thành 1 mảng
+                    const allSongsFlat = data.flatMap(section => section.songs);
 
-            const artistData = buildArtistDataFromMusicLibrary(artistId);
-            if (!artistData) {
-                mainContentContainer.innerHTML = `<div class="content-section" style="text-align:center;"><h2>Không tìm thấy nghệ sĩ</h2><p>Không có bài hát nào được gán cho nghệ sĩ này.</p></div>`;
-                return;
-            }
+                    // Đăng ký dữ liệu với Player để click bài hát chạy được
+                    if (window.registerSongDatabase) {
+                        window.registerSongDatabase(allSongsFlat);
+                    }
 
+                    // --- B. Tìm dữ liệu nghệ sĩ ---
+                    // Lọc ra các bài hát của nghệ sĩ này
+                    const artistSongs = allSongsFlat.filter(song => song.displayArtist && song.displayArtist.id === artistId);
+
+                    if (artistSongs.length === 0) {
+                        mainContentContainer.innerHTML = `<div class="content-section" style="text-align:center;"><h2>Không tìm thấy nghệ sĩ</h2><p>Không có dữ liệu bài hát cho nghệ sĩ này.</p></div>`;
+                        return;
+                    }
+
+                    // Tạo đối tượng dữ liệu nghệ sĩ từ các bài hát tìm được
+                    const artistData = {
+                        id: artistId,
+                        name: artistSongs[0].displayArtist.name,
+                        avatarUrl: artistSongs[0].artUrl || fallbackImage,
+                        bannerUrl: (artistSongs.length > 1 ? artistSongs[1].artUrl : artistSongs[0].artUrl) || fallbackImage,
+                        // Sắp xếp bài hát theo lượt nghe (giả lập parsing string "1.234.567" thành số)
+                        popularSongs: [...artistSongs].sort((a, b) => {
+                            const playA = parseInt(String(a.plays).replace(/\D/g, '')) || 0;
+                            const playB = parseInt(String(b.plays).replace(/\D/g, '')) || 0;
+                            return playB - playA;
+                        }),
+                        albums: [], 
+                        singles: [], 
+                        bio: `Thông tin về nghệ sĩ ${artistSongs[0].displayArtist.name} đang được cập nhật.`
+                    };
+
+                    // --- C. Hiển thị (Render) ---
+                    await renderPage(artistData);
+                })
+                .catch(error => {
+                    console.error("Lỗi khi tải dữ liệu nghệ sĩ:", error);
+                    mainContentContainer.innerHTML = `<div class="content-section" style="text-align:center;"><h2>Lỗi tải dữ liệu</h2><p>Vui lòng thử lại sau.</p></div>`;
+                });
+
+            // --- Hàm Render chi tiết ---
             async function renderPage(data) {
                 document.title = `${data.name} - My Music Player`;
                 artistProfileName.textContent = data.name;
                 artistAvatarImg.src = data.avatarUrl;
+                
                 if (artistHeaderBanner && data.bannerUrl) {
-                    artistHeaderBanner.style.setProperty('--artist-banner-url', `url('${data.bannerUrl}')`);
+                    // Hiệu ứng mờ cho banner nền
+                    artistHeaderBanner.style.background = `linear-gradient(rgba(0,0,0,0.3), #121212), url('${data.bannerUrl}') no-repeat center center / cover`;
                 }
                 artistBio.textContent = data.bio;
 
+                // Tính thời lượng bài hát (Async)
                 const songsWithDuration = await Promise.all(
-                    data.popularSongs.map(async song => ({ ...song, duration: await getAudioFileDuration(song.audioSrc) }))
+                    data.popularSongs.map(async song => ({ 
+                        ...song, 
+                        duration: await getAudioFileDuration(song.audioSrc) 
+                    }))
                 );
 
                 renderPopularSongs(songsWithDuration, data.name);
                 renderGridContent(artistAlbumsGrid, data.albums, 'Album');
                 renderGridContent(artistSinglesGrid, data.singles, 'Single');
 
+                // Nút "Phát nhạc của nghệ sĩ"
                 const playLargeBtn = mainContentContainer.querySelector('.play-button-large');
                 if (playLargeBtn && songsWithDuration.length > 0) {
                     playLargeBtn.addEventListener('click', () => {
-                        // Sửa ở đây: Phải có "window."
-                        window.playSongFromData(songsWithDuration[0], songsWithDuration);
+                        if (window.playSongFromData) {
+                            window.playSongFromData(songsWithDuration[0], songsWithDuration);
+                        } else {
+                            console.error("Hàm playSongFromData chưa được load từ player.js");
+                        }
                     });
                 }
             }
@@ -211,10 +245,12 @@
                 }
                 songs.slice(0, 20).forEach((song, index) => {
                     const songEl = createSongListItem(song, index + 1, artistName);
+                    // Gắn sự kiện click phát nhạc
                     songEl.addEventListener('click', (e) => {
                         if (e.target.closest('.like-song-btn')) return;
-                        // Sửa ở đây: Phải có "window."
-                        window.playSongFromData(song, songs);
+                        if (window.playSongFromData) {
+                            window.playSongFromData(song, songs);
+                        }
                     });
                     artistPopularSongsContainer.appendChild(songEl);
                 });
@@ -223,23 +259,18 @@
             function renderGridContent(container, items, typeLabel) {
                 container.innerHTML = "";
                 if (items.length === 0) {
-                    container.innerHTML = `<p>Chưa có ${typeLabel.toLowerCase()} nào.</p>`;
+                    container.innerHTML = `<p style="color:#b3b3b3; font-size:0.9em;">Chưa có ${typeLabel.toLowerCase()} nào.</p>`;
                     return;
                 }
-                // Logic render album/single sẽ được thêm ở đây
+                // Logic render album/single sẽ được thêm ở đây khi file JSON có cấu trúc album
             }
 
-            renderPage(artistData);
-            console.log("Artist Page (inline script) DOMContentLoaded End");
+            console.log("Artist Page Logic Loaded");
         });
-
-        // <<< KẾT THÚC: CODE TỪ UTILS.JS VÀ ARTIST_PAGE.JS >>>
     </script>
     
-    <!-- Các file JS chung vẫn được nạp với defer -->
     <script src="js/player.js" defer></script>
     <script src="js/sidebar.js" defer></script>
-<!-- Trong các file HTML -->
-<script src="js/footer.js" defer></script>
+    <script src="js/footer.js" defer></script>
 </body>
 </html>
