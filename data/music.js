@@ -672,7 +672,7 @@ const ALL_MUSIC_SECTIONS = [
                     "name": "Nakano-ke no Itsutsugo",
                     "id": "NakanoQuint"
                 },
-                "artUrl": "img/Nino.jpeg",
+                "artUrl": "img/Hatsukoi (Instrumental).png",
                 "audioSrc": "audio/Arigatou no Hana (Cover).mp3",
                 "isFavorite": false
             },
