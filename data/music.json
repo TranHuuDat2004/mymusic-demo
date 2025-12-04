@@ -651,7 +651,7 @@
                     "name": "Airi Suzuki",
                     "id": "AiriSuzuki"
                 },
-                "artUrl": "img/kaguya.png",
+                "artUrl": "img/chika-mini.jpg",
                 "audioSrc": "audio/heart-notes.mp3",
                 "isFavorite": false,
                 "plays": "2,157,311"
@@ -672,7 +672,8 @@
                 },
                 "artUrl": "img/hayasaka-wallpaper1.jpg",
                 "audioSrc": "audio/main theme.mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             },
             {
                 "id": "kaguya_piano_02",
@@ -684,7 +685,8 @@
                 },
                 "artUrl": "img/hayasaka-wallpaper2.jpg",
                 "audioSrc": "audio/Sentimental Crisis piano.mp3",
-                "isFavorite": true
+                "isFavorite": true,
+                "plays": "2,157,311"
             },
             {
                 "id": "kaguya_piano_03",
@@ -696,7 +698,8 @@
                 },
                 "artUrl": "img/kaguya-wallpaper.jpeg",
                 "audioSrc": "audio/Kaze Ni Fukarete.mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             },
             {
                 "id": "kaguya_piano_04",
@@ -708,7 +711,8 @@
                 },
                 "artUrl": "img/kaguya-minimalist3.png",
                 "audioSrc": "audio/Heart ha oteage.mp3",
-                "isFavorite": true
+                "isFavorite": true,
+                "plays": "2,157,311"
             },
             {
                 "id": "kaguya_piano_05",
@@ -720,7 +724,8 @@
                 },
                 "artUrl": "img/kaguya-minimalist2.png",
                 "audioSrc": "audio/heart note.mp3",
-                "isFavorite": true
+                "isFavorite": true,
+                "plays": "2,157,311"
             },
             {
                 "id": "kaguya_piano_06",
@@ -732,7 +737,8 @@
                 },
                 "artUrl": "img/kaguya-minimalist.png",
                 "audioSrc": "audio/the kind of summer.mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             }
         ]
     },
@@ -748,9 +754,10 @@
                     "name": "Nakano-ke no Itsutsugo",
                     "id": "NakanoQuint"
                 },
-                "artUrl": "img/Miku.jpeg",
+                "artUrl": "img/Hatsukoi.png",
                 "audioSrc": "audio/Hatsukoi - Strings & Piano Arrange.mp3",
-                "isFavorite": true
+                "isFavorite": true,
+                "plays": "2,157,311"
             },
             {
                 "id": "gotoubun_02",
@@ -762,7 +769,8 @@
                 },
                 "artUrl": "img/Arigatou no Hana (Orchestra).jpg",
                 "audioSrc": "audio/Arigatou no Hana (Orchestra).mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             },
             {
                 "id": "gotoubun_03",
@@ -774,7 +782,8 @@
                 },
                 "artUrl": "img/Hatsukoi (Instrumental).png",
                 "audioSrc": "audio/Arigatou no Hana (Cover).mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             },
             {
                 "id": "gotoubun_04",
@@ -786,7 +795,8 @@
                 },
                 "artUrl": "img/gotorbun.jpg",
                 "audioSrc": "audio/Arigatou no Hana.mp3",
-                "isFavorite": true
+                "isFavorite": true,
+                "plays": "2,157,311"
             },
             {
                 "id": "gotoubun_05",
@@ -796,9 +806,10 @@
                     "name": "Nakano-ke no Itsutsugo",
                     "id": "NakanoQuint"
                 },
-                "artUrl": "img/Hatsukoi.png",
+                "artUrl": "img/gotorbun3.jpg",
                 "audioSrc": "audio/Hatsukoi (Instrumental).mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             },
             {
                 "id": "gotoubun_06",
@@ -810,7 +821,8 @@
                 },
                 "artUrl": "img/Arigatou no Hana.png",
                 "audioSrc": "audio/Arigatou no Hana (Instrumental).mp3",
-                "isFavorite": false
+                "isFavorite": false,
+                "plays": "2,157,311"
             }
         ]
     }
