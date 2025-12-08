@@ -806,7 +806,7 @@
                     "name": "Nakano-ke no Itsutsugo",
                     "id": "NakanoQuint"
                 },
-                "artUrl": "img/gotorbun3.jpg",
+                "artUrl": "img/gotorbun-wedding.png",
                 "audioSrc": "audio/Hatsukoi (Instrumental).mp3",
                 "isFavorite": false,
                 "plays": "2,157,311"
@@ -819,8 +819,21 @@
                     "name": "Nakano-ke no Itsutsugo",
                     "id": "NakanoQuint"
                 },
-                "artUrl": "img/Arigatou no Hana.png",
+                "artUrl": "img/gotorbun-adult.png",
                 "audioSrc": "audio/Arigatou no Hana (Instrumental).mp3",
+                "isFavorite": false,
+                "plays": "2,157,311"
+            },
+            {
+                "id": "gotoubun_06",
+                "title": "Arigatou no Hana (Remix by AI)",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun3.jpg",
+                "audioSrc": "audio/Arigatou no Hana (Remix by AI).mp3",
                 "isFavorite": false,
                 "plays": "2,157,311"
             }
