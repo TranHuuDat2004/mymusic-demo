@@ -849,7 +849,124 @@
                 "audioSrc": "audio/Arigatou no Hana (Remix by AI).mp3",
                 "isFavorite": false,
                 "plays": "2,157,311"
-            }
+            },
+            {
+            "id": "gotoubun_track_01",
+            "title": "Op2 Orchestra",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (1).jpg",
+            "audioSrc": "audio/Op2 Orchestra.mp3",
+            "isFavorite": true,
+            "plays": "1,020,300"
+        },
+        {
+            "id": "gotoubun_track_02",
+            "title": "After Wedding",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (2).jpg",
+            "audioSrc": "audio/After Wedding.mp3",
+            "isFavorite": false,
+            "plays": "980,500"
+        },
+        {
+            "id": "gotoubun_track_03",
+            "title": "Memories",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (3).jpg",
+            "audioSrc": "audio/Memories.mp3",
+            "isFavorite": false,
+            "plays": "850,210"
+        },
+        {
+            "id": "gotoubun_track_04",
+            "title": "Takaramono",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (4).jpg",
+            "audioSrc": "audio/Takaramono.mp3",
+            "isFavorite": true,
+            "plays": "2,450,111"
+        },
+        {
+            "id": "gotoubun_track_05",
+            "title": "The future",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (5).jpg",
+            "audioSrc": "audio/The future.mp3",
+            "isFavorite": false,
+            "plays": "760,000"
+        },
+        {
+            "id": "gotoubun_track_06",
+            "title": "Hatsukoi Orchestra",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (6).jpg",
+            "audioSrc": "audio/Hatsukoi Orchestra.mp3",
+            "isFavorite": true,
+            "plays": "3,100,555"
+        },
+        {
+            "id": "gotoubun_track_07",
+            "title": "The ring",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (7).jpg",
+            "audioSrc": "audio/The ring.mp3",
+            "isFavorite": false,
+            "plays": "650,400"
+        },
+        {
+            "id": "gotoubun_track_08",
+            "title": "Wedding Theme",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (8).jpg",
+            "audioSrc": "audio/Wedding Theme.mp3",
+            "isFavorite": true,
+            "plays": "1,890,200"
+        },
+        {
+            "id": "gotoubun_track_09",
+            "title": "Rena Nakano Theme",
+            "artistData": "Nakano-ke no Itsutsugo",
+            "displayArtist": {
+                "name": "Nakano-ke no Itsutsugo",
+                "id": "NakanoQuint"
+            },
+            "artUrl": "img/gotorbun (9).jpg",
+            "audioSrc": "audio/Rena Nakano Theme.mp3",
+            "isFavorite": false,
+            "plays": "540,100"
+        }
         ]
     }
 ]
