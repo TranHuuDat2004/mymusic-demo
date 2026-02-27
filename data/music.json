@@ -203,6 +203,45 @@
                 "audioSrc": "audio/Hạnh Phúc Thoáng Qua.mp3",
                 "isFavorite": false,
                 "plays": "1.999.000"
+            },
+            {
+                "id": "vpop_new1",
+                "title": "Ai Anh Cũng Cực Vàng (Remix)",
+                "artistData": "Remix",
+                "displayArtist": {
+                    "name": "Remix",
+                    "id": "remix"
+                },
+                "artUrl": "img/Ai Anh Cũng Cục Vàng Remix (Em Nhắc Anh).png",
+                "audioSrc": "audio/Ai Anh Cũng Cực Vàng Remix (Em Nhắc Anh) Remix.mp3",
+                "isFavorite": false,
+                "plays": "1.500.000"
+            },
+            {
+                "id": "vpop_new2",
+                "title": "Em Ơi Anh Phải Làm Sao x Hey Hey Hey",
+                "artistData": "Viral Music",
+                "displayArtist": {
+                    "name": "Viral Music",
+                    "id": "viral-music"
+                },
+                "artUrl": "img/Em ơi anh phải làm sao.png",
+                "audioSrc": "audio/Em Ơi Anh Phải Làm Sao x Hey Hey Hey.mp3",
+                "isFavorite": false,
+                "plays": "2.345.678"
+            },
+            {
+                "id": "vpop_new3",
+                "title": "Nắng Dưới Chân Mây",
+                "artistData": "Thazh x Đông",
+                "displayArtist": {
+                    "name": "Thazh x Đông",
+                    "id": "thazh-x-dong"
+                },
+                "artUrl": "img/Nắng Dưới Chân Mây.png",
+                "audioSrc": "audio/Nắng Dưới Chân Mây.mp3",
+                "isFavorite": false,
+                "plays": "3.456.789"
             }
         ]
     },
@@ -339,6 +378,32 @@
                 "audioSrc": "audio/[Vietsub + Kara] That Girl - Olly Murs (lyrics) - Tik Tok.mp3",
                 "isFavorite": false,
                 "plays": "120.987.654"
+            },
+            {
+                "id": "vpop_douyin_instrumental",
+                "title": "Douyin Instrumental",
+                "artistData": "Douyin",
+                "displayArtist": {
+                    "name": "Douyin",
+                    "id": "douyin"
+                },
+                "artUrl": "img/douyin intrumental.jpg",
+                "audioSrc": "audio/Douyin intrumental.mp3",
+                "isFavorite": false,
+                "plays": "1.111.222"
+            },
+            {
+                "id": "vpop_douyin",
+                "title": "Douyin",
+                "artistData": "Hot Trend",
+                "displayArtist": {
+                    "name": "Hot Trend",
+                    "id": "hot-trend"
+                },
+                "artUrl": "img/douyin.jpg",
+                "audioSrc": "audio/Douyin.mp3",
+                "isFavorite": false,
+                "plays": "2.222.333"
             }
         ]
     },
@@ -851,135 +916,186 @@
                 "plays": "2,157,311"
             },
             {
-            "id": "gotoubun_track_01",
-            "title": "Op2 Orchestra",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+                "id": "gotoubun_track_01",
+                "title": "Op2 Orchestra",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (1).jpg",
+                "audioSrc": "audio/Op2 Orchestra.mp3",
+                "isFavorite": true,
+                "plays": "1,020,300"
             },
-            "artUrl": "img/gotorbun (1).jpg",
-            "audioSrc": "audio/Op2 Orchestra.mp3",
-            "isFavorite": true,
-            "plays": "1,020,300"
-        },
-        {
-            "id": "gotoubun_track_02",
-            "title": "After Wedding",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_02",
+                "title": "After Wedding",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (2).jpg",
+                "audioSrc": "audio/After Wedding.mp3",
+                "isFavorite": false,
+                "plays": "980,500"
             },
-            "artUrl": "img/gotorbun (2).jpg",
-            "audioSrc": "audio/After Wedding.mp3",
-            "isFavorite": false,
-            "plays": "980,500"
-        },
-        {
-            "id": "gotoubun_track_03",
-            "title": "Memories",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_03",
+                "title": "Memories",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (3).jpg",
+                "audioSrc": "audio/Memories.mp3",
+                "isFavorite": false,
+                "plays": "850,210"
             },
-            "artUrl": "img/gotorbun (3).jpg",
-            "audioSrc": "audio/Memories.mp3",
-            "isFavorite": false,
-            "plays": "850,210"
-        },
-        {
-            "id": "gotoubun_track_04",
-            "title": "Takaramono",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_04",
+                "title": "Takaramono",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (4).jpg",
+                "audioSrc": "audio/Takaramono.mp3",
+                "isFavorite": true,
+                "plays": "2,450,111"
             },
-            "artUrl": "img/gotorbun (4).jpg",
-            "audioSrc": "audio/Takaramono.mp3",
-            "isFavorite": true,
-            "plays": "2,450,111"
-        },
-        {
-            "id": "gotoubun_track_05",
-            "title": "The future",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_05",
+                "title": "The future",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (5).jpg",
+                "audioSrc": "audio/The future.mp3",
+                "isFavorite": false,
+                "plays": "760,000"
             },
-            "artUrl": "img/gotorbun (5).jpg",
-            "audioSrc": "audio/The future.mp3",
-            "isFavorite": false,
-            "plays": "760,000"
-        },
-        {
-            "id": "gotoubun_track_06",
-            "title": "Hatsukoi Orchestra",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_06",
+                "title": "Hatsukoi Orchestra",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (6).jpg",
+                "audioSrc": "audio/Hatsukoi Orchestra.mp3",
+                "isFavorite": true,
+                "plays": "3,100,555"
             },
-            "artUrl": "img/gotorbun (6).jpg",
-            "audioSrc": "audio/Hatsukoi Orchestra.mp3",
-            "isFavorite": true,
-            "plays": "3,100,555"
-        },
-        {
-            "id": "gotoubun_track_07",
-            "title": "The ring",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_07",
+                "title": "The ring",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (7).jpg",
+                "audioSrc": "audio/The ring.mp3",
+                "isFavorite": false,
+                "plays": "650,400"
             },
-            "artUrl": "img/gotorbun (7).jpg",
-            "audioSrc": "audio/The ring.mp3",
-            "isFavorite": false,
-            "plays": "650,400"
-        },
-        {
-            "id": "gotoubun_track_08",
-            "title": "Wedding Theme",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_08",
+                "title": "Wedding Theme",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (8).jpg",
+                "audioSrc": "audio/Wedding Theme.mp3",
+                "isFavorite": true,
+                "plays": "1,890,200"
             },
-            "artUrl": "img/gotorbun (8).jpg",
-            "audioSrc": "audio/Wedding Theme.mp3",
-            "isFavorite": true,
-            "plays": "1,890,200"
-        },
-        {
-            "id": "gotoubun_track_09",
-            "title": "Rena Nakano Theme",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_09",
+                "title": "Rena Nakano Theme",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (9).jpg",
+                "audioSrc": "audio/Rena Nakano Theme.mp3",
+                "isFavorite": false,
+                "plays": "540,100"
             },
-            "artUrl": "img/gotorbun (9).jpg",
-            "audioSrc": "audio/Rena Nakano Theme.mp3",
-            "isFavorite": false,
-            "plays": "540,100"
-        },
-                {
-            "id": "gotoubun_track_10",
-            "title": "Op1 Orchestra",
-            "artistData": "Nakano-ke no Itsutsugo",
-            "displayArtist": {
-                "name": "Nakano-ke no Itsutsugo",
-                "id": "NakanoQuint"
+            {
+                "id": "gotoubun_track_10",
+                "title": "Op1 Orchestra",
+                "artistData": "Nakano-ke no Itsutsugo",
+                "displayArtist": {
+                    "name": "Nakano-ke no Itsutsugo",
+                    "id": "NakanoQuint"
+                },
+                "artUrl": "img/gotorbun (10).jpg",
+                "audioSrc": "audio/Op1 Orchestra.mp3",
+                "isFavorite": false,
+                "plays": "540,100"
+            }
+        ]
+    },
+    {
+        "id": "mayonaka_heart_tune",
+        "title": "Mayonaka Heart Tune",
+        "songs": [
+            {
+                "id": "mayonaka_heart_tune_01",
+                "title": "Koe no Kiseki (声の軌跡)",
+                "artistData": "Soala",
+                "displayArtist": {
+                    "name": "Soala",
+                    "id": "soala"
+                },
+                "artUrl": "img/Koe no Kiseki (声の軌跡)』by Soala.png",
+                "audioSrc": "audio/Koe no Kiseki (声の軌跡)』by Soala.mp3",
+                "isFavorite": false,
+                "plays": "890.123"
+            }
+        ]
+    },
+    {
+        "id": "riichi_city",
+        "title": "Riichi City",
+        "songs": [
+            {
+                "id": "riichi_city_01",
+                "title": "Lobby Music 2",
+                "artistData": "Game Music",
+                "displayArtist": {
+                    "name": "Game Music",
+                    "id": "game-music"
+                },
+                "artUrl": "img/lobby_music_2.jpg",
+                "audioSrc": "audio/lobby_music2.mp3",
+                "isFavorite": false,
+                "plays": "500.000"
             },
-            "artUrl": "img/gotorbun (10).jpg",
-            "audioSrc": "audio/Op1 Orchestra.mp3",
-            "isFavorite": false,
-            "plays": "540,100"
-        }
+            {
+                "id": "riichi_city_02",
+                "title": "Sunday",
+                "artistData": "Unknown",
+                "displayArtist": {
+                    "name": "Unknown",
+                    "id": "unknown"
+                },
+                "artUrl": "img/sunday.jpg",
+                "audioSrc": "audio/Sunday.mp3",
+                "isFavorite": false,
+                "plays": "888.999"
+            }
         ]
     }
 ]
