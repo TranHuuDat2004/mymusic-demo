@@ -206,24 +206,24 @@
             },
             {
                 "id": "vpop_new1",
-                "title": "Ai Anh Cũng Cực Vàng (Remix)",
-                "artistData": "Remix",
+                "title": "Em nhắc anh (Remix)",
+                "artistData": "Air Remix",
                 "displayArtist": {
-                    "name": "Remix",
-                    "id": "remix"
+                    "name": "Air Remix",
+                    "id": "airremix"
                 },
                 "artUrl": "img/Ai Anh Cũng Cục Vàng Remix (Em Nhắc Anh).png",
-                "audioSrc": "audio/Ai Anh Cũng Cực Vàng Remix (Em Nhắc Anh) Remix.mp3",
+                "audioSrc": "audio/em-nhac-anh.mp3",
                 "isFavorite": false,
                 "plays": "1.500.000"
             },
             {
                 "id": "vpop_new2",
                 "title": "Em Ơi Anh Phải Làm Sao x Hey Hey Hey",
-                "artistData": "Viral Music",
+                "artistData": "Air Remix",
                 "displayArtist": {
-                    "name": "Viral Music",
-                    "id": "viral-music"
+                    "name": "Air Remix",
+                    "id": "airremix"
                 },
                 "artUrl": "img/Em ơi anh phải làm sao.png",
                 "audioSrc": "audio/Em Ơi Anh Phải Làm Sao x Hey Hey Hey.mp3",
@@ -378,7 +378,14 @@
                 "audioSrc": "audio/[Vietsub + Kara] That Girl - Olly Murs (lyrics) - Tik Tok.mp3",
                 "isFavorite": false,
                 "plays": "120.987.654"
-            },
+            }
+        ]
+    },
+    {
+        "id": "DouyinEDM",
+        "title": "Douyin EDM",
+        "songs": [
+            
             {
                 "id": "vpop_douyin_instrumental",
                 "title": "Douyin Instrumental",
@@ -1059,7 +1066,7 @@
                     "name": "Soala",
                     "id": "soala"
                 },
-                "artUrl": "img/Koe no Kiseki (声の軌跡)』by Soala.png",
+                "artUrl": "img/Koe no Kiseki.png",
                 "audioSrc": "audio/Koe no Kiseki (声の軌跡)』by Soala.mp3",
                 "isFavorite": false,
                 "plays": "890.123"
@@ -1086,10 +1093,10 @@
             {
                 "id": "riichi_city_02",
                 "title": "Sunday",
-                "artistData": "Unknown",
+                "artistData": "Suno AI",
                 "displayArtist": {
-                    "name": "Unknown",
-                    "id": "unknown"
+                    "name": "Suno AI",
+                    "id": "sunoa"
                 },
                 "artUrl": "img/sunday.jpg",
                 "audioSrc": "audio/Sunday.mp3",
