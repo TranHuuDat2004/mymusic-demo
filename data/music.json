@@ -1,4 +1,5 @@
 [
+
     {
         "id": "Vpop",
         "title": "Nhạc Việt Nam",
@@ -378,6 +379,129 @@
                 "audioSrc": "audio/[Vietsub + Kara] That Girl - Olly Murs (lyrics) - Tik Tok.mp3",
                 "isFavorite": false,
                 "plays": "120.987.654"
+            },
+            {
+                "id": "edm_tinh_ve",
+                "title": "TINH VỆ (精卫) - JAPANDEE REMIX",
+                "artistData": "JAPANDEE REMIX",
+                "displayArtist": {
+                    "name": "JAPANDEE",
+                    "id": "japandee"
+                },
+                "artUrl": "img/wallpapers/wallpaper_tinh_ve.png",
+                "audioSrc": "audio/TINH VỆ (精卫) - JAPANDEE REMIX.mp3",
+                "isFavorite": false,
+                "plays": "2.000.000"
+            },
+            {
+                "id": "edm_lanterns",
+                "title": "Lanterns",
+                "artistData": "Xomu",
+                "displayArtist": {
+                    "name": "Xomu",
+                    "id": "xomu"
+                },
+                "artUrl": "img/wallpapers/wallpaper_lanterns.png",
+                "audioSrc": "audio/Xomu - Lanterns.mp3",
+                "isFavorite": false,
+                "plays": "1.500.000"
+            }
+        ]
+    },
+    {
+        "id": "AI_Generated",
+        "title": "Nhạc Do AI Tạo (AI Music)",
+        "songs": [
+            {
+                "id": "ai_vpop_emnhacanh",
+                "title": "Em Nhắc Anh (AI)",
+                "artistData": "Air Remix (AI Generated)",
+                "displayArtist": {
+                    "name": "Air Remix",
+                    "id": "airremix"
+                },
+                "artUrl": "img/wallpapers/wallpaper_nature_1.png",
+                "audioSrc": "audio/AI-em-nhac-anh.mp3",
+                "isFavorite": false,
+                "plays": "1.000.000"
+            },
+            {
+                "id": "ai_vpop_hanhphucthoangqua",
+                "title": "Hạnh Phúc Thoáng Qua (AI)",
+                "artistData": "Noo Phước Thịnh (AI Generated)",
+                "displayArtist": {
+                    "name": "Noo Phước Thịnh",
+                    "id": "Noo"
+                },
+                "artUrl": "img/wallpapers/wallpaper_beach_1.png",
+                "audioSrc": "audio/AI-hanh-phuc-thoang-qua.mp3",
+                "isFavorite": false,
+                "plays": "1.000.000"
+            },
+            {
+                "id": "ai_vpop_hanhphucthoangquainst",
+                "title": "Hạnh Phúc Thoáng Qua (Instrumental AI)",
+                "artistData": "Noo Phước Thịnh (AI Generated)",
+                "displayArtist": {
+                    "name": "Noo Phước Thịnh",
+                    "id": "Noo"
+                },
+                "artUrl": "img/wallpapers/wallpaper_sunset_1.png",
+                "audioSrc": "audio/AI-hanh-phuc-thoang-qua (Instrumental).mp3",
+                "isFavorite": false,
+                "plays": "500.000"
+            },
+            {
+                "id": "ai_vpop_khucvuongtinh",
+                "title": "Khúc Vương Tình Remix (AI)",
+                "artistData": "Cần Vinh, Lee Ken (AI Generated)",
+                "displayArtist": {
+                    "name": "Cần Vinh, Lee Ken",
+                    "id": "can-vinh"
+                },
+                "artUrl": "img/wallpapers/wallpaper_nature_2.png",
+                "audioSrc": "audio/AI-khuc-vuong-tinh-remix.mp3",
+                "isFavorite": false,
+                "plays": "1.000.000"
+            },
+            {
+                "id": "ai_vpop_nenchohaynenquen",
+                "title": "Nên Chờ Hay Nên Quên Remix (AI)",
+                "artistData": "Chu Thúy Quỳnh (AI Generated)",
+                "displayArtist": {
+                    "name": "Chu Thúy Quỳnh",
+                    "id": "chu-thuy-quynh"
+                },
+                "artUrl": "img/wallpapers/wallpaper_beach_2.png",
+                "audioSrc": "audio/AI-nen-cho-hay-nen-quen-remix.mp3",
+                "isFavorite": false,
+                "plays": "1.000.000"
+            },
+            {
+                "id": "ai_vpop_taisinh",
+                "title": "Tái Sinh Remix (AI)",
+                "artistData": "Tùng Dương (AI Generated)",
+                "displayArtist": {
+                    "name": "Tùng Dương",
+                    "id": "tung-duong"
+                },
+                "artUrl": "img/wallpapers/wallpaper_sunset_2.png",
+                "audioSrc": "audio/AI-tai-sinh-remix.mp3",
+                "isFavorite": false,
+                "plays": "1.000.000"
+            },
+            {
+                "id": "ai_vpop_tralaithanhxuan",
+                "title": "Trả Lại Thanh Xuân Cho Em (AI)",
+                "artistData": "H2K (AI Generated)",
+                "displayArtist": {
+                    "name": "H2K",
+                    "id": "h2k"
+                },
+                "artUrl": "img/wallpapers/wallpaper_nature_3.png",
+                "audioSrc": "audio/AI-tra-lai-thanh-xuan-cho-em.mp3",
+                "isFavorite": false,
+                "plays": "1.000.000"
             }
         ]
     },
