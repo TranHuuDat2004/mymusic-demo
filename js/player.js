@@ -170,7 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="actions">
                 <button id="like-btn" title="Thích"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-like"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg></button>
+                <button id="view-more-btn" title="Xem thêm / Tải Video"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></svg></button>
             </div>
+
         </div>
         <div class="player-controls">
             <div class="buttons">
@@ -283,7 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
     addTooltip(volumeBtn, 'Âm lượng');
     addTooltip(toggleBgBtn, 'Đổi ảnh nền background');
     addTooltip(likeBtn, 'Thích');
+    addTooltip(document.getElementById('view-more-btn'), 'Xem thêm / Tải Video');
     addTooltip(progressBar, 'Thanh tiến trình');
+
     addTooltip(volumeBar, 'Thanh âm lượng');
 
     fullscreenPlayerContainer.classList.toggle('show-background', showBg);
@@ -335,10 +339,60 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 6. GẮN CÁC LISTENER ---
     const songInfoDiv = playerContainer.querySelector('.song-info');
     songInfoDiv.addEventListener('click', (e) => {
-        if (e.target.closest('#like-btn')) return;
+        if (e.target.closest('#like-btn') || e.target.closest('#view-more-btn')) return;
         if (currentIndex !== -1) fullscreenPlayerContainer.classList.add('active');
     });
+
+    const viewMoreBtn = document.getElementById('view-more-btn');
+    
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    viewMoreBtn.addEventListener('click', async () => {
+        if (currentIndex === -1) {
+            showNotification("Vui lòng chọn một bài hát trước");
+            return;
+        }
+
+        if (typeof openVideoExportModal !== 'function') {
+            showNotification("Đang chuẩn bị trình xuất video...");
+        }
+
+        try {
+            if (!document.getElementById('video-export-modal-container')) {
+                const container = document.createElement('div');
+                container.id = 'video-export-modal-container';
+                document.body.appendChild(container);
+            }
+
+            if (typeof FFmpeg === 'undefined') {
+                await loadScript("https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js");
+            }
+
+            if (typeof openVideoExportModal !== 'function') {
+                await loadScript("js/video-exporter.js");
+            }
+
+            // Gọi hàm từ video-exporter.js
+            if (typeof openVideoExportModal === 'function') {
+                openVideoExportModal(currentQueue[currentIndex]);
+            }
+        } catch (error) {
+            console.error("Lỗi tải video exporter:", error);
+            showNotification("Không thể tải trình xuất video.");
+        }
+    });
+
     npCloseBtn.addEventListener('click', () => fullscreenPlayerContainer.classList.remove('active'));
+
+
 
     mainPlayPauseBtn.addEventListener('click', () => {
         if (!isVolumeInitialized) { audioPlayer.volume = volumeBar.value / 100; isVolumeInitialized = true; }
