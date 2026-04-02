@@ -7,7 +7,7 @@ const { createFFmpeg, fetchFile } = typeof FFmpeg !== 'undefined' ? FFmpeg : { c
 let ffmpeg = null;
 
 // ÉP MẶC ĐỊNH DÙNG WEBM (MediaRecorder) ĐỂ XUẤT SIÊU NHANH BẰNG PHẦN CỨNG
-let useWebMFallback = true; 
+let useWebMFallback = true;
 let isExportCancelled = false;
 
 const videoExportModalHTML = `
@@ -97,7 +97,7 @@ if (document.readyState === 'loading') {
 function setupEventListeners() {
     document.getElementById('close-export-modal').onclick = () => {
         document.getElementById('video-export-modal').style.display = 'none';
-        isExportCancelled = true; 
+        isExportCancelled = true;
     };
     document.getElementById('cancel-export-btn').onclick = () => {
         isExportCancelled = true;
@@ -160,7 +160,7 @@ async function analyzeAudio(buffer) {
     const analysis = [];
     for (let i = 0; i < rawData.length; i += step) {
         let max = 0;
-        for (let j = 0; j < step && (i + j) < rawData.length; j++) max = Math.max(max, Math.abs(rawData[i+j]));
+        for (let j = 0; j < step && (i + j) < rawData.length; j++) max = Math.max(max, Math.abs(rawData[i + j]));
         analysis.push(max);
     }
     return analysis;
@@ -172,21 +172,21 @@ async function startVideoExport() {
     const statusText = document.getElementById('export-status-text');
     const progressFill = document.getElementById('export-progress-fill');
     const res = parseInt(document.getElementById('export-resolution').value);
-    
+
     loading.style.display = 'flex'; statusText.textContent = "Đang tải âm thanh..."; progressFill.style.width = '0%';
 
     try {
         const response = await fetch(currentExportSong.audioSrc);
         const arrayBuffer = await response.arrayBuffer();
-        if(isExportCancelled) throw new Error("CANCELLED");
+        if (isExportCancelled) throw new Error("CANCELLED");
 
         const audioCtx = new AudioContext();
         const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer.slice(0));
-        
+
         statusText.textContent = "Phân tích dải Bass...";
         const bassData = await analyzeAudio(audioBuffer);
 
-        if(isExportCancelled) throw new Error("CANCELLED");
+        if (isExportCancelled) throw new Error("CANCELLED");
 
         const canvas = document.getElementById('export-canvas');
         const ctx = canvas.getContext('2d', { alpha: false }); // Tối ưu phần cứng cho Canvas
@@ -203,27 +203,27 @@ async function startVideoExport() {
             // Chế độ FFmpeg cũ (Rất chậm, giữ lại làm dự phòng)
             try {
                 if (!ffmpeg) { ffmpeg = createFFmpeg({ log: false }); await ffmpeg.load(); }
-                if(isExportCancelled) throw new Error("CANCELLED");
+                if (isExportCancelled) throw new Error("CANCELLED");
 
                 for (let i = 0; i < totalFrames; i++) {
                     if (isExportCancelled) {
-                        for(let j=0; j<i; j++) { try { ffmpeg.FS('unlink', `f-${j.toString().padStart(6, '0')}.jpg`); } catch {} }
+                        for (let j = 0; j < i; j++) { try { ffmpeg.FS('unlink', `f-${j.toString().padStart(6, '0')}.jpg`); } catch { } }
                         throw new Error("CANCELLED");
                     }
                     await drawFrame(ctx, i, fps, width, height, img, dominantColor, bassData, audioBuffer.duration);
                     ffmpeg.FS('writeFile', `f-${i.toString().padStart(6, '0')}.jpg`, await canvasToUint8Array(canvas));
-                    progressFill.style.width = `${(i/totalFrames)*100}%`;
-                    statusText.textContent = `Rendering (Chậm): ${Math.round((i/totalFrames)*100)}%`;
+                    progressFill.style.width = `${(i / totalFrames) * 100}%`;
+                    statusText.textContent = `Rendering (Chậm): ${Math.round((i / totalFrames) * 100)}%`;
                 }
 
-                if(isExportCancelled) throw new Error("CANCELLED");
+                if (isExportCancelled) throw new Error("CANCELLED");
                 statusText.textContent = "Gộp audio và video...";
                 ffmpeg.FS('writeFile', 'a.mp3', new Uint8Array(arrayBuffer));
-                await ffmpeg.run('-framerate','30','-i','f-%06d.jpg','-i','a.mp3','-c:v','libx264','-pix_fmt','yuv420p','-c:a','aac','-shortest','o.mp4');
+                await ffmpeg.run('-framerate', '30', '-i', 'f-%06d.jpg', '-i', 'a.mp3', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', 'o.mp4');
                 const data = ffmpeg.FS('readFile', 'o.mp4');
                 downloadBlob(new Blob([data.buffer], { type: 'video/mp4' }), 'mp4');
                 for (let i = 0; i < totalFrames; i++) ffmpeg.FS('unlink', `f-${i.toString().padStart(6, '0')}.jpg`);
-                ffmpeg.FS('unlink','a.mp3'); ffmpeg.FS('unlink','o.mp4');
+                ffmpeg.FS('unlink', 'a.mp3'); ffmpeg.FS('unlink', 'o.mp4');
                 loading.style.display = 'none'; showNotification("Thành công!");
             } catch (err) {
                 if (err.message === "CANCELLED") throw err;
@@ -234,12 +234,12 @@ async function startVideoExport() {
             // ==========================================
             // CHẾ ĐỘ MỚI: XUẤT WEBM REALTIME - CỰC NHANH
             // ==========================================
-            const chunks = []; 
+            const chunks = [];
             const stream = canvas.captureStream(fps);
             const destination = audioCtx.createMediaStreamDestination();
-            const source = audioCtx.createBufferSource(); 
+            const source = audioCtx.createBufferSource();
             source.buffer = audioBuffer;
-            source.connect(destination); 
+            source.connect(destination);
             stream.addTrack(destination.stream.getAudioTracks()[0]);
 
             // Dùng VP8 hoặc VP9 tùy trình duyệt
@@ -252,17 +252,60 @@ async function startVideoExport() {
 
             const recorder = new MediaRecorder(stream, { mimeType: mimeType, videoBitsPerSecond: 8000000 });
             recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
-            recorder.onstop = () => {
-                if(!isExportCancelled) {
+            recorder.onstop = async () => {
+                if (isExportCancelled) return;
+
+                loading.style.display = 'flex';
+                statusText.textContent = "Đang chuyển đổi sang MP4 (Vui lòng đợi 1-2 phút)...";
+                progressFill.style.width = '100%'; // Full thanh tiến trình
+
+                try {
+                    // Tạo blob từ video WebM vừa ghi xong
+                    const webmBlob = new Blob(chunks, { type: mimeType });
+                    const webmBuffer = await webmBlob.arrayBuffer();
+
+                    // Load FFmpeg nếu chưa load
+                    if (!ffmpeg) {
+                        ffmpeg = createFFmpeg({ log: false });
+                        await ffmpeg.load();
+                    }
+
+                    // Ghi file webm tạm vào bộ nhớ FFmpeg
+                    ffmpeg.FS('writeFile', 'temp.webm', new Uint8Array(webmBuffer));
+
+                    // Dùng FFmpeg convert WebM sang MP4 (Chuẩn H.264 và AAC để CapCut/iPhone nhận 100%)
+                    // Lệnh -preset ultrafast giúp quá trình convert diễn ra nhanh nhất có thể
+                    await ffmpeg.run(
+                        '-i', 'temp.webm',
+                        '-c:v', 'libx264',
+                        '-preset', 'ultrafast',
+                        '-pix_fmt', 'yuv420p',
+                        '-c:a', 'aac',
+                        'output.mp4'
+                    );
+
+                    // Đọc file MP4 đã convert và tải về
+                    const mp4Data = ffmpeg.FS('readFile', 'output.mp4');
+                    downloadBlob(new Blob([mp4Data.buffer], { type: 'video/mp4' }), 'mp4');
+
+                    // Dọn dẹp RAM
+                    ffmpeg.FS('unlink', 'temp.webm');
+                    ffmpeg.FS('unlink', 'output.mp4');
+
+                    showNotification("Đã xuất thành công file MP4!");
+                } catch (err) {
+                    console.error("Lỗi convert MP4:", err);
+                    // Nếu lỗi convert, cho tải luôn file WebM làm phương án dự phòng
                     downloadBlob(new Blob(chunks, { type: mimeType }), 'webm');
-                    showNotification("Xuất video thành công!");
+                    showNotification("Không thể tạo MP4, đã tải video WebM gốc.");
                 }
+
                 loading.style.display = 'none';
             };
 
-            recorder.start(1000); 
+            recorder.start(1000);
             source.start(0); // Phát nhạc ẩn
-            
+
             let frame = 0;
             let startTime = audioCtx.currentTime;
 
@@ -271,22 +314,22 @@ async function startVideoExport() {
                     recorder.stop(); source.stop();
                     return;
                 }
-                
+
                 // Đồng bộ hóa frame với thời gian thực của AudioContext
                 let currentTime = audioCtx.currentTime - startTime;
                 frame = Math.floor(currentTime * fps);
 
-                if (currentTime >= audioBuffer.duration || frame >= totalFrames) { 
-                    recorder.stop(); source.stop(); 
-                    return; 
+                if (currentTime >= audioBuffer.duration || frame >= totalFrames) {
+                    recorder.stop(); source.stop();
+                    return;
                 }
 
                 await drawFrame(ctx, frame, fps, width, height, img, dominantColor, bassData, audioBuffer.duration);
-                
+
                 let percent = (currentTime / audioBuffer.duration) * 100;
                 progressFill.style.width = `${percent}%`;
                 statusText.textContent = `Đang ghi hình trực tiếp... ${Math.round(percent)}%`;
-                
+
                 requestAnimationFrame(loop);
             };
             loop();
@@ -299,7 +342,7 @@ async function startVideoExport() {
             console.error(e);
             statusText.textContent = "Đã xảy ra lỗi!";
         }
-        setTimeout(() => loading.style.display = 'none', 3000); 
+        setTimeout(() => loading.style.display = 'none', 3000);
     }
 }
 
@@ -310,12 +353,12 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
 
     // Background (Tối ưu: Xóa shadowBlur rác từ frame trước)
     ctx.shadowBlur = 0;
-    ctx.fillStyle = dominantColor; 
+    ctx.fillStyle = dominantColor;
     ctx.fillRect(0, 0, width, height);
     const grd = ctx.createLinearGradient(0, 0, 0, height);
-    grd.addColorStop(0, "rgba(0,0,0,0.2)"); 
+    grd.addColorStop(0, "rgba(0,0,0,0.2)");
     grd.addColorStop(1, '#121212');
-    ctx.fillStyle = grd; 
+    ctx.fillStyle = grd;
     ctx.fillRect(0, 0, width, height);
 
     // --- HIỆU ỨNG VÒNG TRÒN REMIX (ĐÃ TỐI ƯU HIỆU NĂNG) ---
@@ -323,40 +366,40 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     const artSize = rawArtSize * pulse;
     const cx = width / 2;
     const cy = height * 0.4;
-    
+
     ctx.save();
     ctx.translate(cx, cy);
 
     // Wave Visualizer (Giảm xuống 80 cột cho nét và mượt hơn)
     const numBars = 80;
-    const radius = (rawArtSize/2 * pulse) + 8;
-    
+    const radius = (rawArtSize / 2 * pulse) + 8;
+
     for (let j = 0; j < numBars; j++) {
         const MathPI2 = Math.PI * 2;
-        const angle = (j / numBars) * MathPI2 + (Math.PI / 2); 
-        const symIndex = j < numBars/2 ? j : numBars - j; // Max của symIndex giờ là 40
-        
+        const angle = (j / numBars) * MathPI2 + (Math.PI / 2);
+        const symIndex = j < numBars / 2 ? j : numBars - j; // Max của symIndex giờ là 40
+
         let freqReact = 0;
         // Chia lại tỷ lệ do tổng số cột rút xuống còn 80
         if (symIndex < 10) {
-            freqReact = bassValue * (1 - symIndex/10) * 1.8; 
+            freqReact = bassValue * (1 - symIndex / 10) * 1.8;
         } else if (symIndex < 25) {
-            freqReact = bassValue * (Math.sin(symIndex*0.5 + time*8)*0.5 + 0.5) * 0.9; 
+            freqReact = bassValue * (Math.sin(symIndex * 0.5 + time * 8) * 0.5 + 0.5) * 0.9;
         } else {
-            freqReact = bassValue * (Math.cos(symIndex*0.8 - time*12)*0.5 + 0.5) * 0.6;
+            freqReact = bassValue * (Math.cos(symIndex * 0.8 - time * 12) * 0.5 + 0.5) * 0.6;
         }
-        
+
         const noise = Math.sin(symIndex * 0.6 + time * 10) * 0.5 + 0.5;
         const noise2 = Math.cos(symIndex * 0.3 - time * 15) * 0.5 + 0.5;
         let barHeight = 8 + (noise * noise2 * 50 * pulse) + (freqReact * 140);
-        
+
         ctx.save();
         ctx.rotate(angle);
-        ctx.translate(radius, 0); 
-        
+        ctx.translate(radius, 0);
+
         const hue = ((time * 100) + symIndex * 6) % 360; // Tăng bước màu lên 6 cho đẹp
         ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
-        
+
         // TỐI ƯU CỰC MẠNH: Chỉ bật đổ bóng sáng khi Bass đập để cứu CPU/RAM
         if (bassValue > 0.5) {
             ctx.shadowBlur = 8; // Đã giảm từ 15 -> 8
@@ -364,7 +407,7 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
         } else {
             ctx.shadowBlur = 0;
         }
-        
+
         ctx.beginPath();
         if (ctx.roundRect) {
             ctx.roundRect(0, -3, barHeight, 6, 3);
@@ -374,14 +417,14 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
         ctx.fill();
         ctx.restore();
     }
-    
+
     // Viền trắng mảnh sát vòng tròn
     ctx.lineWidth = 4;
     ctx.strokeStyle = 'white';
     ctx.shadowBlur = 10; // Đã giảm từ 20 -> 10
     ctx.shadowColor = 'white';
     ctx.beginPath();
-    ctx.arc(0, 0, (rawArtSize/2 * pulse), 0, Math.PI * 2);
+    ctx.arc(0, 0, (rawArtSize / 2 * pulse), 0, Math.PI * 2);
     ctx.stroke();
     ctx.restore();
 
@@ -391,45 +434,45 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     // Cắt ảnh bìa TRÒN
     ctx.save();
     ctx.beginPath();
-    ctx.arc(cx, cy, rawArtSize/2 * pulse, 0, Math.PI * 2);
+    ctx.arc(cx, cy, rawArtSize / 2 * pulse, 0, Math.PI * 2);
     ctx.clip();
-    ctx.drawImage(img, cx - (artSize/2), cy - (artSize/2), artSize, artSize);
+    ctx.drawImage(img, cx - (artSize / 2), cy - (artSize / 2), artSize, artSize);
     ctx.restore();
 
     // Info Text
     ctx.fillStyle = "white"; ctx.textAlign = "center";
     ctx.font = `bold ${width * 0.052}px Inter, sans-serif`;
-    const titleY = height * 0.75; 
-    
+    const titleY = height * 0.75;
+
     const title = currentExportSong.title;
     const titleWidth = ctx.measureText(title).width;
     if (titleWidth > width * 0.8) {
         const offset = (time * 80) % (titleWidth + 200);
-        ctx.save(); ctx.beginPath(); ctx.rect(width*0.1, titleY-60, width*0.8, 120); ctx.clip();
-        ctx.fillText(title, (width/2) + 200 - offset, titleY); ctx.restore();
+        ctx.save(); ctx.beginPath(); ctx.rect(width * 0.1, titleY - 60, width * 0.8, 120); ctx.clip();
+        ctx.fillText(title, (width / 2) + 200 - offset, titleY); ctx.restore();
     } else {
-        ctx.fillText(title, width/2, titleY);
+        ctx.fillText(title, width / 2, titleY);
     }
 
     ctx.font = `${width * 0.038}px Inter, sans-serif`; ctx.fillStyle = "#b3b3b3";
-    ctx.fillText(currentExportSong.artistData, width/2, titleY + width*0.06);
+    ctx.fillText(currentExportSong.artistData, width / 2, titleY + width * 0.06);
 
     // Progress Line
     const barY = height * 0.88; const barW = width * 0.85;
-    ctx.fillStyle = "#535353"; ctx.fillRect((width-barW)/2, barY, barW, 6);
-    ctx.fillStyle = "white"; ctx.fillRect((width-barW)/2, barY, barW * (time/duration), 6);
-    
+    ctx.fillStyle = "#535353"; ctx.fillRect((width - barW) / 2, barY, barW, 6);
+    ctx.fillStyle = "white"; ctx.fillRect((width - barW) / 2, barY, barW * (time / duration), 6);
+
     ctx.beginPath();
-    ctx.arc(((width-barW)/2) + (barW * (time/duration)), barY + 3, 10, 0, Math.PI*2);
+    ctx.arc(((width - barW) / 2) + (barW * (time / duration)), barY + 3, 10, 0, Math.PI * 2);
     ctx.fillStyle = "white"; ctx.fill();
 
     // Time texts
     ctx.font = `bold ${width * 0.030}px Inter, sans-serif`;
     ctx.fillStyle = "#b3b3b3";
     ctx.textAlign = "left";
-    ctx.fillText(formatTime(time), (width-barW)/2, barY - 15);
+    ctx.fillText(formatTime(time), (width - barW) / 2, barY - 15);
     ctx.textAlign = "right";
-    ctx.fillText(formatTime(duration), (width-barW)/2 + barW, barY - 15);
+    ctx.fillText(formatTime(duration), (width - barW) / 2 + barW, barY - 15);
 }
 
 function downloadBlob(blob, ext) {
