@@ -1,22 +1,22 @@
 /**
  * video-exporter.js
- * Phiên bản Remix TỐI ƯU HIỆU NĂNG: Render siêu tốc, giảm tải CPU/RAM, wave 80 cột.
+ * Phiên bản Remix TỐI ƯU HIỆU NĂNG + FIX LỖI CHUYỂN TAB & MÁY YẾU
  */
 
 const { createFFmpeg, fetchFile } = typeof FFmpeg !== 'undefined' ? FFmpeg : { createFFmpeg: null, fetchFile: null };
 let ffmpeg = null;
 
-// ÉP MẶC ĐỊNH DÙNG WEBM (MediaRecorder) ĐỂ XUẤT SIÊU NHANH BẰNG PHẦN CỨNG
 let useWebMFallback = true;
 let isExportCancelled = false;
 
+// ĐÃ FIX: Sửa style của thẻ canvas ở dòng cuối cùng
 const videoExportModalHTML = `
 <div id="video-export-modal" class="modal-overlay" style="display:none;">
     <div class="modal-content video-export-content">
         <button id="close-export-modal" class="close-btn">&times;</button>
         <h2>Xuất Video Chia Sẻ</h2>
         <div id="fallback-notice" style="background: #e3f2fd; color: #0277bd; padding: 12px; border-radius: 8px; font-size: 0.85em; margin-bottom: 15px; border-left: 4px solid #03a9f4;">
-            ⚡ Video sẽ được ghi hình trực tiếp (Thời gian xuất = Thời lượng bài hát). Quá trình render dùng phần cứng nên sẽ rất mượt và nhẹ máy!
+            ⚡ Video sẽ được ghi hình trực tiếp. Quá trình render dùng phần cứng nên sẽ mượt và nhẹ máy! Có thể chuyển tab khác thoải mái.
         </div>
         
         <div class="export-preview-container">
@@ -72,7 +72,8 @@ const videoExportModalHTML = `
         </div>
     </div>
 </div>
-<canvas id="export-canvas" style="display:none;"></canvas>
+<!-- ĐÃ FIX: Để position fixed tàng hình thay vì display none để tránh trình duyệt dọn rác canvas -->
+<canvas id="export-canvas" style="position: fixed; top: -9999px; left: -9999px; opacity: 0; pointer-events: none; z-index: -1;"></canvas>
 `;
 
 let currentExportSong = null;
@@ -200,7 +201,7 @@ async function startVideoExport() {
         const dominantColor = await getDominantColor(currentExportSong.artUrl);
 
         if (!useWebMFallback) {
-            // Chế độ FFmpeg cũ (Rất chậm, giữ lại làm dự phòng)
+            // Chế độ FFmpeg cũ giữ lại dự phòng
             try {
                 if (!ffmpeg) { ffmpeg = createFFmpeg({ log: false }); await ffmpeg.load(); }
                 if (isExportCancelled) throw new Error("CANCELLED");
@@ -232,7 +233,7 @@ async function startVideoExport() {
             }
         } else {
             // ==========================================
-            // CHẾ ĐỘ MỚI: XUẤT WEBM REALTIME - CỰC NHANH
+            // CHẾ ĐỘ MỚI: XUẤT WEBM REALTIME - FIX CHUYỂN TAB
             // ==========================================
             const chunks = [];
             const stream = canvas.captureStream(fps);
@@ -242,7 +243,6 @@ async function startVideoExport() {
             source.connect(destination);
             stream.addTrack(destination.stream.getAudioTracks()[0]);
 
-            // Dùng VP8 hoặc VP9 tùy trình duyệt
             let mimeType = 'video/webm';
             if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
                 mimeType = 'video/webm; codecs=vp9';
@@ -257,24 +257,18 @@ async function startVideoExport() {
 
                 loading.style.display = 'flex';
                 statusText.textContent = "Đang chuyển đổi sang MP4 (Vui lòng đợi 1-2 phút)...";
-                progressFill.style.width = '100%'; // Full thanh tiến trình
+                progressFill.style.width = '100%';
 
                 try {
-                    // Tạo blob từ video WebM vừa ghi xong
                     const webmBlob = new Blob(chunks, { type: mimeType });
                     const webmBuffer = await webmBlob.arrayBuffer();
 
-                    // Load FFmpeg nếu chưa load
                     if (!ffmpeg) {
                         ffmpeg = createFFmpeg({ log: false });
                         await ffmpeg.load();
                     }
 
-                    // Ghi file webm tạm vào bộ nhớ FFmpeg
                     ffmpeg.FS('writeFile', 'temp.webm', new Uint8Array(webmBuffer));
-
-                    // Dùng FFmpeg convert WebM sang MP4 (Chuẩn H.264 và AAC để CapCut/iPhone nhận 100%)
-                    // Lệnh -preset ultrafast giúp quá trình convert diễn ra nhanh nhất có thể
                     await ffmpeg.run(
                         '-i', 'temp.webm',
                         '-c:v', 'libx264',
@@ -284,18 +278,15 @@ async function startVideoExport() {
                         'output.mp4'
                     );
 
-                    // Đọc file MP4 đã convert và tải về
                     const mp4Data = ffmpeg.FS('readFile', 'output.mp4');
                     downloadBlob(new Blob([mp4Data.buffer], { type: 'video/mp4' }), 'mp4');
 
-                    // Dọn dẹp RAM
                     ffmpeg.FS('unlink', 'temp.webm');
                     ffmpeg.FS('unlink', 'output.mp4');
 
                     showNotification("Đã xuất thành công file MP4!");
                 } catch (err) {
                     console.error("Lỗi convert MP4:", err);
-                    // Nếu lỗi convert, cho tải luôn file WebM làm phương án dự phòng
                     downloadBlob(new Blob(chunks, { type: mimeType }), 'webm');
                     showNotification("Không thể tạo MP4, đã tải video WebM gốc.");
                 }
@@ -304,35 +295,60 @@ async function startVideoExport() {
             };
 
             recorder.start(1000);
-            source.start(0); // Phát nhạc ẩn
+            source.start(0);
 
             let frame = 0;
             let startTime = audioCtx.currentTime;
 
-            const loop = async () => {
+            // --- WEB WORKER HACK: ÉP RENDER KHI CHUYỂN TAB ---
+            const workerCode = `
+                let timer = null;
+                self.onmessage = function(e) {
+                    if (e.data === 'start') {
+                        // Tick 30 lần 1 giây
+                        timer = setInterval(() => postMessage('tick'), 1000 / 30); 
+                    } else if (e.data === 'stop') {
+                        clearInterval(timer);
+                    }
+                };
+            `;
+            const blob = new Blob([workerCode], { type: 'application/javascript' });
+            const timerWorker = new Worker(URL.createObjectURL(blob));
+
+            let isDrawing = false; // Cờ bảo vệ RAM máy yếu
+
+            timerWorker.onmessage = async () => {
                 if (isExportCancelled) {
-                    recorder.stop(); source.stop();
+                    recorder.stop(); source.stop(); timerWorker.postMessage('stop');
                     return;
                 }
 
-                // Đồng bộ hóa frame với thời gian thực của AudioContext
+                // Nếu máy yếu vẽ không kịp, bỏ qua frame này để tránh treo máy
+                if (isDrawing) return; 
+                isDrawing = true;
+
                 let currentTime = audioCtx.currentTime - startTime;
                 frame = Math.floor(currentTime * fps);
 
                 if (currentTime >= audioBuffer.duration || frame >= totalFrames) {
-                    recorder.stop(); source.stop();
+                    recorder.stop(); source.stop(); timerWorker.postMessage('stop');
                     return;
                 }
 
+                // Vẽ frame
                 await drawFrame(ctx, frame, fps, width, height, img, dominantColor, bassData, audioBuffer.duration);
 
-                let percent = (currentTime / audioBuffer.duration) * 100;
-                progressFill.style.width = `${percent}%`;
-                statusText.textContent = `Đang ghi hình trực tiếp... ${Math.round(percent)}%`;
-
-                requestAnimationFrame(loop);
+                // Giảm tải DOM: Chỉ update UI tiến trình mỗi 10 frame (3 lần/giây)
+                if (frame % 10 === 0) {
+                    let percent = (currentTime / audioBuffer.duration) * 100;
+                    progressFill.style.width = `${percent}%`;
+                    statusText.textContent = `Đang ghi hình trực tiếp... ${Math.round(percent)}%`;
+                }
+                
+                isDrawing = false; // Mở khóa vẽ frame tiếp theo
             };
-            loop();
+
+            timerWorker.postMessage('start'); // Khởi động Web Worker
         }
     } catch (e) {
         if (e.message === "CANCELLED") {
@@ -351,7 +367,6 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     const bassValue = bassData[Math.floor(time * 30)] || 0;
     const pulse = 1 + (bassValue * 0.15);
 
-    // Background (Tối ưu: Xóa shadowBlur rác từ frame trước)
     ctx.shadowBlur = 0;
     ctx.fillStyle = dominantColor;
     ctx.fillRect(0, 0, width, height);
@@ -361,7 +376,6 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, width, height);
 
-    // --- HIỆU ỨNG VÒNG TRÒN REMIX (ĐÃ TỐI ƯU HIỆU NĂNG) ---
     const rawArtSize = width * 0.7;
     const artSize = rawArtSize * pulse;
     const cx = width / 2;
@@ -370,17 +384,15 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     ctx.save();
     ctx.translate(cx, cy);
 
-    // Wave Visualizer (Giảm xuống 80 cột cho nét và mượt hơn)
     const numBars = 80;
     const radius = (rawArtSize / 2 * pulse) + 8;
 
     for (let j = 0; j < numBars; j++) {
         const MathPI2 = Math.PI * 2;
         const angle = (j / numBars) * MathPI2 + (Math.PI / 2);
-        const symIndex = j < numBars / 2 ? j : numBars - j; // Max của symIndex giờ là 40
+        const symIndex = j < numBars / 2 ? j : numBars - j; 
 
         let freqReact = 0;
-        // Chia lại tỷ lệ do tổng số cột rút xuống còn 80
         if (symIndex < 10) {
             freqReact = bassValue * (1 - symIndex / 10) * 1.8;
         } else if (symIndex < 25) {
@@ -397,12 +409,11 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
         ctx.rotate(angle);
         ctx.translate(radius, 0);
 
-        const hue = ((time * 100) + symIndex * 6) % 360; // Tăng bước màu lên 6 cho đẹp
+        const hue = ((time * 100) + symIndex * 6) % 360; 
         ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
 
-        // TỐI ƯU CỰC MẠNH: Chỉ bật đổ bóng sáng khi Bass đập để cứu CPU/RAM
         if (bassValue > 0.5) {
-            ctx.shadowBlur = 8; // Đã giảm từ 15 -> 8
+            ctx.shadowBlur = 8; 
             ctx.shadowColor = ctx.fillStyle;
         } else {
             ctx.shadowBlur = 0;
@@ -418,20 +429,17 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
         ctx.restore();
     }
 
-    // Viền trắng mảnh sát vòng tròn
     ctx.lineWidth = 4;
     ctx.strokeStyle = 'white';
-    ctx.shadowBlur = 10; // Đã giảm từ 20 -> 10
+    ctx.shadowBlur = 10; 
     ctx.shadowColor = 'white';
     ctx.beginPath();
     ctx.arc(0, 0, (rawArtSize / 2 * pulse), 0, Math.PI * 2);
     ctx.stroke();
     ctx.restore();
 
-    // Reset shadowBlur trước khi vẽ chữ và ảnh
     ctx.shadowBlur = 0;
 
-    // Cắt ảnh bìa TRÒN
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, rawArtSize / 2 * pulse, 0, Math.PI * 2);
@@ -439,7 +447,6 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     ctx.drawImage(img, cx - (artSize / 2), cy - (artSize / 2), artSize, artSize);
     ctx.restore();
 
-    // Info Text
     ctx.fillStyle = "white"; ctx.textAlign = "center";
     ctx.font = `bold ${width * 0.052}px Inter, sans-serif`;
     const titleY = height * 0.75;
@@ -457,7 +464,6 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     ctx.font = `${width * 0.038}px Inter, sans-serif`; ctx.fillStyle = "#b3b3b3";
     ctx.fillText(currentExportSong.artistData, width / 2, titleY + width * 0.06);
 
-    // Progress Line
     const barY = height * 0.88; const barW = width * 0.85;
     ctx.fillStyle = "#535353"; ctx.fillRect((width - barW) / 2, barY, barW, 6);
     ctx.fillStyle = "white"; ctx.fillRect((width - barW) / 2, barY, barW * (time / duration), 6);
@@ -466,7 +472,6 @@ async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassDat
     ctx.arc(((width - barW) / 2) + (barW * (time / duration)), barY + 3, 10, 0, Math.PI * 2);
     ctx.fillStyle = "white"; ctx.fill();
 
-    // Time texts
     ctx.font = `bold ${width * 0.030}px Inter, sans-serif`;
     ctx.fillStyle = "#b3b3b3";
     ctx.textAlign = "left";
@@ -481,11 +486,10 @@ function downloadBlob(blob, ext) {
     a.download = `${currentExportSong.title}.${ext}`; a.click();
 }
 
-// Hàm được tối ưu lại (Sử dụng arrayBuffer thay vì FileReader)
 async function canvasToUint8Array(canvas) {
     return new Promise(resolve => {
         canvas.toBlob(blob => {
             blob.arrayBuffer().then(buffer => resolve(new Uint8Array(buffer)));
-        }, 'image/jpeg', 0.7); // Nén nhẹ xuống 0.7 để xuất mượt hơn khi dùng FFmpeg fallback
+        }, 'image/jpeg', 0.7); 
     });
 }
