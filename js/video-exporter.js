@@ -1,6 +1,6 @@
 /**
  * video-exporter.js
- * Phiên bản Remix TỐI ƯU HIỆU NĂNG + FIX LỖI CHUYỂN TAB & MÁY YẾU
+ * Phiên bản V3 FINAL: Tối ưu Web Worker, Fix Mobile Rendering (Opacity + Wake Lock + Auto 720p/24fps)
  */
 
 const { createFFmpeg, fetchFile } = typeof FFmpeg !== 'undefined' ? FFmpeg : { createFFmpeg: null, fetchFile: null };
@@ -9,14 +9,14 @@ let ffmpeg = null;
 let useWebMFallback = true;
 let isExportCancelled = false;
 
-// ĐÃ FIX: Sửa style của thẻ canvas ở dòng cuối cùng
+// ĐÃ FIX: Sửa thẻ canvas ở cuối HTML thành opacity: 0.01 và bọc toàn màn hình để Mobile chịu render
 const videoExportModalHTML = `
 <div id="video-export-modal" class="modal-overlay" style="display:none;">
     <div class="modal-content video-export-content">
         <button id="close-export-modal" class="close-btn">&times;</button>
         <h2>Xuất Video Chia Sẻ</h2>
         <div id="fallback-notice" style="background: #e3f2fd; color: #0277bd; padding: 12px; border-radius: 8px; font-size: 0.85em; margin-bottom: 15px; border-left: 4px solid #03a9f4;">
-            ⚡ Video sẽ được ghi hình trực tiếp. Quá trình render dùng phần cứng nên sẽ mượt và nhẹ máy! Có thể chuyển tab khác thoải mái.
+            ⚡ Video đang được kết xuất trực tiếp bằng phần cứng máy của bạn. Tốc độ phụ thuộc vào cấu hình thiết bị!
         </div>
         
         <div class="export-preview-container">
@@ -72,8 +72,8 @@ const videoExportModalHTML = `
         </div>
     </div>
 </div>
-<!-- ĐÃ FIX: Để position fixed tàng hình thay vì display none để tránh trình duyệt dọn rác canvas -->
-<canvas id="export-canvas" style="position: fixed; top: -9999px; left: -9999px; opacity: 0; pointer-events: none; z-index: -1;"></canvas>
+<!-- ĐÃ FIX: Hack Mobile Canvas Rendering -->
+<canvas id="export-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; opacity: 0.01; pointer-events: none; z-index: -999;"></canvas>
 `;
 
 let currentExportSong = null;
@@ -172,9 +172,29 @@ async function startVideoExport() {
     const loading = document.getElementById('export-loading-overlay');
     const statusText = document.getElementById('export-status-text');
     const progressFill = document.getElementById('export-progress-fill');
-    const res = parseInt(document.getElementById('export-resolution').value);
+    
+    // --- ĐÃ FIX: NHẬN DIỆN MOBILE VÀ AUTO DOWNGRADE ---
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    let res = parseInt(document.getElementById('export-resolution').value);
+    
+    if (isMobile) {
+        res = 720; // Ép xuống 720p an toàn cho RAM Mobile
+        document.getElementById('export-warning-text').innerText = "📱 CẢNH BÁO MOBILE: Vui lòng KHÔNG tắt màn hình, KHÔNG vuốt sang ứng dụng khác lúc này để tránh lỗi video!";
+    } else {
+        document.getElementById('export-warning-text').innerText = "⚠️ Đang ghi hình trực tiếp... Có thể mở tab khác nhưng không được đóng tab này!";
+    }
 
     loading.style.display = 'flex'; statusText.textContent = "Đang tải âm thanh..."; progressFill.style.width = '0%';
+
+    // --- ĐÃ FIX: XIN QUYỀN GIỮ SÁNG MÀN HÌNH (WAKE LOCK) ---
+    let wakeLock = null;
+    try {
+        if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+        }
+    } catch (err) {
+        console.log("Trình duyệt không hỗ trợ Wake Lock", err);
+    }
 
     try {
         const response = await fetch(currentExportSong.audioSrc);
@@ -190,12 +210,15 @@ async function startVideoExport() {
         if (isExportCancelled) throw new Error("CANCELLED");
 
         const canvas = document.getElementById('export-canvas');
-        const ctx = canvas.getContext('2d', { alpha: false }); // Tối ưu phần cứng cho Canvas
+        const ctx = canvas.getContext('2d', { alpha: false });
         const width = (res === 1080) ? 1080 : 720;
         const height = (res === 1080) ? 1920 : 1280;
         canvas.width = width; canvas.height = height;
 
-        const fps = 30; const totalFrames = Math.floor(audioBuffer.duration * fps);
+        // Giảm FPS xuống 24 nếu là Mobile để cực kỳ an toàn
+        const fps = isMobile ? 24 : 30; 
+        const totalFrames = Math.floor(audioBuffer.duration * fps);
+        
         const img = new Image(); img.crossOrigin = "Anonymous"; img.src = currentExportSong.artUrl;
         await new Promise(r => img.onload = r);
         const dominantColor = await getDominantColor(currentExportSong.artUrl);
@@ -220,20 +243,21 @@ async function startVideoExport() {
                 if (isExportCancelled) throw new Error("CANCELLED");
                 statusText.textContent = "Gộp audio và video...";
                 ffmpeg.FS('writeFile', 'a.mp3', new Uint8Array(arrayBuffer));
-                await ffmpeg.run('-framerate', '30', '-i', 'f-%06d.jpg', '-i', 'a.mp3', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', 'o.mp4');
+                await ffmpeg.run('-framerate', fps.toString(), '-i', 'f-%06d.jpg', '-i', 'a.mp3', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-shortest', 'o.mp4');
                 const data = ffmpeg.FS('readFile', 'o.mp4');
                 downloadBlob(new Blob([data.buffer], { type: 'video/mp4' }), 'mp4');
                 for (let i = 0; i < totalFrames; i++) ffmpeg.FS('unlink', `f-${i.toString().padStart(6, '0')}.jpg`);
                 ffmpeg.FS('unlink', 'a.mp3'); ffmpeg.FS('unlink', 'o.mp4');
+                
+                if (wakeLock !== null) wakeLock.release().then(() => wakeLock = null);
                 loading.style.display = 'none'; showNotification("Thành công!");
             } catch (err) {
                 if (err.message === "CANCELLED") throw err;
-                console.warn("Lỗi FFmpeg, tự động chuyển sang WebM:", err);
                 useWebMFallback = true; return startVideoExport();
             }
         } else {
             // ==========================================
-            // CHẾ ĐỘ MỚI: XUẤT WEBM REALTIME - FIX CHUYỂN TAB
+            // CHẾ ĐỘ XUẤT WEBM REALTIME CHO MOBILE VÀ PC
             // ==========================================
             const chunks = [];
             const stream = canvas.captureStream(fps);
@@ -250,47 +274,51 @@ async function startVideoExport() {
                 mimeType = 'video/webm; codecs=vp8';
             }
 
-            const recorder = new MediaRecorder(stream, { mimeType: mimeType, videoBitsPerSecond: 8000000 });
+            // Tối ưu bitrate cho Mobile (khoảng 4-5Mbps là đẹp cho 720p)
+            const bitrate = isMobile ? 4500000 : 8000000;
+            const recorder = new MediaRecorder(stream, { mimeType: mimeType, videoBitsPerSecond: bitrate });
+            
             recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+            
             recorder.onstop = async () => {
-                if (isExportCancelled) return;
+                if (isExportCancelled) {
+                    if (wakeLock !== null) wakeLock.release().then(() => wakeLock = null);
+                    return;
+                }
 
                 loading.style.display = 'flex';
-                statusText.textContent = "Đang chuyển đổi sang MP4 (Vui lòng đợi 1-2 phút)...";
+                statusText.textContent = isMobile ? "Đang gộp file Video (Đừng thoát app)..." : "Đang chuyển đổi sang MP4...";
                 progressFill.style.width = '100%';
 
                 try {
                     const webmBlob = new Blob(chunks, { type: mimeType });
-                    const webmBuffer = await webmBlob.arrayBuffer();
-
-                    if (!ffmpeg) {
-                        ffmpeg = createFFmpeg({ log: false });
-                        await ffmpeg.load();
+                    
+                    // Nếu là Mobile, cho tải thẳng WebM về vì FFmpeg.wasm chạy trên Mobile rất hay bị Crash Out of Memory
+                    if (isMobile) {
+                        downloadBlob(webmBlob, 'webm');
+                        showNotification("Đã tải Video (Định dạng WebM tối ưu cho Android)");
+                    } else {
+                        // Desktop: Convert sang MP4 cho chuẩn xác
+                        const webmBuffer = await webmBlob.arrayBuffer();
+                        if (!ffmpeg) {
+                            ffmpeg = createFFmpeg({ log: false });
+                            await ffmpeg.load();
+                        }
+                        ffmpeg.FS('writeFile', 'temp.webm', new Uint8Array(webmBuffer));
+                        await ffmpeg.run('-i', 'temp.webm', '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', 'output.mp4');
+                        const mp4Data = ffmpeg.FS('readFile', 'output.mp4');
+                        downloadBlob(new Blob([mp4Data.buffer], { type: 'video/mp4' }), 'mp4');
+                        ffmpeg.FS('unlink', 'temp.webm');
+                        ffmpeg.FS('unlink', 'output.mp4');
+                        showNotification("Đã xuất thành công file MP4!");
                     }
-
-                    ffmpeg.FS('writeFile', 'temp.webm', new Uint8Array(webmBuffer));
-                    await ffmpeg.run(
-                        '-i', 'temp.webm',
-                        '-c:v', 'libx264',
-                        '-preset', 'ultrafast',
-                        '-pix_fmt', 'yuv420p',
-                        '-c:a', 'aac',
-                        'output.mp4'
-                    );
-
-                    const mp4Data = ffmpeg.FS('readFile', 'output.mp4');
-                    downloadBlob(new Blob([mp4Data.buffer], { type: 'video/mp4' }), 'mp4');
-
-                    ffmpeg.FS('unlink', 'temp.webm');
-                    ffmpeg.FS('unlink', 'output.mp4');
-
-                    showNotification("Đã xuất thành công file MP4!");
                 } catch (err) {
-                    console.error("Lỗi convert MP4:", err);
+                    console.error("Lỗi xuất:", err);
                     downloadBlob(new Blob(chunks, { type: mimeType }), 'webm');
                     showNotification("Không thể tạo MP4, đã tải video WebM gốc.");
                 }
 
+                if (wakeLock !== null) wakeLock.release().then(() => wakeLock = null);
                 loading.style.display = 'none';
             };
 
@@ -304,10 +332,9 @@ async function startVideoExport() {
             const workerCode = `
                 let timer = null;
                 self.onmessage = function(e) {
-                    if (e.data === 'start') {
-                        // Tick 30 lần 1 giây
-                        timer = setInterval(() => postMessage('tick'), 1000 / 30); 
-                    } else if (e.data === 'stop') {
+                    if (e.data.cmd === 'start') {
+                        timer = setInterval(() => postMessage('tick'), 1000 / e.data.fps); 
+                    } else if (e.data.cmd === 'stop') {
                         clearInterval(timer);
                     }
                 };
@@ -319,11 +346,11 @@ async function startVideoExport() {
 
             timerWorker.onmessage = async () => {
                 if (isExportCancelled) {
-                    recorder.stop(); source.stop(); timerWorker.postMessage('stop');
+                    recorder.stop(); source.stop(); timerWorker.postMessage({cmd: 'stop'});
                     return;
                 }
 
-                // Nếu máy yếu vẽ không kịp, bỏ qua frame này để tránh treo máy
+                // Chống tràn RAM: Nếu máy đang bận rặn ra frame trước, thì bỏ qua nhịp này
                 if (isDrawing) return; 
                 isDrawing = true;
 
@@ -331,26 +358,27 @@ async function startVideoExport() {
                 frame = Math.floor(currentTime * fps);
 
                 if (currentTime >= audioBuffer.duration || frame >= totalFrames) {
-                    recorder.stop(); source.stop(); timerWorker.postMessage('stop');
+                    recorder.stop(); source.stop(); timerWorker.postMessage({cmd: 'stop'});
                     return;
                 }
 
-                // Vẽ frame
+                // Vẽ đồ họa
                 await drawFrame(ctx, frame, fps, width, height, img, dominantColor, bassData, audioBuffer.duration);
 
-                // Giảm tải DOM: Chỉ update UI tiến trình mỗi 10 frame (3 lần/giây)
-                if (frame % 10 === 0) {
+                // Giảm tải DOM: UI tiến trình chỉ update 3 lần/giây
+                if (frame % (Math.floor(fps/3)) === 0) {
                     let percent = (currentTime / audioBuffer.duration) * 100;
                     progressFill.style.width = `${percent}%`;
                     statusText.textContent = `Đang ghi hình trực tiếp... ${Math.round(percent)}%`;
                 }
                 
-                isDrawing = false; // Mở khóa vẽ frame tiếp theo
+                isDrawing = false; 
             };
 
-            timerWorker.postMessage('start'); // Khởi động Web Worker
+            timerWorker.postMessage({cmd: 'start', fps: fps}); 
         }
     } catch (e) {
+        if (wakeLock !== null) wakeLock.release().then(() => wakeLock = null);
         if (e.message === "CANCELLED") {
             statusText.textContent = "Đã hủy xuất video.";
             showNotification("Đã dừng quá trình xuất video.");
@@ -362,6 +390,7 @@ async function startVideoExport() {
     }
 }
 
+// Giữ nguyên hàm drawFrame của bạn...
 async function drawFrame(ctx, i, fps, width, height, img, dominantColor, bassData, duration) {
     const time = i / fps;
     const bassValue = bassData[Math.floor(time * 30)] || 0;

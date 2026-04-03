@@ -13,6 +13,9 @@
             "main-content"
             "player-bar";
     }
+    .right-sidebar {
+        display: none;
+    }
 
     .sidebar {
         position: fixed;

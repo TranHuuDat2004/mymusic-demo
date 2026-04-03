@@ -30,13 +30,28 @@
     background-color: #333;
 }
 
+.player-bar .song-info .text-details {
+    overflow: hidden;
+    position: relative;
+    max-width: 15vw;
+}
+
 .player-bar .song-info .text-details h4#now-playing-title {
     /* Added ID for JS */
     font-size: 0.9em;
     margin: 0 0 4px 0;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.player-bar .song-info .text-details h4#now-playing-title.marquee {
+    animation: marquee 10s linear infinite;
+    padding-right: 50px; /* Space between original and copy if we use that method, or just buffer */
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .player-bar .song-info .text-details p#now-playing-artist {
@@ -148,7 +163,11 @@
     align-items: center;
     justify-content: flex-end;
     min-width: 180px;
-    flex: 1 0 180px;
+    gap: 12px;
+}
+
+.player-bar .other-controls button#visualizer-toggle-btn.active svg {
+    color: var(--primary-color);
 }
 
 .player-bar .other-controls button {
@@ -653,6 +672,14 @@
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
+}
+
+/* Fix nút Hủy bị giãn dài ngoằng */
+#cancel-export-btn {
+    flex: none !important; /* Cấm không cho giãn theo layout cha */
+    width: fit-content !important; /* Bề ngang vừa bằng chữ */
+    min-height: 44px; /* Giữ chiều cao nút chuẩn */
+    margin-top: 30px;
 }
 
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

@@ -79,7 +79,15 @@ function playSongByIndex(index) {
     const npFsArt = document.getElementById('np-fullscreen-art');
     const likeBtn = document.getElementById('like-btn');
 
-    if (nowPlayingTitle) nowPlayingTitle.textContent = songData.title;
+    if (nowPlayingTitle) {
+        if (songData.title.length > 30) {
+            nowPlayingTitle.innerHTML = `<span>${songData.title} &nbsp;&nbsp;&nbsp; ${songData.title} &nbsp;&nbsp;&nbsp;</span>`;
+            nowPlayingTitle.classList.add('marquee');
+        } else {
+            nowPlayingTitle.textContent = songData.title;
+            nowPlayingTitle.classList.remove('marquee');
+        }
+    }
     if (nowPlayingArtist) nowPlayingArtist.textContent = songData.artistData;
     if (nowPlayingArt) nowPlayingArt.src = songData.artUrl;
     if (npFsTitle) npFsTitle.textContent = songData.title;
@@ -93,6 +101,13 @@ function playSongByIndex(index) {
     }
 
     audioPlayer.src = songData.audioSrc;
+    
+    // Khởi tạo visualizer nếu chưa có và set hình ảnh mới
+    if (typeof window.initVisualizer === 'function') {
+        window.initVisualizer(audioPlayer);
+        window.setCurrentVisualizerArt(songData.artUrl);
+    }
+    
     const playPromise = audioPlayer.play();
     if (playPromise) {
         playPromise.catch(error => {
@@ -170,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="actions">
                 <button id="like-btn" title="Thích"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-like"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg></button>
-                <button id="view-more-btn" title="Xem thêm / Tải Video"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></svg></button>
+                <button id="view-more-btn" title="Tải Video / Xuất Clip"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></button>
             </div>
 
         </div>
@@ -189,6 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
         <div class="other-controls">
+            <button id="visualizer-toggle-btn" title="Mở/Đóng Visualizer">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <rect x="3" y="10" width="3" height="10"></rect>
+                    <rect x="9" y="5" width="3" height="15"></rect>
+                    <rect x="15" y="14" width="3" height="6"></rect>
+                </svg>
+            </button>
             <button id="volume-btn"><svg viewBox="0 0 24 24" width="18" height="18" class="icon-volume"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"></path></svg></button>
             <div class="volume-bar-container"><input type="range" id="volume-bar" min="0" max="100" value="70" title="Thanh âm lượng"></div>
             <button id="toggle-bg-btn"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 6v12c3.31 0 6-2.69 6-6s-2.69-6-6-6zM5 12c0-3.87 3.13-7 7-7V3c-4.97 0-9 4.03-9 9s4.03 9 9 9v-2c-3.87 0-7-3.13-7-7z"></path></svg></button>
@@ -231,6 +253,35 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     fullscreenPlayerContainer.innerHTML = fullscreenPlayerHTML;
 
+    // C. Màn hình Visualizer Overlay
+    let visualizerOverlay = document.getElementById('visualizer-overlay');
+    if (!visualizerOverlay) {
+        visualizerOverlay = document.createElement('div');
+        visualizerOverlay.id = 'visualizer-overlay';
+        visualizerOverlay.className = 'visualizer-overlay hidden';
+        // HTML content cho visualizer
+        visualizerOverlay.innerHTML = `
+            <button id="close-visualizer-btn" title="Đóng Visualizer" style="position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5); border: none; color: #fff; cursor: pointer; font-size: 28px; z-index: 10; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; hover: background: rgba(0,0,0,0.8);">×</button>
+            <div class="visualizer-container">
+                <canvas id="visualizer-canvas"></canvas>
+            </div>
+        `;
+        const musicContainer = document.querySelector('.music-player-container');
+        if (musicContainer) {
+            musicContainer.appendChild(visualizerOverlay);
+        }
+        
+        const closeBtn = document.getElementById('close-visualizer-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                visualizerOverlay.classList.add('hidden');
+                window.userClosedVisualizer = true;
+                const visualizerToggleBtn = document.getElementById('visualizer-toggle-btn');
+                if (visualizerToggleBtn) visualizerToggleBtn.classList.remove('active');
+            });
+        }
+    }
+
     // --- 2. LẤY CÁC PHẦN TỬ DOM ---
     audioPlayer = document.getElementById('audio-player'); // Assign to global variable
     // Player Bar elements
@@ -256,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const npFsShuffleBtn = document.getElementById('np-fullscreen-shuffle-btn');
     const npFsRepeatBtn = document.getElementById('np-fullscreen-repeat-btn');
     const toggleBgBtn = document.getElementById('toggle-bg-btn');
+    const visualizerToggleBtn = document.getElementById('visualizer-toggle-btn');
 
     const tooltip = document.createElement('div');
     tooltip.className = 'custom-tooltip';
@@ -284,8 +336,9 @@ document.addEventListener('DOMContentLoaded', () => {
     addTooltip(repeatBtn, 'Lặp lại');
     addTooltip(volumeBtn, 'Âm lượng');
     addTooltip(toggleBgBtn, 'Đổi ảnh nền background');
+    addTooltip(visualizerToggleBtn, 'Mở/Đóng Visualizer');
     addTooltip(likeBtn, 'Thích');
-    addTooltip(document.getElementById('view-more-btn'), 'Xem thêm / Tải Video');
+    addTooltip(document.getElementById('view-more-btn'), 'Tải Video / Xuất Clip');
     addTooltip(progressBar, 'Thanh tiến trình');
 
     addTooltip(volumeBar, 'Thanh âm lượng');
@@ -392,6 +445,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     npCloseBtn.addEventListener('click', () => fullscreenPlayerContainer.classList.remove('active'));
 
+    if (visualizerToggleBtn) {
+        visualizerToggleBtn.addEventListener('click', () => {
+            const visualizerOverlay = document.getElementById('visualizer-overlay');
+            if (visualizerOverlay) {
+                const isHidden = visualizerOverlay.classList.toggle('hidden');
+                visualizerToggleBtn.classList.toggle('active', !isHidden);
+                // Trigger resize to update visualizer canvas size
+                setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
+            }
+        });
+    }
+
 
 
     mainPlayPauseBtn.addEventListener('click', () => {
@@ -459,10 +524,20 @@ document.addEventListener('DOMContentLoaded', () => {
     audioPlayer.addEventListener('play', () => {
         mainPlayPauseBtn.innerHTML = pauseIconSVG;
         npFsPlayPauseBtn.innerHTML = pauseIconSVG.replace('width="24" height="24"', 'width="60" height="60"');
+        
+        const visualizerOverlay = document.getElementById('visualizer-overlay');
+        if (visualizerOverlay && !window.userClosedVisualizer) {
+            visualizerOverlay.classList.remove('hidden');
+            if (visualizerToggleBtn) visualizerToggleBtn.classList.add('active');
+            setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
+        }
+        
+        if (typeof window.startVisualizer === 'function') window.startVisualizer();
     });
     audioPlayer.addEventListener('pause', () => {
         mainPlayPauseBtn.innerHTML = playIconSVG;
         npFsPlayPauseBtn.innerHTML = playIconSVG.replace('width="24" height="24"', 'width="60" height="60"');
+        if (typeof window.stopVisualizer === 'function') window.stopVisualizer();
     });
     audioPlayer.addEventListener('volumechange', () => {
         const isActive = !audioPlayer.muted && audioPlayer.volume > 0;
