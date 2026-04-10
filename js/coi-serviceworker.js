@@ -33,7 +33,13 @@ if (typeof window === "undefined") {
         const sc = document.createElement("script");
         sc.src = "js/coi-serviceworker.js";
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register(window.location.pathname + "js/coi-serviceworker.js").then(
+            let swPath = window.location.pathname;
+            if (swPath.includes('.html')) {
+                swPath = swPath.substring(0, swPath.lastIndexOf('/') + 1);
+            } else if (!swPath.endsWith('/')) {
+                swPath += '/';
+            }
+            navigator.serviceWorker.register(swPath + "js/coi-serviceworker.js").then(
                 (registration) => {
                     console.log("COI Service Worker registered", registration.scope);
                     registration.addEventListener("updatefound", () => {

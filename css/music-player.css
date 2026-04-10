@@ -14,8 +14,7 @@
     display: flex;
     align-items: center;
     min-width: 180px;
-    /* Spotify's min-width */
-    flex: 1 0 180px;
+    flex: 1; /* Match other-controls to keep middle centered */
 }
 
 .player-bar .song-info img#now-playing-art {
@@ -74,10 +73,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 2 0 auto;
-    /* Take more space but can shrink */
+    flex: 1; /* Center column */
     max-width: 722px;
-    /* Spotify's max-width */
 }
 
 .player-bar .player-controls .buttons {
@@ -163,12 +160,11 @@
     align-items: center;
     justify-content: flex-end;
     min-width: 180px;
+    flex: 1; /* Match song-info to keep middle centered */
     gap: 12px;
 }
 
-.player-bar .other-controls button#visualizer-toggle-btn.active svg {
-    color: var(--primary-color);
-}
+
 
 .player-bar .other-controls button {
     margin-left: 12px;
