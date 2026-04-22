@@ -1,0 +1,132 @@
+[
+  {
+    "category": "Vibe Lo-fi Chill",
+    "summary": "Nhịp điệu đều đặn, êm ái, hợp làm nền xuyên suốt",
+    "songs": [
+      {
+        "id": "sunset_dream",
+        "title": "Sunset Dream",
+        "artist": "Cheel",
+        "youtubeUrl": "https://www.youtube.com/watch?v=F3a37yH8d_Q",
+        "description": "Âm bass êm, nhịp chậm giúp giọng đọc của nhân vật trở nên rất rõ ràng.",
+        "tags": ["lo-fi", "chill", "background"]
+      },
+      {
+        "id": "blue_dream",
+        "title": "Blue Dream",
+        "artist": "Cheel",
+        "youtubeUrl": "https://www.youtube.com/watch?v=R9o1D0y9bO0",
+        "description": "Giai điệu êm ái, hợp làm nền cho các đoạn hướng dẫn nhẹ nhàng.",
+        "tags": ["lo-fi", "calm"]
+      },
+      {
+        "id": "soft_feeling",
+        "title": "Soft Feeling",
+        "artist": "Cheel",
+        "youtubeUrl": "https://www.youtube.com/watch?v=F3iMumJQmVg",
+        "description": "Nhẹ nhàng, không gây xao nhãng, hợp cho các đoạn hội thoại dài.",
+        "tags": ["lo-fi", "smooth"]
+      },
+      {
+        "id": "slipping_away",
+        "title": "Slipping Away",
+        "artist": "Dyalla",
+        "youtubeUrl": "https://www.youtube.com/watch?v=kYvH57-p35M",
+        "description": "Vibe chill hiện đại, phong cách Dyalla đặc trưng.",
+        "tags": ["lo-fi", "modern"]
+      },
+      {
+        "id": "puff",
+        "title": "Puff",
+        "artist": "Text Me Records / Social Work",
+        "youtubeUrl": "https://www.youtube.com/watch?v=sR3jW2-F68w",
+        "description": "Nhịp điệu ổn định, hợp cho các đoạn montage ngắn.",
+        "tags": ["lo-fi", "steady"]
+      }
+    ]
+  },
+  {
+    "category": "Vibe Tuổi thơ, Bình yên",
+    "summary": "Hợp đoạn giới thiệu game, chăm cây, sang nhà hàng xóm",
+    "songs": [
+      {
+        "id": "morning_mandolin",
+        "title": "Morning Mandolin",
+        "artist": "Chris Haugen",
+        "youtubeUrl": "https://www.youtube.com/watch?v=A1S41R-u98s",
+        "description": "Âm thanh Mandolin mộc mạc, tươi sáng cho ngày mới.",
+        "tags": ["acoustic", "morning", "peaceful"]
+      },
+      {
+        "id": "sunny_looks_good",
+        "title": "Sunny Looks Good on You",
+        "artist": "Midnight North",
+        "youtubeUrl": "https://www.youtube.com/watch?v=kYJ5oQ62V3w",
+        "description": "Cảm giác nắng ấm, tích cực và đầy hy vọng.",
+        "tags": ["acoustic", "sunny", "happy"]
+      },
+      {
+        "id": "sweet_release",
+        "title": "Sweet Release",
+        "artist": "Dan Lebowitz",
+        "youtubeUrl": "https://www.youtube.com/watch?v=3S_o8-pE-84",
+        "description": "Gợi nhớ về những kỷ niệm đẹp, nhẹ nhàng.",
+        "tags": ["acoustic", "nostalgic"]
+      },
+      {
+        "id": "spring_in_my_step",
+        "title": "Spring In My Step",
+        "artist": "Silent Partner",
+        "youtubeUrl": "https://www.youtube.com/watch?v=c4kyZvQ8--E",
+        "description": "Giai điệu cực kỳ quen thuộc và vui tươi, hợp đoạn intro game.",
+        "tags": ["happy", "playful", "intro"]
+      }
+    ]
+  },
+  {
+    "category": "Vibe Hoài niệm, Hơi deep",
+    "summary": "Hợp đoạn Zing Me đóng cửa, thanh xuân gửi lại",
+    "songs": [
+      {
+        "id": "kiss_the_sky",
+        "title": "Kiss the Sky",
+        "artist": "Aakash Gandhi",
+        "youtubeUrl": "https://www.youtube.com/watch?v=J_7W-y92qW0",
+        "description": "Piano sâu lắng, đẩy cảm xúc lên cao nhất ở những giây cuối.",
+        "tags": ["piano", "emotional", "deep"]
+      },
+      {
+        "id": "liquid_time",
+        "title": "Liquid Time",
+        "artist": "Aakash Gandhi",
+        "youtubeUrl": "https://www.youtube.com/watch?v=E_PAnW07360",
+        "description": "Giai điệu trôi chảy như thời gian, mang mác buồn.",
+        "tags": ["piano", "melancholy"]
+      },
+      {
+        "id": "wehrmut",
+        "title": "Wehrmut",
+        "artist": "Godmode",
+        "youtubeUrl": "https://www.youtube.com/watch?v=VyBQBAc1u2U",
+        "description": "Không khí trầm buồn, hoài niệm về quá khứ.",
+        "tags": ["ambient", "sad", "nostalgic"]
+      },
+      {
+        "id": "one_more_time",
+        "title": "One More Time",
+        "artist": "Aaron Kenny",
+        "youtubeUrl": "https://www.youtube.com/results?search_query=Aaron+Kenny+music",
+        "description": "Thanh xuân gửi lại, những lời chưa kịp nói.",
+        "tags": ["orchestral", "sad", "final"]
+      },
+      {
+        "id": "nightingale",
+        "title": "Nightingale",
+        "artist": "Eveningland",
+        "youtubeUrl": "https://www.youtube.com/watch?v=Xh0YyS_wK6A",
+        "description": "Giai điệu da diết, hợp cho những đoạn kết thúc video.",
+        "tags": ["electronic", "emotional"]
+      }
+    ]
+  }
+]

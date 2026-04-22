@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Library - My Music Manager</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/music-player.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .studio-category {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .studio-category h2 {
+            font-size: 1.8rem;
+            color: var(--text-color, #fff);
+            margin-bottom: 5px;
+        }
+        .studio-category p.summary {
+            color: var(--text-secondary, #b3b3b3);
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .studio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .studio-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .studio-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        .studio-card h3 {
+            margin: 0 0 5px 0;
+            color: #1DB954; /* Spotify Green for emphasis */
+        }
+        .studio-card .artist {
+            font-size: 0.9rem;
+            color: #b3b3b3;
+            margin-bottom: 15px;
+        }
+        .studio-card .description {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .studio-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .studio-card .tag {
+            background: rgba(29, 185, 84, 0.1);
+            color: #1DB954;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        .studio-card .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #1DB954;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+        .btn-link:hover {
+            opacity: 0.8;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <button class="menu-toggle-btn" aria-label="Toggle menu">☰</button>
+    
+    <div class="music-player-container">
+        <nav id="sidebar-container" class="sidebar"></nav>
+        
+        <main class="main-content">
+            <div class="library-header">
+                <h1>Studio Library</h1>
+                <p>Tổng hợp nhạc YouTube Audio Library phục vụ làm video và blog.</p>
+            </div>
+
+            <div id="studio-content">
+                <p class="loading-message">Đang tải danh sách nhạc Studio...</p>
+            </div>
+
+            <div id="footer-placeholder"></div>
+        </main>
+
+        <footer id="player-bar-container"></footer>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/sidebar.js" defer></script>
+    <script src="js/appendMainFooter.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const contentContainer = document.getElementById('studio-content');
+            
+            try {
+                const response = await fetch('data/youtube_music.json');
+                if (!response.ok) throw new Error('Không thể tải dữ liệu');
+                const data = await response.json();
+                
+                contentContainer.innerHTML = '';
+                
+                data.forEach(category => {
+                    const section = document.createElement('section');
+                    section.className = 'studio-category';
+                    
+                    section.innerHTML = `
+                        <h2>${category.category}</h2>
+                        <p class="summary">${category.summary}</p>
+                        <div class="studio-grid"></div>
+                    `;
+                    
+                    const grid = section.querySelector('.studio-grid');
+                    
+                    category.songs.forEach(song => {
+                        const card = document.createElement('div');
+                        card.className = 'studio-card';
+                        
+                        const tagsHtml = song.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                        
+                        card.innerHTML = `
+                            <div>
+                                <h3>${song.title}</h3>
+                                <div class="artist">by ${song.artist}</div>
+                                <div class="description">${song.description}</div>
+                                <div class="tags">${tagsHtml}</div>
+                            </div>
+                            <div class="actions">
+                                <a href="${song.youtubeUrl}" target="_blank" class="btn-link">Mở YouTube</a>
+                                <button class="btn-link btn-secondary" onclick="copyToClipboard('${song.youtubeUrl}')">Copy Link</button>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                    
+                    contentContainer.appendChild(section);
+                });
+                
+            } catch (error) {
+                console.error(error);
+                contentContainer.innerHTML = '<p style="color: red;">Lỗi tải dữ liệu. Vui lòng kiểm tra file youtube_music.json</p>';
+            }
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã copy link vào bộ nhớ tạm!');
+            });
+        }
+    </script>
+</body>
+
+</html>
