@@ -690,6 +690,32 @@
                 "audioSrc": "audio/Little_Love_Song.mp3",
                 "isFavorite": true,
                 "plays": "1.134.892"
+            },
+            {
+                "id": "mahiru8",
+                "title": "明日への扉",
+                "artistData": "椎名真昼 (CV: 石見舞菜香)",
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
+                "artUrl": "img/明日への扉.png",
+                "audioSrc": "audio/明日への扉.mp3",
+                "isFavorite": true,
+                "plays": "3.512.678"
+            },
+            {
+                "id": "mahiru9",
+                "title": "明日への扉 - Instrumental",
+                "artistData": "Instrumental",
+                "displayArtist": {
+                    "name": "椎名真昼 (CV: 石見舞菜香)",
+                    "id": "MahiruShiina"
+                },
+                "artUrl": "img/明日への扉.png",
+                "audioSrc": "audio/明日への扉-Intruments.mp3",
+                "isFavorite": true,
+                "plays": "1.234.567"
             }
         ]
     },
