@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li><a href="tutorial.html"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-tutorial"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"></path></svg> Hướng dẫn</a></li>
                 <li><a href="about.html"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-info"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg> Giới thiệu</a></li>
                 <li><a href="version.html"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="icon-version"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"></path></svg> Phiên bản</a></li>
+                <li><a href="#" id="auth-logout-btn"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-logout" style="vertical-align: middle; margin-right: 8px; width: 24px; height: 24px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Đăng xuất</a></li>
             </ul>
         </div>
         <div class="sidebar-playlists">
@@ -89,6 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Execute synchronous setup functions
     setActiveLink();
+
+    // Handle logout click
+    const logoutBtn = document.getElementById('auth-logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('Bạn có chắc chắn muốn đăng xuất không?')) {
+                localStorage.removeItem('music_auth_session');
+                window.location.reload();
+            }
+        });
+    }
 
     // 6. Sidebar toggle logic
     const menuToggleBtn = document.querySelector('.menu-toggle-btn');
