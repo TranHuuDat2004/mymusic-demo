@@ -20,3 +20,7 @@ node_modules/
 # OS files
 .DS_Store
 Thumbs.db
+
+# IDE settings
+.vscode/*
+!.vscode/settings.json
