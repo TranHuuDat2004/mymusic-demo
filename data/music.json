@@ -381,6 +381,19 @@
                 "plays": "120.987.654"
             },
             {
+                "id": "edm_that_girl_alan_walker",
+                "title": "That Girl (Alan Walker Remix)",
+                "artistData": "Olly Murs ft. Alan Walker",
+                "displayArtist": {
+                    "name": "Alan Walker",
+                    "id": "alanwalker"
+                },
+                "artUrl": "img/that-girl-remix.jpg",
+                "audioSrc": "audio/That-Girl-Alan-Walker.mp3",
+                "isFavorite": false,
+                "plays": "150.000.000"
+            },
+            {
                 "id": "edm_tinh_ve",
                 "title": "TINH VỆ (精卫) - JAPANDEE REMIX",
                 "artistData": "JAPANDEE REMIX",
@@ -392,6 +405,32 @@
                 "audioSrc": "audio/TINH VỆ (精卫) - JAPANDEE REMIX.mp3",
                 "isFavorite": false,
                 "plays": "2.000.000"
+            },
+            {
+                "id": "edm_tinh_ve_remix",
+                "title": "Tinh Vệ (Remix)",
+                "artistData": "JAPANDEE REMIX",
+                "displayArtist": {
+                    "name": "JAPANDEE",
+                    "id": "japandee"
+                },
+                "artUrl": "img/tinh-ve-remix.png",
+                "audioSrc": "audio/tinh-ve-remix.mp3",
+                "isFavorite": false,
+                "plays": "2.500.000"
+            },
+            {
+                "id": "edm_tinh_ve_remix_hop_xuong",
+                "title": "Tinh Vệ (Remix Hợp Xướng)",
+                "artistData": "JAPANDEE REMIX",
+                "displayArtist": {
+                    "name": "JAPANDEE",
+                    "id": "japandee"
+                },
+                "artUrl": "img/tinh-ve-remix-hop-xuong.png",
+                "audioSrc": "audio/tinh-ve-remix-hop-xuong.mp3",
+                "isFavorite": false,
+                "plays": "3.000.000"
             },
             {
                 "id": "edm_lanterns",
