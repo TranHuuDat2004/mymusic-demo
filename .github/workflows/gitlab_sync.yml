@@ -1,6 +1,7 @@
 name: Đồng bộ tự động sang GitLab
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
