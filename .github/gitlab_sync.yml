@@ -1,0 +1,35 @@
+name: Đồng bộ tự động sang GitLab
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - '*' # Tùy chọn: Tự động sync luôn cả khi bạn gắn tag/release trên GitHub
+
+jobs:
+  gitlab-mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mã nguồn
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Tải toàn bộ commit history
+
+      - name: Đẩy sang GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+          GITLAB_REPO: gitlab.com/HuuDatLego/mymusic-demo.git 
+        run: |
+          # 1. Thêm GitLab làm remote với oauth2 token
+          git remote add gitlab "https://oauth2:${GITLAB_TOKEN}@${GITLAB_REPO}"
+          
+          # 2. Xóa tracking HEAD để tránh tạo nhầm nhánh 'HEAD' trên GitLab
+          git remote set-head origin -d 2>/dev/null || true
+          
+          # 3. Đồng bộ toàn bộ nhánh sang GitLab
+          git push --force --prune gitlab "refs/remotes/origin/*:refs/heads/*"
+          
+          # 4. Đồng bộ toàn bộ tags
+          git push --tags --force gitlab
